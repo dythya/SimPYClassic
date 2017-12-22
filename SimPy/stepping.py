@@ -9,6 +9,7 @@ Usage:
 
 """
 from __future__ import print_function
+from builtins import input
 import sys
 
 
@@ -32,7 +33,7 @@ def stepping(glob):
         while True:
             if sys.version_info.major == 2:
                 input = raw_input
-            cmd = input("Command ('h' for help): ")
+            cmd = eval(input("Command ('h' for help): "))
             if cmd == "h":
                 for i in help:
                     print(i, ":", help[i])

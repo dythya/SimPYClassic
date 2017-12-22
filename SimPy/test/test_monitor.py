@@ -1,6 +1,10 @@
 # coding=utf-8
 
 from __future__ import print_function
+from __future__ import division
+from builtins import zip
+from builtins import range
+from past.utils import old_div
 from SimPy.Simulation import *
 from random import *
 
@@ -47,7 +51,7 @@ def test_observe():
     assert m.yseries() == tuple(2 * i for i in range(10)),'yseries wrong:%s' % (m.yseries(),)
     assert m.total() == 90, 'total wrong:%s'%m.total()
     assert m.mean() == 9.0, 'mean wrong:%s'%m.mean()
-    assert m.var() == (4 * 285.-(90 * 90 / 10.0)) / 10.0, 'sample var wrong: %s' % (m.var(),)
+    assert m.var() == old_div((4 * 285.-(90 * 90 / 10.0)), 10.0), 'sample var wrong: %s' % (m.var(),)
 
 
 def test_observe_no_time():
@@ -72,7 +76,7 @@ def test_observe_tally():
     assert m == [[0, 2 * i] for i in range(10)],'series wrong'
     assert m.total() == 90, 'total wrong:%s'%m.total()
     assert m.mean() == 9.0, 'mean wrong:%s'%m.mean()
-    assert m.var() == (4 * 285.-(90 * 90 / 10.0)) / 10.0, 'sample var wrong: %s' % (m.var(),)
+    assert m.var() == old_div((4 * 285.-(90 * 90 / 10.0)), 10.0), 'sample var wrong: %s' % (m.var(),)
 
 
 def test_time_average():
@@ -90,7 +94,7 @@ def test_time_average():
     Y = [1, 2,1, 0]
     for t, y in zip(T, Y):
        m2.observe(y, t)
-    assert m2.timeAverage(5.0) == 8.0 / 5, 'm2 time average is wrong: %s'%m2.timeAverage(5)
+    assert m2.timeAverage(5.0) == old_div(8.0, 5), 'm2 time average is wrong: %s'%m2.timeAverage(5)
     # now the new recursive version
     #m = self.M
     #assert m.newtimeAverage(10.0) == 9.0, 'm1: new time average wrong: %s'%m.newtimeAverage(10)
@@ -111,7 +115,7 @@ def test_time_variance():
     Y = [1, 2,1, 0]
     for t, y in zip(T, Y):
        m2.observe(y, t)
-    assert abs(m2.timeVariance(5) - 6.0 / 25) < 0.0001, 'time - weighted variance is wrong: %s'%m2.timeVariance(5)
+    assert abs(m2.timeVariance(5) - old_div(6.0, 25)) < 0.0001, 'time - weighted variance is wrong: %s'%m2.timeVariance(5)
 
 
 def test_reset():
@@ -135,7 +139,7 @@ def test_tally():
     assert m.name == 'First', 'Tally name wrong'
     assert m.total() == 45, 'Tally total wrong'
     assert m.mean() == 4.5, 'Tally mean wrong'
-    assert m.var()  == (285 - (45 * 45 / 10.0)) / 10.0, 'Tally sample var wrong %s' % (m.var(),)
+    assert m.var()  == old_div((285 - (45 * 45 / 10.0)), 10.0), 'Tally sample var wrong %s' % (m.var(),)
 
 
 def test_accumulate():

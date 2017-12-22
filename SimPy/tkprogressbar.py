@@ -1,11 +1,16 @@
-from Tkinter import *
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
+from past.utils import old_div
+from tkinter import *
 
 
 import warnings
 warnings.warn('This module be removed in SimPy 3.', DeprecationWarning)
 
 
-class ProgressBar:
+class ProgressBar(object):
     def __init__(self, master = None, orientation = 'horizontal',
                  min = 0, max = 100, width = 100, height = 18,
                  doLabel = 1, appearance = 'sunken',
@@ -33,9 +38,8 @@ class ProgressBar:
                            highlightthickness = 0, background = background)
         self.scale = self.canvas.create_rectangle(0, 0, width, height,
                                                 fill = fillColor)
-        self.label = self.canvas.create_text(self.canvas.winfo_reqwidth()
-/ 2,
-                                           height / 2, text = labelText,
+        self.label = self.canvas.create_text(old_div(self.canvas.winfo_reqwidth(), 2),
+                                           old_div(height, 2), text = labelText,
                                            anchor = 'c', fill = labelColor,
                                            font = self.labelFont)
         self.update()
@@ -70,7 +74,7 @@ class ProgressBar:
         if self.doLabel:
             if value:
                 if value >= 0:
-                    pvalue = int((float(value) / float(self.max)) *
+                    pvalue = int((old_div(float(value), float(self.max))) *
                                    100.0)
                 else:
                     pvalue = 0

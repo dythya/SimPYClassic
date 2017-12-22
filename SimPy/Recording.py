@@ -4,7 +4,13 @@ This file contains the classes for recording simulation results, Histogram,
 Monitor and Tally.
 
 """
+from __future__ import division
 # Required for backward compatibility
+from builtins import zip
+from builtins import str
+from builtins import range
+from builtins import object
+from past.utils import old_div
 import SimPy.Globals as Globals
 
 
@@ -17,7 +23,7 @@ class Histogram(list):
         self.low   = float(low)
         self.high  = float(high)
         self.nbins = nbins
-        self.binsize = (self.high - self.low) / nbins
+        self.binsize = old_div((self.high - self.low), nbins)
         self._nrObs = 0
         self._sum = 0
         self[:] = [[low + (i - 1) * self.binsize, 0] for i in range(self.nbins + 2)]
@@ -26,7 +32,7 @@ class Histogram(list):
         """ add a value into the correct bin"""
         self._nrObs += 1
         self._sum += y
-        b = int((y - self.low + self.binsize) / self.binsize)
+        b = int(old_div((y - self.low + self.binsize), self.binsize))
         if b < 0: b = 0
         if b > self.nbins + 1: b = self.nbins + 1
         assert 0 <= b <=self.nbins + 1, 'Histogram.addIn: b out of range: %s'%b
@@ -51,13 +57,13 @@ class Histogram(list):
             l1width = len(('%s <= '%fmt)%histo[1][0])
             res.append(line1\
                        %(' ' * l1width, ylab, histo[1][0], str(histo[0][1]).rjust(width),\
-                         str(cum).rjust(width),(float(cum) / nrObs) * 100, '%')
+                         str(cum).rjust(width),(old_div(float(cum), nrObs)) * 100, '%')
                       )
             for i in range(1, len(histo) - 1):
                 cum += histo[i][1]
                 res.append(line\
                        %(histo[i][0], ylab, histo[i + 1][0], str(histo[i][1]).rjust(width),\
-                         str(cum).rjust(width),(float(cum) / nrObs) * 100, '%')
+                         str(cum).rjust(width),(old_div(float(cum), nrObs)) * 100, '%')
                           )
             cum += histo[-1][1]
             linen = '\n%s <= %s %s : %s (cum: %s/%s%s)'\
@@ -65,7 +71,7 @@ class Histogram(list):
             lnwidth = len(('<%s'%fmt)%histo[1][0])
             res.append(linen\
                        %(histo[-1][0], ylab, ' ' * lnwidth, str(histo[-1][1]).rjust(width),\
-                       str(cum).rjust(width),(float(cum) / nrObs) * 100, '%')
+                       str(cum).rjust(width),(old_div(float(cum), nrObs)) * 100, '%')
                        )
         res.append('\n > ')
         return ' '.join(res)
@@ -155,7 +161,7 @@ class Monitor(list):
         for i in range(self.__len__()):
             ssq += self[i][1] ** 2 # replace by sum() eventually
         try:
-            return (ssq - float(tot * tot) / n) / n
+            return old_div((ssq - old_div(float(tot * tot), n)), n)
         except:
             raise ZeroDivisionError(
                     'SimPy: No observations for sample variance')
@@ -185,7 +191,7 @@ class Monitor(list):
         T = t - self[0][0]
         if T == 0:
              return None
-        return sum / float(T)
+        return old_div(sum, float(T))
 
     def timeVariance(self, t = None):
         """ the time - weighted Variance of the monitored variable.
@@ -213,8 +219,8 @@ class Monitor(list):
         T = t - self[0][0]
         if T == 0:
              return None
-        mn = sm / float(T)
-        return ssq / float(T) - mn * mn
+        mn = old_div(sm, float(T))
+        return old_div(ssq, float(T)) - mn * mn
 
 
     def histogram(self, low = 0.0, high = 100.0, nbins = 10):
@@ -259,13 +265,13 @@ class Monitor(list):
         l1width = len(('%s <= '%fmt)%histo[1][0])
         res.append(line1\
                    %(' ' * l1width, ylab, histo[1][0], str(histo[0][1]).rjust(width),\
-                     str(cum).rjust(width),(float(cum) / nrObs) * 100, '%')
+                     str(cum).rjust(width),(old_div(float(cum), nrObs)) * 100, '%')
                   )
         for i in range(1, len(histo) - 1):
             cum += histo[i][1]
             res.append(line\
                    %(histo[i][0], ylab, histo[i + 1][0], str(histo[i][1]).rjust(width),\
-                     str(cum).rjust(width),(float(cum) / nrObs) * 100, '%')
+                     str(cum).rjust(width),(old_div(float(cum), nrObs)) * 100, '%')
                       )
         cum += histo[-1][1]
         linen = '\n%s <= %s %s : %s (cum: %s/%s%s)'\
@@ -273,11 +279,11 @@ class Monitor(list):
         lnwidth = len(('<%s'%fmt)%histo[1][0])
         res.append(linen\
                    %(histo[-1][0], ylab, ' ' * lnwidth, str(histo[-1][1]).rjust(width),\
-                   str(cum).rjust(width),(float(cum) / nrObs) * 100, '%')
+                   str(cum).rjust(width),(old_div(float(cum), nrObs)) * 100, '%')
                    )
         return ' '.join(res)
 
-class Tally:
+class Tally(object):
     def __init__(self, name = 'a_Tally', ylab = 'y', tlab = 't', sim = None):
         if not sim: sim = Globals.sim # use global simulation if sim is None
         self.sim = sim
@@ -408,13 +414,13 @@ class Tally:
         l1width = len(('%s <= '%fmt)%histo[1][0])
         res.append(line1\
                    %(' ' * l1width, ylab, histo[1][0], str(histo[0][1]).rjust(width),\
-                     str(cum).rjust(width),(float(cum) / nrObs) * 100, '%')
+                     str(cum).rjust(width),(old_div(float(cum), nrObs)) * 100, '%')
                   )
         for i in range(1, len(histo) - 1):
             cum += histo[i][1]
             res.append(line\
                    %(histo[i][0], ylab, histo[i + 1][0], str(histo[i][1]).rjust(width),\
-                     str(cum).rjust(width),(float(cum) / nrObs) * 100, '%')
+                     str(cum).rjust(width),(old_div(float(cum), nrObs)) * 100, '%')
                       )
         cum += histo[-1][1]
         linen = '\n%s <= %s %s : %s (cum: %s/%s%s)'\
@@ -422,6 +428,6 @@ class Tally:
         lnwidth = len(('<%s'%fmt)%histo[1][0])
         res.append(linen\
                    %(histo[-1][0], ylab, ' ' * lnwidth, str(histo[-1][1]).rjust(width),\
-                   str(cum).rjust(width),(float(cum) / nrObs) * 100, '%')
+                   str(cum).rjust(width),(old_div(float(cum), nrObs)) * 100, '%')
                    )
         return ' '.join(res)

@@ -1,7 +1,14 @@
+from future import standard_library
+standard_library.install_aliases()
+from builtins import filter
+from builtins import map
+from builtins import str
+from builtins import range
+from builtins import object
 try:  # Python 3
     from tkinter import *
 except:  # Python 2
-    from Tkinter import *
+    from tkinter import *
 
 from SimPy.SimulationStep import now,Globals
 

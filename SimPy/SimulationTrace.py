@@ -9,6 +9,7 @@ Based on generators.
 """
 from __future__ import print_function
 
+from builtins import str
 from SimPy.Lister import *
 from SimPy.Simulation import *
 
@@ -35,7 +36,7 @@ class SimulationTrace(Simulation):
         self._dispatch = dict(Simulation._dispatch)
 
         # Now wrap all commands in a tracing call.
-        for command, func in self._dispatch.items():
+        for command, func in list(self._dispatch.items()):
             self._dispatch[command] = trace_dispatch(self.trace, command, func)
 
     def initialize(self):

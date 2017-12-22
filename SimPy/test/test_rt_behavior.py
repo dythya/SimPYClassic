@@ -1,5 +1,7 @@
 # coding=utf-8
 
+from __future__ import division
+from past.utils import old_div
 from SimPy.SimulationRT import *
 
 
@@ -23,7 +25,7 @@ def test_ticker():
     sim_slow.simulate(until=10,real_time=True,rel_speed=rel_speed)
 
     for tSim, tRT in t.timing:
-        assert tSim/tRT > rel_speed - 1
+        assert old_div(tSim,tRT) > rel_speed - 1
 
     rel_speed = 20
     sim_fast=SimulationRT()
@@ -33,4 +35,4 @@ def test_ticker():
     sim_fast.simulate(until=10,real_time=True,rel_speed=rel_speed)
 
     for tSim, tRT in t.timing:
-        assert tSim/tRT > rel_speed - 1
+        assert old_div(tSim,tRT) > rel_speed - 1

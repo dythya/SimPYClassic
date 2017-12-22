@@ -1,4 +1,9 @@
 # coding=utf-8
+from __future__ import division
+from builtins import str
+from builtins import range
+from builtins import object
+from past.utils import old_div
 from SimPy.Simulation  import *
 import unittest
 from random import random
@@ -425,7 +430,7 @@ def test_resource_monitored(sim):
            'Wrong waitMon:%s'%res.waitMon
     assert res.actMon == [[0, 0],[2, 1], [4, 0], [4, 1], [6, 0], [6, 1], [8, 0]],\
             'Wrong actMon:%s'%res.actMon
-    assert res.waitMon.timeAverage() == (0 * 2 + 2 * 2 + 1 * 2) / float(sim.now()), \
+    assert res.waitMon.timeAverage() == old_div((0 * 2 + 2 * 2 + 1 * 2), float(sim.now())), \
            'Wrong waitMon.timeAverage:%s'%res.waitMon.timeAverage()
 
 # Interrupt tests
@@ -1527,7 +1532,7 @@ class ConsumerWidget(Process):
         yield get,self,buffer
         gotten.append(self.got[0].weight)
 
-class Widget:
+class Widget(object):
     def __init__(self,weight):
         self.weight=weight
 
@@ -1558,14 +1563,14 @@ class ConsumerPrincS(Process):
             yield get,self,buffer,1
             yield hold,self,consumptionTime
 
-class WidgetPrinc:
+class WidgetPrinc(object):
     pass
 
 class FilterConsumer(Process):
     """Used in testBufferFilter"""
     def __init__(self,sim=None):
         Process.__init__(self,sim=sim)
-    class Widget:
+    class Widget(object):
         def __init__(self,weighs):
             self.weight=weighs
 
@@ -1777,7 +1782,7 @@ class TBTput(Process):
     def __init__(self,sim=None):
         Process.__init__(self,sim=sim)
     def tbt(self,store):
-        class Item:pass
+        class Item(object):pass
         yield (put,self,store,[Item()]),(hold,self,4)
         if self.stored(store):
             assert store.nrBuffered==1 and not store.putQ,\
@@ -1796,7 +1801,7 @@ class TBEput(Process):
     def __init__(self,sim=None):
         Process.__init__(self,sim=sim)
     def tbe(self,store,trigger):
-        class Item:pass
+        class Item(object):pass
         yield (put,self,store,[Item()]),(waitevent,self,trigger)
         if self.stored(store):
             assert store.nrBuffered==1 and not store.putQ,\

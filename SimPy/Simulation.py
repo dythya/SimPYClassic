@@ -6,6 +6,8 @@ Monitor and Tally.
 Based on generators
 
 """
+from builtins import next
+from builtins import object
 import random
 import sys
 import types
