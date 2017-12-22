@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 from SimPy.SimulationStep import *
 try:  # Python 3

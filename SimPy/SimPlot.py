@@ -3,6 +3,7 @@
 SimPlot 2.1  Provides basic plotting services based on Tk / Tkinter.
 
 """
+from __future__ import print_function
 
 try:  # Python 3
     from tkinter import *

@@ -126,14 +126,14 @@ class Console(Frame):
                         'morecolour': '#a0d0f0',
                         'badcolour': '#e0b0b0',
                         'runcolour': '#90d090'}
-        apply(self.config, (), self.options)
-        apply(self.config, (), options)
+        self.config(*(), **self.options)
+        self.config(*(), **options)
 
     def __getitem__(self, key):
         return self.options[key]
 
     def __setitem__(self, key, value):
-        if not self.options.has_key(key):
+        if key not in self.options:
             raise KeyError('no such configuration option \'%s\'' % key)
         self.options[key] = value
         if key == 'stdoutcolour':
@@ -286,7 +286,7 @@ class Console(Frame):
 
                 def __getattr__(self, key):
                     for dict in self.dicts:
-                        if dict.has_key(key): return dict[key]
+                        if key in dict: return dict[key]
                     return None
             object = Lookup([self.dict, __builtin__.__dict__])
             keys = self.dict.keys() + dir(__builtin__)
@@ -751,8 +751,8 @@ class Console(Frame):
             exec(code, self.dict)
         except:
             self.error = 1
-            sys.last_type = sys.exc_type
-            sys.last_value = sys.exc_value
+            sys.last_type = sys.exc_info()[0]
+            sys.last_value = sys.exc_info()[1]
             sys.last_traceback = sys.exc_traceback.tb_next
             self.intraceback = 1
             traceback.print_exception(
@@ -783,7 +783,7 @@ def members(object):
         for key in object.__dict__.keys(): result[key] = 1
         result['__dict__'] = 1
     except: pass
-    if type(object) is types.ClassType:
+    if type(object) is type:
         scanclass(object, result)
         result['__name__'] = 1
         result['__bases__'] = 1
@@ -806,10 +806,10 @@ def commonprefix(keys):
             if max == 0: return ''
     return prefixes[max]
 
-callabletypes = [types.FunctionType, types.MethodType, types.ClassType,
+callabletypes = [types.FunctionType, types.MethodType, type,
                  types.BuiltinFunctionType, types.BuiltinMethodType]
-sequencetypes = [types.TupleType, types.ListType]
-mappingtypes = [types.DictType]
+sequencetypes = [tuple, list]
+mappingtypes = [dict]
 
 try:
     import ExtensionClass

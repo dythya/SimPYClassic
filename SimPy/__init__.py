@@ -21,6 +21,7 @@ Globals - module providing global Simulation object and the global
 stepping - a simple interactive debugger
 
 """
+from __future__ import print_function
 __version__ = '2.3.1'
 
 

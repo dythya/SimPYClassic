@@ -4,6 +4,7 @@ SimGUI 2.1  Provides a Tk / Tkinter - based framework for SimPy simulation
 models.
 
 """
+from __future__ import print_function
 try:  # Python 3
     from tkinter import *
     from tkinter.messagebox import *
