@@ -39,7 +39,7 @@ You can also download and install SimPy manually::
     $ cd where/you/put/simpy/
     $ python setup.py install
 
-To run SimPy’s test suite on your installation, execute::
+To run SimPy's test suite on your installation, execute::
 
     $ python -c "import SimPy; SimPy.test()"
 
