@@ -166,7 +166,7 @@ class ReprErrorExample(TerminalRepr):
     def toterminal(self, tw):
         tw.line('Execution failed! Captured output:', bold=True)
         tw.sep('-')
-        tw.line(self.exc_info.value.output, red=True, bold=True)
+        tw.line(self.exc_info.value.output.decode(), red=True, bold=True)
         tw.line('%s:%d (%s) Example failed (exitcode=%d)' % (self.filename,
                 self.lineno, os.path.relpath(self.examplefile),
                 self.exc_info.value.returncode))
