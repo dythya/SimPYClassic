@@ -1,10 +1,10 @@
-SimPy
-=====
+SimPyClassic
+============
 
 SimPy is a process-based discrete-event simulation language based on standard
 Python and released under the GNU LGPL.
 
-It provides the modeller with components of a simulation model. These include
+It provides the modeler with components of a simulation model. These include
 processes for active components like customers, messages and vehicles as well
 as  resources for passive components that form limited capacity congestion
 points (like servers, checkout counters and tunnels). It also provides monitor
@@ -22,6 +22,8 @@ Software developers are also encouraged to interface SimPy with other Python-
 accessible packages, such as GUI, database or mapping and to share these new
 capabilities with the community under the GNU LGPL.
 
+This the original SimPy. Around 2012 SimPy forked and this version is know
+known as SimpyClassic.
 
 Installation
 ------------
