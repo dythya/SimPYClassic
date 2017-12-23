@@ -1,5 +1,4 @@
-# encoding: utf-8
-from distutils.core import setup
+from setuptools import setup
 
 import SimPy
 
@@ -14,8 +13,8 @@ setup(
         'stefan at sofa-rockers.org'),
     description='Event discrete, process based simulation for Python.',
     long_description=open('README.txt').read(),
-    url='http://simpy.sourceforge.net/',
-    download_url='https://sourceforge.net/projects/simpy/files/',
+    url='https://github.com/SimPyClassic/SimPyClassic',
+    download_url='https://github.com/SimPyClassic/SimPyClassic/releases',
     license='GNU LGPL',
     packages=[
         'SimPy',
@@ -24,11 +23,11 @@ setup(
     package_data={},
     classifiers=[
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Operating System :: OS Independent',
         'License :: OSI Approved :: GNU Library or Lesser General Public ' + \
