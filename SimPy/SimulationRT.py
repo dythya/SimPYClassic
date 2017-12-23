@@ -6,6 +6,8 @@ by coroutine calls.
 Based on generators.
 
 """
+from __future__ import division
+from past.utils import old_div
 import time
 
 from SimPy.Simulation import *
@@ -46,7 +48,7 @@ class SimulationRT(Simulation):
 
                 if real_time:
                     delay = (
-                            next_event_time / self.rel_speed -
+                            old_div(next_event_time, self.rel_speed) -
                             (self.wallclock() - self.rtstart)
                     )
                     if delay > 0: time.sleep(delay)

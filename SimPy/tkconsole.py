@@ -16,8 +16,14 @@ use, modify, or distribute the software for any purpose is hereby granted."""
 # TODO: blink or highlight matching brackets
 # TODO: delete the prompt when joining lines; allow a way to break lines
 
-from Tkinter import *
-import sys, string, traceback, types, __builtin__
+from future import standard_library
+standard_library.install_aliases()
+from builtins import filter
+from builtins import map
+from builtins import range
+from builtins import object
+from tkinter import *
+import sys, string, traceback, types, builtins
 from SimPy import __version__
 REVISION = __version__
 VERSION = __version__
@@ -27,7 +33,7 @@ import warnings
 warnings.warn('This module be removed in SimPy 3.', DeprecationWarning)
 
 
-class OutputPipe:
+class OutputPipe(object):
     """A substitute file object for redirecting output to a function."""
 
     def __init__(self, writer):
@@ -126,14 +132,14 @@ class Console(Frame):
                         'morecolour': '#a0d0f0',
                         'badcolour': '#e0b0b0',
                         'runcolour': '#90d090'}
-        apply(self.config, (), self.options)
-        apply(self.config, (), options)
+        self.config(*(), **self.options)
+        self.config(*(), **options)
 
     def __getitem__(self, key):
         return self.options[key]
 
     def __setitem__(self, key, value):
-        if not self.options.has_key(key):
+        if key not in self.options:
             raise KeyError('no such configuration option \'%s\'' % key)
         self.options[key] = value
         if key == 'stdoutcolour':
@@ -147,7 +153,7 @@ class Console(Frame):
             return self.options
         if len(args) == 1:
             return self.options[args[0]]
-        for key, value in dict.items():
+        for key, value in list(dict.items()):
             self[key] = value
 
     # Text box routines.
@@ -172,7 +178,7 @@ class Console(Frame):
     def cursor(self):
         """Get the current line and position of the cursor."""
         cursor = self.text.index('insert')
-        [line, pos] = map(string.atoi, string.split(cursor, '.'))
+        [line, pos] = list(map(string.atoi, string.split(cursor, '.')))
         return line, pos
 
     def write(self, data, tag = None):
@@ -280,16 +286,16 @@ class Console(Frame):
                 object = None
                 keys = []
         else:
-            class Lookup:
+            class Lookup(object):
                 def __init__(self, dicts):
                     self.dicts = dicts
 
                 def __getattr__(self, key):
                     for dict in self.dicts:
-                        if dict.has_key(key): return dict[key]
+                        if key in dict: return dict[key]
                     return None
-            object = Lookup([self.dict, __builtin__.__dict__])
-            keys = self.dict.keys() + dir(__builtin__)
+            object = Lookup([self.dict, builtins.__dict__])
+            keys = list(self.dict.keys()) + dir(__builtin__)
 
         keys = matchingkeys(keys, ident)
         if not ident:
@@ -456,7 +462,7 @@ class Console(Frame):
 
         if not object:
             try:
-                object = __builtin__.__dict__[word]
+                object = builtins.__dict__[word]
                 skip = len(word) - len(ident)
             except: pass
 
@@ -751,8 +757,8 @@ class Console(Frame):
             exec(code, self.dict)
         except:
             self.error = 1
-            sys.last_type = sys.exc_type
-            sys.last_value = sys.exc_value
+            sys.last_type = sys.exc_info()[0]
+            sys.last_value = sys.exc_info()[1]
             sys.last_traceback = sys.exc_traceback.tb_next
             self.intraceback = 1
             traceback.print_exception(
@@ -766,7 +772,7 @@ class Console(Frame):
 # Helpers for the completion mechanism.
 
 def scanclass(klass, result):
-    for key in klass.__dict__.keys(): result[key] = 1
+    for key in list(klass.__dict__.keys()): result[key] = 1
     for base in klass.__bases__: scanclass(base, result)
 
 def members(object):
@@ -780,36 +786,36 @@ def members(object):
         result['__methods__'] = 1
     except: pass
     try:
-        for key in object.__dict__.keys(): result[key] = 1
+        for key in list(object.__dict__.keys()): result[key] = 1
         result['__dict__'] = 1
     except: pass
-    if type(object) is types.ClassType:
+    if type(object) is type:
         scanclass(object, result)
         result['__name__'] = 1
         result['__bases__'] = 1
     if type(object) is types.InstanceType:
         scanclass(object.__class__, result)
         result['__class__'] = 1
-    return result.keys()
+    return list(result.keys())
 
 def matchingkeys(keys, prefix):
     prefixmatch = lambda key, l = len(prefix), p = prefix: key[:l] == p
-    return filter(prefixmatch, keys)
+    return list(filter(prefixmatch, keys))
 
 def commonprefix(keys):
     if not keys: return ''
     max = len(keys[0])
-    prefixes = map(lambda i, key = keys[0]: key[:i], range(max + 1))
+    prefixes = list(map(lambda i, key = keys[0]: key[:i], list(range(max + 1))))
     for key in keys:
         while key[:max] != prefixes[max]:
             max = max - 1
             if max == 0: return ''
     return prefixes[max]
 
-callabletypes = [types.FunctionType, types.MethodType, types.ClassType,
+callabletypes = [types.FunctionType, types.MethodType, type,
                  types.BuiltinFunctionType, types.BuiltinMethodType]
-sequencetypes = [types.TupleType, types.ListType]
-mappingtypes = [types.DictType]
+sequencetypes = [tuple, list]
+mappingtypes = [dict]
 
 try:
     import ExtensionClass

@@ -4,12 +4,20 @@ SimGUI 2.1  Provides a Tk / Tkinter - based framework for SimPy simulation
 models.
 
 """
+from __future__ import print_function
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
+from past.utils import old_div
+from builtins import object
 try:  # Python 3
     from tkinter import *
     from tkinter.messagebox import *
 except: # Python 2
-    from Tkinter import *
-    from tkMessageBox import *
+    from tkinter import *
+    from tkinter.messagebox import *
     from Canvas import Line, CanvasText, Rectangle
 
 from SimPy import tkconsole as tkcons
@@ -103,7 +111,7 @@ class SimGUI(object):
         try:  # Python 3
             from tkinter.filedialog import asksaveasfilename
         except:  # Python 2
-            from tkFileDialog import asksaveasfilename
+            from tkinter.filedialog import asksaveasfilename
         #get the Console content
         content = self.console.get('1.0', END + ' - 1c')
         #get a file name to save to
@@ -263,7 +271,7 @@ class SimGUI(object):
         interpreter.dict['SimPy'] = self
         interpreter.pack(fill = BOTH, expand = 1)
 
-class Parameters:
+class Parameters(object):
     def __init__(self,**kwds):
         self.__dict__.update(kwds)
     def __repr__(self):
@@ -292,7 +300,7 @@ if __name__ == '__main__':
             for i in range(number):
                 c = Customer(name = 'Customer%02d' % (i,))
                 activate(c, c.visit(timeInBank = 12.0))
-                t = rv.expovariate(1.0 / interval)
+                t = rv.expovariate(old_div(1.0, interval))
                 yield hold, self, t
 
     def NoInSystem(R):
@@ -316,7 +324,7 @@ if __name__ == '__main__':
             wait = now() - arrive
             waitMonitor.observe(wait, t = now())
             ##print '%7.4f %s: Waited %6.3f' % (now(),self.name, wait)
-            tib = counterRV.expovariate(1.0 / timeInBank)
+            tib = counterRV.expovariate(old_div(1.0, timeInBank))
             yield hold, self, tib
             yield release, self, counter[join]
             serviceMonitor.observe(now() - arrive, t = now())
@@ -357,7 +365,7 @@ if __name__ == '__main__':
             showwarning(title = 'Model warning',
                       message = 'Run simulation first -- no data available.')
             return
-        aver = lastLeave / gui.params.nrRuns
+        aver = old_div(lastLeave, gui.params.nrRuns)
         gui.writeConsole(text = 'Average time for %s customers to get through bank: %.1f\n(%s runs)\n'\
                           %(gui.params.numberCustomers, aver, gui.params.nrRuns))
 

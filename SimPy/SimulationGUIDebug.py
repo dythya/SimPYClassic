@@ -1,9 +1,13 @@
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+from builtins import input
 import sys
 from SimPy.SimulationStep import *
 try:  # Python 3
     from tkinter import *
 except:
-    from Tkinter import *
+    from tkinter import *
 
 import SimPy.SimulationStep, GUIDebug
 
@@ -166,7 +170,7 @@ def promptUser():
     while( 1 ):
         if sys.version_info.major == 2:
             input = raw_input
-        user_input = input( prompt )
+        user_input = eval(input( prompt ))
 
         # take a look at the last command issued
         global _lastCommandIssued

@@ -3,17 +3,25 @@
 SimPlot 2.1  Provides basic plotting services based on Tk / Tkinter.
 
 """
+from __future__ import print_function
+from __future__ import division
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
+from past.utils import old_div
+from builtins import object
 try:  # Python 3
     from tkinter import *
     from tkinter.messagebox import *
     from tkinter.simpledialog import askinteger, askstring, askfloat
     from tkinter.filedialog import *
 except:  # Python 2
-    from Tkinter import *
-    from tkMessageBox import *
-    from tkSimpleDialog import askinteger, askstring, askfloat
-    from tkFileDialog import *
+    from tkinter import *
+    from tkinter.messagebox import *
+    from tkinter.simpledialog import askinteger, askstring, askfloat
+    from tkinter.filedialog import *
     from Canvas import Line, CanvasText, Rectangle
 
 import string, math
@@ -293,12 +301,12 @@ class SimPlot(object):
     def mainloop(self):
         self.root.mainloop()
 
-class GraphPoints:
+class GraphPoints(object):
     def __init__(self, points, attr):
         self.points = points
         self.scaled = self.points
         self.attributes = {}
-        for name, value in self._attributes.items():
+        for name, value in list(self._attributes.items()):
             try:
                 value = attr[name]
             except KeyError: pass
@@ -468,7 +476,7 @@ class GraphBars(GraphPoints):
                                     width = width, outline = outline,
                                     stipple = fillstyle)
 
-class GraphObjects:
+class GraphObjects(object):
     def __init__(self, objects):
         self.objects = objects
 
@@ -570,10 +578,10 @@ class GraphBase(Frame):
             yticks = None
         text1 = [text_width[0], -text_height[1]]
         text2 = [text_width[1], -text_height[0]]
-        scale = ((self.plotarea_size[0] - text1[0] - text2[0]) / \
-                 (p2[0] - p1[0]),
-                 (self.plotarea_size[1] - text1[1] - text2[1]) / \
-                 (p2[1] - p1[1]))
+        scale = (old_div((self.plotarea_size[0] - text1[0] - text2[0]), \
+                 (p2[0] - p1[0])),
+                 old_div((self.plotarea_size[1] - text1[1] - text2[1]), \
+                 (p2[1] - p1[1])))
         shift = ((-p1[0] * scale[0]) + self.plotarea_origin[0] + \
                  text1[0],
                  (-p1[1] * scale[1]) + self.plotarea_origin[1] + \
@@ -645,9 +653,9 @@ class GraphBase(Frame):
                                                p[1] + 2, **dict)    ##KGM 14 Aug 03
                 text = 0
             #write x - axis title
-            CanvasText(self.canvas,(pp2[0] - pp1[0]) / 2.+pp1[0],pp1[1] + 22, text = self.xtitle)
+            CanvasText(self.canvas,old_div((pp2[0] - pp1[0]), 2.)+pp1[0],pp1[1] + 22, text = self.xtitle)
         #write graph title
-        CanvasText(self.canvas,(pp2[0] - pp1[0]) / 2.+pp1[0],7, text = self.title)
+        CanvasText(self.canvas,old_div((pp2[0] - pp1[0]), 2.)+pp1[0],7, text = self.title)
         dict['anchor'] = E
         if yaxis is not None:
             #draw y - axis
@@ -676,7 +684,7 @@ class GraphBase(Frame):
             CanvasText(self.canvas, pp2[0],pp2[1] - 10, text = self.ytitle)
 
     def _ticks(self, lower, upper):
-        ideal = (upper - lower) / 7.
+        ideal = old_div((upper - lower), 7.)
         log = math.log10(ideal)
         power = math.floor(log)
         fraction = log - power
@@ -697,7 +705,7 @@ class GraphBase(Frame):
             digits = -int(power)
             format = '%'+repr(digits + 2)+'.'+repr(digits)+'f'
         ticks = []
-        t = -grid * math.floor(-lower / grid)
+        t = -grid * math.floor(old_div(-lower, grid))
         while t <= upper and len(ticks) < 200:
             ticks.append((t, format % (t,)))
             t = t + grid
@@ -729,7 +737,7 @@ class GraphBase(Frame):
         try:  # Python 3
             from tkinter.filedialog import asksaveasfilename
         except:  # Python 2
-            from tkFileDialog import asksaveasfilename
+            from tkinter.filedialog import asksaveasfilename
         if not filename:
             filename = asksaveasfilename()
         if filename:
