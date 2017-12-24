@@ -1,1 +1,14 @@
 bank08renege
+ 0.0000 Customer00: Here I am     
+ 0.0000 Customer00: Waited  0.000
+ 0.0902 Customer00: Finished
+33.9482 Customer01: Here I am     
+33.9482 Customer01: Waited  0.000
+44.4221 Customer01: Finished
+58.1367 Customer02: Here I am     
+58.1367 Customer02: Waited  0.000
+69.2708 Customer03: Here I am     
+70.3325 Customer03: RENEGED after  1.062
+71.9733 Customer04: Here I am     
+73.6655 Customer04: RENEGED after  1.692
+75.5906 Customer02: Finished

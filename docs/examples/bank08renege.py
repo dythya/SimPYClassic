@@ -59,7 +59,7 @@ def model():
 ## Experiment data -------------------------
 
 maxTime = 400.0
-theseed = 12345
+theseed = 1234
 NumCustomers = 5
 IntervalCustomers = 10.0
 ## Experiment ------------------------------
