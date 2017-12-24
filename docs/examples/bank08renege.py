@@ -26,7 +26,7 @@ class Customer(Process):
         arrive = now()
         print("{0:7.4f} {1}: Here I am     ".format(now(), self.name))
 
-        yield (request, self, counter), (hold, self, Customer.patience())
+        yield (request, self, counter), (hold, self, next(Customer.patience))
 
         if self.acquired(counter):
             wait = now()-arrive
@@ -48,8 +48,7 @@ class Customer(Process):
 
 def model():
     counter = Resource(name="Karen")
-    pat = Customer.fpatience(minpatience=1, maxpatience=3)
-    Customer.patience = pat.next
+    Customer.patience = Customer.fpatience(minpatience=1, maxpatience=3)
     initialize()
     source = Source('Source')
     activate(source, source.generate(NumCustomers,

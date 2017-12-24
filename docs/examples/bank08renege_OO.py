@@ -26,7 +26,7 @@ class Customer(Process):
         arrive = self.sim.now()
         print("{0:7.4f} {1}: Here I am     ".format(self.sim.now(),self.name))
 
-        yield (request,self,counter),(hold,self,Customer.patience())
+        yield (request,self,counter),(hold,self,next(Customer.patience))
 
         if self.acquired(counter):
             wait = self.sim.now()-arrive
@@ -50,8 +50,7 @@ class BankModel(Simulation):
     def run(self):    
         self.initialize()
         counter = Resource(name="Karen",sim=self) 
-        pat = Customer.fpatience(minpatience=1,maxpatience=3)
-        Customer.patience=pat.next
+        Customer.patience= Customer.fpatience(minpatience=1,maxpatience=3)
         source = Source(name='Source',sim=self)
         self.activate(source,source.generate(NumCustomers,
                                     interval=IntervalCustomers,
