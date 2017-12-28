@@ -22,8 +22,8 @@ Software developers are also encouraged to interface SimPy with other Python-
 accessible packages, such as GUI, database or mapping and to share these new
 capabilities with the community under the GNU LGPL.
 
-This the original SimPy. Around 2012 SimPy forked and this version is know
-known as SimpyClassic.
+This the original SimPy. Around 2012 SimPy forked and this original version
+is now known as SimpyClassic.
 
 Installation
 ------------
