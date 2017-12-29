@@ -94,6 +94,9 @@ class ExampleItem(pytest.Item):
         if isinstance(output, bytes):  # The case on Python 3
             output = output.decode('utf8')
 
+        # On Microsoft Windows machines the output contains CR LF
+        output = output.replace('\r', '')
+
         if output != expected:
             # Hijack the ValueError exception to identify mismatching output.
             raise ValueError(expected, output)
