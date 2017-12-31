@@ -1,4 +1,6 @@
-version: 1.0.{build}
+version: '{branch}-{build}'
+cache:
+  - '%LOCALAPPDATA%\pip\Cache'
 environment:
   matrix:
   - PYTHON: '"C:\\Python27"'
