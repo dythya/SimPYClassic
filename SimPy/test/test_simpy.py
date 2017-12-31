@@ -1,9 +1,9 @@
 # coding=utf-8
 from SimPy.Simulation  import *
-import unittest
+from SimPy import (Globals, Simulation, SimulationStep, SimulationTrace,
+                   SimulationRT)
+import pytest
 from random import random
-
-pytest_plugins = 'SimPy.test.support'
 
 class P(Process):
    """ P class for testing"""
@@ -50,6 +50,44 @@ class ForEvtTimes(Process):
     def run(self):
         yield hold,self
 
+
+@pytest.fixture(autouse=True, params=[
+    # Execute tests using a dedicated simulation instance (SimPy OO style).
+    'default',
+    # Execute tests using a SimulationStep instance.
+    'step',
+    # Execute tests using a SimulationTrace instance.
+    'trace',
+    # Execute tests using a SimulationRT instance.
+    'rt',
+    # Execute tests using the global simulation object (SimPy 1.x style).
+    'global-default',
+    # Execute tests using the global SimulationStep object.
+    'global-step',
+    # Execute tests using the global SimulationTrace object.
+    'global-trace',
+    # Execute tests using the global SimulationRT object.
+    'global-rt'
+])
+def sim(request):
+    if request.param == 'default':
+        return Simulation.Simulation()
+    elif request.param == 'step':
+        return SimulationStep.SimulationStep()
+    elif request.param == 'trace':
+        return SimulationTrace.SimulationTrace()
+    elif request.param == 'rt':
+        return SimulationRT.SimulationRT()
+    elif request.param.startswith('global'):
+        if request.param.endswith('default'):
+            Globals.sim = Simulation.Simulation()
+        elif request.param.endswith('step'):
+            Globals.sim = SimulationStep.SimulationStep()
+        elif request.param.endswith('trace'):
+            Globals.sim = SimulationTrace.SimulationTrace()
+        elif request.param.endswith('rt'):
+            Globals.sim = SimulationRT.SimulationRT()
+        return Globals.sim
 
 # Simulation tests
 # ----------------
