@@ -19,13 +19,14 @@ class Series(Process):
             yield hold,self,1
             diffSim=now()-tLastSim
             diffWall=wallclock()-tLastWallclock
-            print "now(): %s, sim. time elapsed: %s, wall clock elapsed: "\
-                "%6.3f, sim/wall time ratio: %6.3f"\
-                %(now(),diffSim,diffWall,diffSim/diffWall)
+            print("now(): %s, sim. time elapsed: %s, wall clock elapsed: "\
+                  "%6.3f, sim/wall time ratio: %6.3f"\
+                  %(now(),diffSim,diffWall,diffSim/diffWall))
             if not ratio==oldratio:
-                print "At simulation time %s: ratio simulation/wallclock "\
-                    "time now changed to %s"%(now(),ratio)
+                print("At simulation time %s: ratio simulation/wallclock "\
+                    "time now changed to %s"%(now(),ratio))
                 oldratio=ratio
+
 initialize()
 ticks=15
 s=Series()
@@ -35,6 +36,6 @@ activate(c,c.change(5,5))
 c=Changer()
 activate(c,c.change(10,10))
 ratio=1
-print "At simulation time %s: set ratio simulation/wallclock time to %s"\
-       %(now(),ratio)
+print("At simulation time %s: set ratio simulation/wallclock time to %s"\
+      %(now(),ratio))
 simulate(until=100,real_time=True,rel_speed=ratio)
