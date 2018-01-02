@@ -6,9 +6,9 @@ import time
 class Launcher(Process):
 	def launch(self):
 		while True:
-			print("Launch at %2.2f; wallclock: %2.2f"%(now(),time.clock()-startTime))
+			print("Launch at %2.4f; wallclock: %2.4f"%(now(),time.clock()-startTime))
 			yield hold,self,uniform(1,maxFlightTime)
-			print("Boom!!! Aaaah!! at %2.2f; wallclock: %2.2f"\
+			print("Boom!!! Aaaah!! at %2.4f; wallclock: %2.4f"\
 			       %(now(),time.clock()-startTime))
 def model():
 	initialize()
