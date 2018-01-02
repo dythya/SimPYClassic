@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 This module scans all ``*.rst`` files below ``docs/`` for example code. Example
 code is discoved by checking for lines containing the ``.. literalinclude:: ``
@@ -15,22 +14,28 @@ import sys
 import subprocess
 import errno
 import random
+import re
 
 import pytest
 from py._code.code import TerminalRepr
 from _pytest.assertion.util import _diff_text
 
 
-blacklist = ['SimRTManual.rst']
-"""A list of strings with rst-files to skip."""
+"""A list of rst-file names to skip running tests on. eg xyz.rst"""
+BLACKLIST = []
 
 
 def pytest_collect_file(path, parent):
-    """Checks if the file is a rst file and creates an :class:`ExampleFile`
-    instance."""
+    """Collects
+
+    Checks if the file is a rst file and creates a :class:`ExampleFile`
+    instance. Skips Manual rst files listed in the blacklist.
+    Blacklisting causes the entire manual to be skipped, so none of the
+    examples will be tested.
+    """
     if path.ext != '.rst':
         return
-    for item in blacklist:
+    for item in BLACKLIST:
         if str(path).endswith(item):
             return
     return ExampleFile(path, parent)
@@ -71,10 +76,47 @@ class ExampleItem(pytest.Item):
         self.output = output
         self.examplefile = os.path.join(self.fspath.dirname, self.example)
         self.outputfile = os.path.join(self.fspath.dirname, self.output)
-        # Python 2 has some differences in program output. For instace less
+
+        # Python 2 has some differences in program output. For instance less
         # precision
         if sys.version_info[0] < 3:
-            self.outputfile = self.outputfile.replace('program_output', 'program_output_python2')
+            self.outputfile = self.outputfile.replace(
+                'program_output', 'program_output_python2')
+        self.check_exected_output = self._check_exected_output()
+
+    def _check_exected_output(self):
+        """
+        Check skip file to see if the exected output check should be skipped
+
+        Format of skip file is each line is the name of the output file to skip
+        blank lines and lines starting with # are skipped
+
+        This is done for examples that can never produce consistent output
+        Due to the nature of the program being tested.
+        """
+        SKIP_FILE_NAME = '_skip_output_check'
+        check_exected_output = True
+        try:
+            # Get name and dir path of skip file
+            # file name may or may not have path
+            match = re.match(r'(.*)/([^/]+)$', self.output)
+            if match:
+                skip_file = "{}/".format(match.group(1))
+                outfile = match.group(2)
+            else:
+                skip_file = "/"
+                outfile = self.output_lineno
+            skip_file += SKIP_FILE_NAME
+            for line in open(skip_file):
+                line = line.rstrip()
+                if re.search(r'^#', line) or re.search(r'^$', line):
+                    continue
+                if line == outfile:
+                    check_exected_output = False
+                    break
+        except IOError:  # chanage to FileNotFoundError when no python 2
+            pass    # no list of files to skip that is ok
+        return check_exected_output
 
     def runtest(self):
         # Skip if random.expovariate with the old implementation is used.
@@ -93,8 +135,8 @@ class ExampleItem(pytest.Item):
         if not hasattr(subprocess, 'check_output'):  # The case on Python 2.6
             pytest.skip('subprocess has no check_output() method.')
 
-        output = subprocess.check_output(['python', self.examplefile],
-                stderr=subprocess.STDOUT)
+        output = subprocess.check_output([
+            'python', self.examplefile], stderr=subprocess.STDOUT)
 
         if isinstance(output, bytes):  # The case on Python 3
             output = output.decode('utf8')
@@ -102,7 +144,8 @@ class ExampleItem(pytest.Item):
         # On Microsoft Windows machines the output contains CR LF
         output = output.replace('\r', '')
 
-        if output != expected:
+        # Check the program produced the expected output
+        if self.check_exected_output and output != expected:
             # Hijack the ValueError exception to identify mismatching output.
             raise ValueError(expected, output)
 
