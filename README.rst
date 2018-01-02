@@ -39,9 +39,15 @@ You can also download and install SimPy manually::
     $ cd where/you/put/simpy/
     $ python setup.py install
 
-To run SimPy's test suite on your installation, execute::
+To run SimPy's test suite on your installation execute::
 
     $ pytest
+
+This runs the main SimPy test suit and the documentation tests. The
+documentation tests need to know where SimPy is, So you are running from
+the repository with SimPy not installed execute::
+
+    $ PYTHONPATH=$PYTHONPATH:. pytest
 
 
 Getting started
