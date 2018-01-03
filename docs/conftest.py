@@ -9,7 +9,7 @@ consists of the example code which is executed in a separate process. The
 output of this process is compared to the contents of the ``*.out`` file.
 
 """
-import os.path
+import os
 import sys
 import subprocess
 import errno
@@ -23,6 +23,10 @@ from _pytest.assertion.util import _diff_text
 
 """A list of rst-file names to skip running tests on. eg xyz.rst"""
 BLACKLIST = []
+
+# SimPy libraries need to be on path when running doc tests
+# This assumes tests are run top level of the repository
+os.environ["PYTHONPATH"] = os.getcwd()
 
 
 def pytest_collect_file(path, parent):
