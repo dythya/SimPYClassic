@@ -29,7 +29,7 @@ approach which is used in most of the models described here.
 
 .. _`SimPy`: http://simpy.sourceforge.net/
 
-SimPy can be obtained from: http://sourceforge.net/projects/simpy.
+SimPy can be obtained from: https://github.com/SimPyClassic/SimPyClassic.
 The examples run with SimPy version 1.5 and later.  This tutorial is
 best read with the SimPy Manual or Cheatsheet at your side for
 reference.
@@ -38,7 +38,7 @@ Before attempting to use SimPy you should be familiar with the Python_
 language. In particular you should be able to use *classes*. Python is
 free and available for most machine types. You can find out more about
 it at the `Python web site`_.  SimPy is compatible with Python version
-2.6 and later including Python 3.
+2.7 and Python 3.x.
 
 .. _Python: http://www.Python.org
 .. _`Python web site`: http://www.Python.org

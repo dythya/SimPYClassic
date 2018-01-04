@@ -4,7 +4,7 @@
 
 :SimPy version: 2.3
 :Web-site: http://simpy.sourceforge.net/
-:Python-Version: 2.6 or later and 3.x except for the GUI ones
+:Python-Version: 2.7 or later and 3.x except for the GUI ones
 
 These models are examples of SimPy use written by several authors and usually
 developed for other purposes, such as teaching and consulting. They are in a

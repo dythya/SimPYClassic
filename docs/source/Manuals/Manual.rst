@@ -14,7 +14,8 @@ SimPy Manual
           - Bob Helmbold
 :SimPy release: |release|
 :SimPy Web-site: http://simpy.sourceforge.net/
-:Python-Version: 2.6 and later
+:SimPy Source: https://github.com/SimPyClassic/SimPyClassic
+:Python-Version: 2.7 and later
 :Date: |today|
 
 
@@ -3207,7 +3208,7 @@ Glossary
 
 
 .. .. |simpylogo| image:: images/sm_SimPy_Logo.png
-.. _`simpydownload`: http://sourceforge.net/projects/simpy/
+.. _`simpydownload`: https://github.com/SimPyClassic/SimPyClassic
 
 .. _`Python random module`: http://www.python.org/doc/current/lib/module-random.html
 

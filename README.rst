@@ -28,13 +28,13 @@ is now known as SimpyClassic.
 Installation
 ------------
 
-SimPy requires Python 2.6 or above (including Python 3).
+SimPy requires Python 2.7 or Python 3.
 
 You can install SimPy easily via `PIP <http://pypi.python.org/pypi/pip>`_::
 
     $ pip install -U SimPy
 
-You can also download and install SimPy manually::
+You can also download and install SimPy manually. It can be found at `https://github.com/SimPyClassic/SimPyClassic`::
 
     $ cd where/you/put/simpy/
     $ python setup.py install

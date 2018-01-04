@@ -9,8 +9,9 @@ Simulation with Event Stepping
           - Tony Vignaux <Vignaux@users.sourceforge.net>
 :SimPy release: |release|
 :Web-site: http://simpy.sourceforge.net/
-:Python-Version: 2.6+
+:Python-Version: 2.7+
 :Date: December 2011
+:Updated: January 2018
 
 .. contents:: Contents
    :depth: 2

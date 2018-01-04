@@ -18,8 +18,9 @@ The Bank Tutorial part 2: More  examples of SimPy Simulation
 
 :Author: G A Vignaux  
 :Date:  2012 February
+:Updated: January 2018
 :SimPy release: |release|
-:Python-Version: 2.6 and later
+:Python-Version: 2.7 and later
 
 
 .. highlight:: python
@@ -84,9 +85,10 @@ directory ``bankprograms``. Some have trace statements for
 demonstration purposes, others produce graphical output to the
 screen. Let me encourage you to run them and modify them for yourself
 
-SimPy itself can be obtained from: http://simpy.sourceforge.net/.  It
-is compatible with Python version 2.6 onwards.  The examples in this
-documentation run with SimPy version 1.5 and later.
+SimPy itself can be obtained from:
+https://github.com/SimPyClassic/SimPyClassic.  It is compatible with
+Python version 2.7 onwards.  The examples in this documentation run
+with SimPy version 1.5 and later.
 
 This tutorial should be read with the SimPy Manual or Cheatsheet at
 your side for reference. 
@@ -382,7 +384,7 @@ References
 
 - Python website: http://www.Python.org
 
-- SimPy homepage: http://simpy.sourceforge.net/
+- SimPy homepage: https://github.com/SimPyClassic/SimPyClassic
 
 - The Bank:
 

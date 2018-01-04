@@ -2,7 +2,7 @@
 SimPy Resources
 ===============
 
-SimPy can be downloaded from the "SimPy web-site": http://simpy.sourceforge.net.
+SimPy can be downloaded from the "SimPy web-site": https://github.com/SimPyClassic/SimPyClassic
 
 Simulation model developers are encouraged to share their SimPy modeling
 techniques with the SimPy community. Please "post a message to the simpy-Users

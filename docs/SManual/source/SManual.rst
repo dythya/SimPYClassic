@@ -12,7 +12,7 @@ Introduction to SimPy
 :Authors: G A Vignaux and Klaus Muller
 :Date:  |today|
 :SimPy release: |release|
-:Python-Version: 2.6 and later
+:Python-Version: 2.7 and later
 
 .. THIS WAS PUT UNDER SUBVERSION 2008/08/07
 
@@ -1048,7 +1048,7 @@ the ``gasstation``.)
 .. some useful stuff used above
 
 
-.. _`simpydownload`: http://sourceforge.net/projects/simpy/
+.. _`simpydownload`: https://github.com/SimPyClassic/SimPyClassic
 .. _`Python web-site` : http://www.Python.org
 
 

@@ -11,8 +11,9 @@
           - Tony Vignaux <Vignaux@users.sourceforge.net>
 :SimPy release: |release|
 :Web-site: http://simpy.sourceforge.net/
-:Python-Version: 2.6+
+:Python-Version: 2.7+
 :Date: December 2011
+:Updated: January 2018
 
 .. contents:: Contents
    :depth: 3
@@ -67,7 +68,7 @@ Here is an example:
 
 The program changes the time ratio twice, at simulation times 5 and 10.
 
-When run on a Windows Vista computer under Python 2.6, this results in this output:
+When run on a Windows Vista computer under Python 2.7, this results in this output:
 
 .. literalinclude:: SimulationRTprograms/variableTimeRatio.out
 

@@ -13,7 +13,7 @@ standard Python *random* module.
 
 It is based on ideas from Simula and Simscript and provides efficient
 implementation of co-routines using Python's generators capability. It
-requires Python 2.6 or later including Python 3.x. It was first
+requires Python 2.7 or later including Python 3.x. It was first
 released in 2002 under the GNU LGPL.
 
 

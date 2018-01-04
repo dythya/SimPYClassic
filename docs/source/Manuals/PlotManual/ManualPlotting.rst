@@ -8,8 +8,9 @@
 :Authors: Klaus Muller <Muller@users.sourceforge.net>
 :SimPy release: |release|
 :Web-site: http://simpy.sourceforge.net/
-:Python-Version: 2.6 and later
+:Python-Version: 2.7 and later
 :Date: December 2011
+:Updated: January 2018
 
 
 .. contents:: Contents

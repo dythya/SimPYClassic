@@ -10,7 +10,7 @@ The Bank Tutorial (OO API) Part 2: More  examples of SimPy Simulation
 :Authors: G A Vignaux, K G Muller
 :Date:  2010 April
 :SimPy release: |release|
-:Python-Version: 2.6 and later
+:Python-Version: 2.7 and later
 
 .. ---------------------------------------------------
 ..  TO DO
@@ -102,9 +102,10 @@ directory ``bankprograms``. Some have trace statements for
 demonstration purposes, others produce graphical output to the
 screen. Let me encourage you to run them and modify them for yourself.
 
-SimPy itself can be obtained from: http://simpy.sourceforge.net/.  It
-is compatible with Python version 2.3 onwards.  The examples in this
-documentation run with SimPy version 1.5 and later.
+SimPy itself can be obtained from:
+https://github.com/SimPyClassic/SimPyClassic.  It is compatible with
+Python version 2.7 onwards.  The examples in this documentation run
+with SimPy version 1.5 and later.
 
 This tutorial should be read with the SimPy Manual and CheatsheetOO at
 your side for reference.
@@ -557,7 +558,7 @@ program the graph is plotted; the user has to terminate the plotting
 
 .. Some of the following links need changing
 
-.. _`SimPy`: http://simpy.sourceforge.net/
+.. _`SimPy`: https://github.com/SimPyClassic/SimPyClassic
 .. _Python: http://www.Python.org
 .. _`Python web site`: http://www.Python.org
 
@@ -578,7 +579,7 @@ References
 
 - Python website: http://www.Python.org
 
-- SimPy homepage: http://simpy.sourceforge.net/
+- SimPy homepage: https://github.com/SimPyClassic/SimPyClassic
 
 - The Bank:
 

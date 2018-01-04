@@ -37,7 +37,7 @@ simulation model better than the procedural approach.
 .. _`SimPy`: http://simpy.sourceforge.net/
 
 
-SimPy can be obtained from: http://sourceforge.net/projects/simpy.
+SimPy can be obtained from: https://github.com/SimPyClassic/SimPyClassic.
 This tutorial is best read with the SimPy Manual and CheatsheetOO at
 your side for reference.
 
@@ -938,7 +938,7 @@ References
 
 - Python website: http://www.Python.org
 
-- SimPy website: http://sourceforge.net/projects/simpy
+- SimPy website: https://github.com/SimPyClassic/SimPyClassic
 
 
 ..
