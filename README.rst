@@ -1,5 +1,5 @@
-SimPyClassic |travis| |appveyor|
-================================
+SimPyClassic |travis| |appveyor| |codecov|
+==========================================
 
 SimPy is a process-based discrete-event simulation language based on standard
 Python and released under the GNU LGPL.
@@ -66,3 +66,5 @@ Enjoy simulation programming in SimPy!
             :target: https://travis-ci.org/SimPyClassic/SimPyClassic
 .. |appveyor| image:: https://ci.appveyor.com/api/projects/status/lo8cke509h0qj96r/branch/master?svg=true
             :target: https://ci.appveyor.com/project/johnguant/simpyclassic
+.. |codecov| image:: https://codecov.io/gh/SimPyClassic/SimPyClassic/branch/master/graph/badge.svg
+            :target: https://codecov.io/gh/SimPyClassic/SimPyClassic

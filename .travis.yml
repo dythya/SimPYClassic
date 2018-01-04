@@ -7,8 +7,8 @@ python:
     - "3.6"
 install:
   - pip install -r dev-requirements.txt
-  - pip install python-coveralls
+  - pip install codecov
 script:
-  - pytest --cov=SimPy --cov-report=term-missing
+  - pytest --cov=SimPy
 after_success:
-  - coveralls
+  - codecov
