@@ -123,6 +123,17 @@ Output:
 .. literalinclude:: programs/resourcemonitor.out
 
 
+Romulans
+--------
+
+.. index:: example; Romulans
+.. literalinclude:: programs/romulans.py
+
+Example output, varies:
+
+.. literalinclude:: programs/romulans.out
+
+
 Shopping
 --------
 
