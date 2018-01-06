@@ -55,7 +55,7 @@ hyperexponential. The theoretical probability is also calculated.  (TV)
 .. literalinclude:: ../../../examples/program_output/bcc.out
 
 
-allCenter.py, callCenter_OO.py
+callCenter.py, callCenter_OO.py
 ===============================
 
 Scenario: A call center runs around the clock. It has a number of agents
