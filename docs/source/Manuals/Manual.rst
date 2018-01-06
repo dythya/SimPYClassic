@@ -14,7 +14,6 @@ SimPy Manual
           - Bob Helmbold
 :SimPy release: |release|
 :SimPy Web-site: https://github.com/SimPyClassic/SimPyClassic
-:SimPy Source: https://github.com/SimPyClassic/SimPyClassic
 :Python-Version: 2.7 and later
 :Date: |today|
 
@@ -241,8 +240,8 @@ at the end of the previous subsection would look like this::
 
   Report()  #  report results when the simulation finishes
 
-Further examples of the OO style exist in the *SimPyModels* directory 
-and the *Bank Tutorial*. 
+Further examples of the OO style exist in the *SimPyModels* directory
+and the *Bank Tutorial*.
 
 Alternative SimPy simulation libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -398,13 +397,13 @@ For example to create a new ``Message`` object with a name
 --------
 
 .. note:: When working through this and all other SimPy manuals,
-   the reader is encouraged to type in, run and experiment with 
+   the reader is encouraged to type in, run and experiment with
    all examples as she goes. No better way of learning exists
    than **doing**! A suggestion: if you want to see how a SimPy
-   model is being executed, *trace* it by replacing `from SimPy.Simulation 
+   model is being executed, *trace* it by replacing `from SimPy.Simulation
    import *` with `from SimPy.SimulationTrace import *`.
    Any Python environment is suitable -- an interactive Python session,
-   IDLE, IPython, Scite . . . 
+   IDLE, IPython, Scite . . .
 
 .. index:: example;message
 
@@ -586,7 +585,7 @@ method. There are a number of ways of using it:
 You can use the ``passivate``, ``reactivate``, or ``cancel`` commands to
 control Process objects.
 
-.. index:: 
+.. index::
    pair: yield;passivate
    single: sleep
 
@@ -716,7 +715,7 @@ An active process object can be interrupted by another but cannot
 interrupt itself.
 
 .. index:: interrupt
- 
+
 interrupt
 +++++++++
 
@@ -755,7 +754,7 @@ interrupted
    pair: interrupted;cause
 
 .. index:: interruptedCause
- 
+
 interruptCause
 ++++++++++++++++
 
@@ -765,7 +764,7 @@ interruptCause
     reference to the *interrupter* object.
 
 .. index:: interruptLeft
- 
+
 interruptLeft
 +++++++++++++
 
@@ -925,7 +924,7 @@ succession move up one step.)
 
 You program a process to ``wait`` for SimEvents by including in its PEM:
 
-.. index:: 
+.. index::
    pair: yield; waitenvent
 
 yield waitevent
@@ -961,7 +960,7 @@ yield waitevent
 
 You program a process to "queue" for events by including in its PEM:
 
-.. index:: 
+.. index::
    pair: yield; queueevent
 
 yield queueevent
@@ -1346,7 +1345,7 @@ wait. When ``c1`` and ``c2`` finish with their resources, clients
    triple: Resource; request; priority
    pair: Resource; qType
    pair: Resource; PriorityQ
- 
+
 Priority requests for a Resource unit
 ++++++++++++++++++++++++++++++++++++++++
 
@@ -1603,7 +1602,7 @@ called *reneging*, and the reneging person or thing is said to
 SimPy provides an extended (i.e., compound) ``yield request`` statement
 to handle reneging.
 
-.. index:: yield; request with reneging 
+.. index:: yield; request with reneging
 
 Reneging yield request
 ++++++++++++++++++++++++
@@ -2273,7 +2272,7 @@ returns a list. The argument represents the buffer of the Store. The
 function must search through the objects in the buffer and return a
 sub-list of those that satisfy the requirement.
 
-.. index:: 
+.. index::
    triple: example; Store; yield get with filter
 
 ------------
@@ -2337,7 +2336,7 @@ This program produces the following outputs
 
 [Return to Top_ ]
 
-.. index:: yield; put with reneging 
+.. index:: yield; put with reneging
 
 
 Reneging
@@ -2421,7 +2420,7 @@ change the list order. Subsequently, the SimPy system will
 automatically call that function after any addition (``put``) to the
 queue.
 
-.. index:: 
+.. index::
    triple: Store; example; parcel
 
 ------------
@@ -2456,7 +2455,7 @@ Note that such function only changes the sorting order of the Store instance,
 NOT of the Store class.
 
 
-.. index:: 
+.. index::
    triple: Store; example; master/slave
 
 Master/Slave modelling with a Store
@@ -2478,7 +2477,7 @@ end of the cooperation. This Master/Slave pattern results in the slave process'
 life-cycle having a hole between the slave process arrival and its departure
 after having been served.
 
-.. index:: 
+.. index::
    triple: example;Store;car wash
 
 ------------
@@ -2839,7 +2838,7 @@ furnish histogram data in different ways.
   histogram need not be set up until it is needed and this can be done
   after the data has been gathered.
 
-.. index:: 
+.. index::
    triple: Histogram;Tally; establish
 
 Setting up a Histogram for a Tally object
@@ -2858,7 +2857,7 @@ Then, after ``observing`` the data:
   histogram parameters as set up.
 
 
-.. index:: 
+.. index::
    triple: example; Histogram;Tally
 
 ---------
@@ -2873,7 +2872,7 @@ histogram with 30 bins (plus the under- and over-count bins):
 
 ---------
 
-.. index:: 
+.. index::
    triple: Histogram;Monitor; establish
 
 Setting up a Histogram for a Monitor object
@@ -2891,7 +2890,7 @@ This  call is  equivalent to the following pair:
 
 
 
-.. index:: 
+.. index::
    triple: example; Histogram;Monitor
 
 ---------
@@ -3113,4 +3112,3 @@ Glossary
   sentence-end-double-space: t
   fill-column: 70
   End:
-
