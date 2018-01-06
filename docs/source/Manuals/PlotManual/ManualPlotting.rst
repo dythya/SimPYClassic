@@ -27,7 +27,7 @@ There are several more elaborate Open Source plotting packages downloadable from
 Internet which can be used from Python and therefore from SimPy. SimPlot is
 the "quick and dirty", out-of-the-box plotting package for SimPy. If you need
 more complex plots or publication-quality graphics, consider using e.g. Matplotlib
-( <http://matplotlib.org/>_ ).
+( <https://matplotlib.org/>_ ).
 
 Introduction
 =============
