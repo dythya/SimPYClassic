@@ -95,7 +95,7 @@ It is quite compatible with the procedural approach. The object-oriented
 interface, however, can support the process of developing and extending a
 simulation model better than the procedural approach.
 
-.. _SimPy: http://simpy.sourceforge.net/
+.. _SimPy: https://github.com/SimPyClassic/SimPyClassic
 
 The programs are available without line numbers and ready to go, in
 directory ``bankprograms``. Some have trace statements for
@@ -596,4 +596,3 @@ References
    sentence-end-double-space: t
    fill-column: 70
    End:
-

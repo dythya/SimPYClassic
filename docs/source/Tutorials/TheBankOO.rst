@@ -5,7 +5,7 @@ The Bank (Object Oriented version)
 ..  Tutorials/TheBankOO
 
 .. highlight:: python
-   :linenothreshold: 5  
+   :linenothreshold: 5
 
 .. index::
    Simulation,Monitors, Tallys, Processes,Resources, Levels, Stores
@@ -34,7 +34,7 @@ interface, however, can support the process of developing and extending a
 simulation model better than the procedural approach.
 
 
-.. _`SimPy`: http://simpy.sourceforge.net/
+.. _`SimPy`: https://github.com/SimPyClassic/SimPyClassic
 
 
 SimPy can be obtained from: https://github.com/SimPyClassic/SimPyClassic.
@@ -73,18 +73,18 @@ or tellers might affect the waiting time for customers.
 
 A Customer arriving at a fixed time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
+
 We first model a single customer who arrives at the bank for a visit,
 looks around at the decor for a time and then leaves.  There is no
 queueing. First we will assume his arrival time and the time he spends
 in the bank are fixed.
-  
+
 Examine the following listing which is a complete runnable Python
 script, except for the line numbers.  We use comments to divide the
 script up into sections. This makes for clarity later when the
 programs get more complicated.  Line 1 is a normal Python
 documentation string; line 2 makes available the SimPy constructs
-needed for this model: the ``Simulation`` class, the ``Process`` class, 
+needed for this model: the ``Simulation`` class, the ``Process`` class,
 and the ``hold`` verb.
 
 We define a ``Customer`` class derived from the SimPy ``Process``
@@ -98,18 +98,18 @@ SimPy.
 
 The customer's ``visit`` PEM, lines 9-12, models his
 activities.  When he arrives (it will turn out to be a 'he' in this
-model), he will print out the simulation time, ``self.sim.now()``, 
+model), he will print out the simulation time, ``self.sim.now()``,
 and his name (line 10). ``self.sim`` is a reference to the ``BankModel``
 simulation object where this customer exists. Every ``Process`` instance
 is linked to the simulation in which it is created by assigning to
 its ``sim`` parameter when it is created (see line 19).
-The method ``now()`` can be used at any 
+The method ``now()`` can be used at any
 time in the simulation to find the current simulation time though it cannot be
 changed by the programmer. The customer's name will be set when the
 customer is created later in the script (line 19).
 
 He then stays in the bank for a fixed simulation time ``timeInBank``
-(line 11).  This is achieved by the ``yield hold,self,timeInBank`` statement.  
+(line 11).  This is achieved by the ``yield hold,self,timeInBank`` statement.
 This is the first of the special simulation commands that ``SimPy`` offers.
 
 After a simulation time of ``timeInBank``, the program's execution
@@ -142,13 +142,13 @@ initialize any instance variables needed.
   32
 
 
-Lines 6 to 21 define a class ``BankModel``, composing a model of a bank from  
+Lines 6 to 21 define a class ``BankModel``, composing a model of a bank from
 the ``Simulation`` class, a ``Customer`` class and the global experiment data.
-The definition ``class BankModel(Simulation)`` gives an instance of a 
-``BankModel`` all the attributes of class ``Simulation``. (In OO terms, 
-``BankModel`` *inherits* from ``Simulation``.) Any instance of ``BankModel`` 
-*is* a ``Simulation`` instance. This gives a ``BankModel`` its own event list 
-and thus its own time axis. Also, it allows a ``BankModel`` instance to 
+The definition ``class BankModel(Simulation)`` gives an instance of a
+``BankModel`` all the attributes of class ``Simulation``. (In OO terms,
+``BankModel`` *inherits* from ``Simulation``.) Any instance of ``BankModel``
+*is* a ``Simulation`` instance. This gives a ``BankModel`` its own event list
+and thus its own time axis. Also, it allows a ``BankModel`` instance to
 activate processes and to start the execution of a simulation on its time axis.
 
 Lines 17 to 21 define a ``run`` method; when called, it results in the
@@ -179,12 +179,12 @@ model, and ``.run()`` executes it. This is just a short form of::
     bM = BankModel()
     bM.run()
 
-.. index:: 
+.. index::
    pair: PEM; Process Execution Method
 
 
 .. literalinclude:: bankprograms_OO/bank01_OO.py
-   
+
 
 The short trace printed out by the ``print`` statements shows the
 result. The program finishes at simulation time ``15.0`` because there are
@@ -193,7 +193,7 @@ the customer has no more actions and no other objects or customers are
 active.
 
 .. literalinclude:: bankprograms/bank01.out
-   
+
 
 .. index:: random arrival, bank05_OO
 
@@ -210,16 +210,16 @@ The change occurs in line 3 of the program and in lines 19, 21,
 Python ``random`` module to give us ``expovariate`` to generate the
 random time of arrival. We also import the ``seed`` function to
 initialize the random number stream to allow control of the random
-numbers.  The  ``run`` method is given a parameter ``aseed`` for the 
-initial seed (line 19) .In line 31 we provide an initial seed of 
+numbers.  The  ``run`` method is given a parameter ``aseed`` for the
+initial seed (line 19) .In line 31 we provide an initial seed of
 ``99999``. An exponential random variate, ``t``, is generated in line 23. Note
 that the Python Random module's ``expovariate`` function uses the rate
 (here, ``1.0/tMeanArrival``) as the argument. The generated random variate,
 ``t``, is used in line 24 as the ``at`` argument to the
-``activate`` call. ``tMeanArrival`` is assigned a value of ``5.0`` minutes 
+``activate`` call. ``tMeanArrival`` is assigned a value of ``5.0`` minutes
 at line 31.
 
-In line 35, the ``BankModel`` entity is generated and its ``run`` function 
+In line 35, the ``BankModel`` entity is generated and its ``run`` function
 called with parameter assignment ``aseed=seedVal``.
 
 ..
@@ -237,13 +237,13 @@ called with parameter assignment ``aseed=seedVal``.
 
 
 .. literalinclude:: bankprograms_OO/bank05_OO.py
-   
+
 
 The result is shown below. The customer now arrives at time
 10.5809. Changing the seed value would change that time.
 
 .. literalinclude:: bankprograms/bank05.out
-   
+
 
 The display looks pretty untidy. In the next example I will try and
 make it tidier.
@@ -302,14 +302,14 @@ complicated but the output is much nicer.
 
 
 .. literalinclude:: bankprograms_OO/bank02_OO.py
-   
+
 
 The trace produced by the program is shown below.  Again the
 simulation finishes before the ``400.0`` specified in the ``simulate``
 call.
 
 .. literalinclude:: bankprograms/bank02.out
-   
+
 
 .. -------------------------------------------------------------
 
@@ -339,7 +339,7 @@ to which the ``Source`` belongs. The customer is
 then activated at the current simulation time (the final argument of
 the ``activate`` statement is missing so that the default value of
 ``self.sim.now()``, the current simulation time for the instance of
-``BankModel``, is used as the time; here, it is ``0.0``). We also specify 
+``BankModel``, is used as the time; here, it is ``0.0``). We also specify
 how long the customer
 is to stay in the bank. To keep it simple, all customers stay
 exactly ``12`` minutes.  After each new customer is activated, the
@@ -347,15 +347,15 @@ exactly ``12`` minutes.  After each new customer is activated, the
 before creating the next one (line 13).
 
 ``class BankModel(Simulation)`` (line 24) provides a ``run`` method
-which executes this model consisting of a customer source and the global data. 
-As ``BankModel`` inherits from ``Simulation``, it has its own event list which gets 
+which executes this model consisting of a customer source and the global data.
+As ``BankModel`` inherits from ``Simulation``, it has its own event list which gets
 initialized as empty in line 26.
 
 A ``Source``, ``s``, is created in line 27 and activated at line
 28 where the number of customers to be generated is set to
-``maxNumber = 5`` and the interval between customers to ``ARRint = 10.0``. 
+``maxNumber = 5`` and the interval between customers to ``ARRint = 10.0``.
 The parameter assignment ``sim = self`` links the ``Source`` process
-to this ``BankModel`` instance. Once started at time ``0.0``, ``s``  creates 
+to this ``BankModel`` instance. Once started at time ``0.0``, ``s``  creates
 customers at intervals and each customer then operates independently of the others.
 
 In line 40, a ``BankModel`` object is created and its ``run`` method executed:
@@ -384,12 +384,12 @@ In line 40, a ``BankModel`` object is created and its ``run`` method executed:
 
 
 .. literalinclude:: bankprograms_OO/bank03_OO.py
-   
+
 
 The output is:
 
 .. literalinclude:: bankprograms/bank03.out
-   
+
 
 .. -------------------------------------------------------------
 
@@ -452,17 +452,17 @@ the seed value as parameter.
 
 
 .. literalinclude:: bankprograms_OO/bank06_OO.py
-   
+
 
 
 This generates the following output:
 
 .. literalinclude:: bankprograms/bank06.out
-   
+
 
 .. ---------------------------------------------------------------
 
-.. index:: 
+.. index::
    pair: Resource; queue
 
 
@@ -476,13 +476,13 @@ service from the bank clerk. We extend the model to include a service
 counter which will be modelled as an object of SimPy's ``Resource``
 class with a single resource unit.  The actions of a ``Resource`` are
 simple: a customer ``requests`` a unit of the resource (a clerk). If
-one is free he gets service (and removes the unit, i.e., makes it busy). 
+one is free he gets service (and removes the unit, i.e., makes it busy).
 If there is no
 free clerk the customer joins the queue (managed by the resource
 object) until it is his turn to be served. As each customer
-completes service and ``releases`` the unit, the clerk automatically 
+completes service and ``releases`` the unit, the clerk automatically
 starts serving the next in line. This is done by reactivating that customer's
-process where it had been blocked. 
+process where it had been blocked.
 
 
 .. ---------------------------------------------------------------
@@ -503,14 +503,14 @@ and this is indicated by the parameter assignment ``sim = self``.
 The ``Source`` PEM ``generate`` can access this attribute by
 ``self.sim.k``, its ``BankModel``'s resource attribute (line 14).
 
-The actions involving the ``Counter`` referred to by the parameter 
+The actions involving the ``Counter`` referred to by the parameter
 ``res`` in the customer's PEM are:
 
 - the ``yield request`` statement in line 25. If the server is
   free then the customer can start service immediately and the code
   moves on to line  26. If the server is busy, the customer is
   automatically queued by the Resource. When it eventually comes
-  available the PEM moves on to line 26.  
+  available the PEM moves on to line 26.
 
 - the ``yield hold`` statement in line 28 where the operation of
   the service counter is modelled. Here the service time is a fixed
@@ -540,7 +540,7 @@ the bank before starting service.
     The service counter is created as a ``Resource`` (``k``) in line
     38. This is provided as an argument to the ``Source`` (line
     45) which, in turn, provides it to each customer it creates and
-    activates (line 14). 
+    activates (line 14).
 
     The actions involving the ``counter`` in the customer's PEM are:
 
@@ -548,7 +548,7 @@ the bank before starting service.
       free then the customer can start service immediately and the code
       moves on to line  26. If the server is busy, the customer is
       automatically queued by the  Resource. When it eventually comes
-      available the PEM moves on to line 26.  
+      available the PEM moves on to line 26.
 
     - the ``yield hold`` statement in line 28 where the operation of
       the service counter is modelled. Here the service time is a fixed
@@ -575,7 +575,7 @@ the bank before starting service.
 
 
 .. literalinclude:: bankprograms_OO/bank07_OO.py
-   
+
 
 
 Examining the trace we see that the first two customers get instant service but the others
@@ -583,10 +583,10 @@ have to wait. We still only have five customers (line 44) so we
 cannot draw general conclusions.
 
 .. literalinclude:: bankprograms/bank07.out
-   
 
 
-.. index:: 
+
+.. index::
    Resource, Random service time, bank08_OO
    pair: M/M/1; queue
 
@@ -626,12 +626,12 @@ lines 44 to 48.
 
 
 .. literalinclude:: bankprograms_OO/bank08_OO.py
-   
+
 
 And the output:
 
 .. literalinclude:: bankprograms/bank08.out
-   
+
 
 This model with random arrivals and exponential service times is an
 example of an M/M/1 queue and could rather easily be solved
@@ -660,7 +660,7 @@ separate isolated queues. We will not look at jockeying.
 
 Several Counters but a Single Queue
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
+
 
 Here we model a bank whose customers arrive randomly and are to be
 served at a group of counters, taking a random time for service, where
@@ -684,7 +684,7 @@ unit.
 
 
 .. literalinclude:: bankprograms_OO/bank09_OO.py
-   
+
 
 The waiting times in this model are much shorter than those for the
 single service counter. For example, the waiting time for
@@ -693,11 +693,11 @@ minutes. Again we have too few customers processed to draw general
 conclusions.
 
 .. literalinclude:: bankprograms/bank09.out
-   
+
 
 
 .. ---------------------------------------------------------------
-.. index:: 
+.. index::
    pair: Several queues; Resource
    single: bank10_OO
 
@@ -744,7 +744,7 @@ The rest of the program is the same as before.
 
 
 .. literalinclude:: bankprograms_OO/bank10_OO.py
-   
+
 
 The results show how the customers choose the counter with the
 smallest number. Unlucky ``Customer02`` who joins the wrong queue has
@@ -752,9 +752,9 @@ to wait until ``Customer00`` finishes at time ``55.067``. There are,
 however, too few arrivals in these runs, limited as they are to five
 customers, to draw any general conclusions about the relative
 efficiencies of the two systems.
-  
+
 .. literalinclude:: bankprograms/bank10.out
-   
+
 
 .. ---------------------------------------------------------------
 
@@ -780,14 +780,14 @@ output.
 
 SimPy offers an easy way to gather a few simple statistics such as
 averages: the ``Monitor`` and ``Tally`` classes. The ``Monitor``
-records the values of chosen variables as time series. 
+records the values of chosen variables as time series.
 (but see the comments in `Final Remarks`_).
 
 
 
 .. -------------------------------------------------------------
 
-.. index:: 
+.. index::
    pair: Monitored; queue
    single: bank11_OO
 
@@ -823,7 +823,7 @@ of the ``BankModel`` to which the customer belongs,
 
 
 .. literalinclude:: bankprograms_OO/bank11_OO.py
-   
+
 In previous programs, we have generated the ``BankModel``
 anonymously. Here, we do it differently: we assign the ``BankModel``
 object to the variable ``experi`` (line 53). This way,
@@ -835,15 +835,15 @@ real-world decisions. We should also replicate the runs using different
 random number seeds. The result of this run is:
 
 .. literalinclude:: bankprograms/bank11.out
-   
+
 
 
 .. -------------------------------------------------------------
 
-.. index:: 
+.. index::
    single: Multiple runs, replications, bank12_OO
    single: Random Number Seed
-   pair: model; function  
+   pair: model; function
 
 Multiple runs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -876,27 +876,27 @@ The random number seeds are stored in a list, ``seedVals`` and the
 ``run`` method for each entry to get a set of replications.
 
 .. literalinclude:: bankprograms_OO/bank12_OO.py
-   
+
 The results show some variation. Remember, though, that the system is still
 only operating for 50 customers so the system may not be in
 steady-state.
 
 .. literalinclude:: bankprograms/bank12.out
-   
 
-.. index:: 
+
+.. index::
    GUI input, Graphical Output,Statistical Output
    Priorities and Reneging,Other forms of Resource Facilities
    Advanced synchronization/scheduling commands
 
- 
+
 Final Remarks
 -------------------------------------
- 
+
 This introduction is too long and the examples are getting
 longer. There is much more to say about simulation with *SimPy* but no
 space. I finish with a list of topics for further study:
- 
+
 * **GUI input**. Graphical input of simulation parameters could be an
   advantage in some cases. *SimPy* allows this and programs using
   these facilities have been developed (see, for example, program
@@ -923,7 +923,7 @@ space. I finish with a list of topics for further study:
   process synchronization by events and signals.
 
 
- 
+
 Acknowledgements
 -------------------------------------
 
@@ -932,7 +932,7 @@ and users of SimPy for improving this document by sending their
 comments. I would be grateful for further suggestions or
 corrections. Please send them to: *vignaux* at
 *users.sourceforge.net*.
- 
+
 References
 -------------------------------------
 

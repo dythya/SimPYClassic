@@ -7,7 +7,7 @@
 
 :Authors: Klaus Muller <Muller@users.sourceforge.net>
 :SimPy release: |release|
-:Web-site: http://simpy.sourceforge.net/
+:Web-site: https://github.com/SimPyClassic/SimPyClassic
 :Python-Version: 2.7 and later
 :Date: December 2011
 :Updated: January 2018
@@ -27,7 +27,7 @@ There are several more elaborate Open Source plotting packages downloadable from
 Internet which can be used from Python and therefore from SimPy. SimPlot is
 the "quick and dirty", out-of-the-box plotting package for SimPy. If you need
 more complex plots or publication-quality graphics, consider using e.g. Matplotlib
-( <http://matplotlib.sourceforge.net/>_ ).
+( <http://matplotlib.org/>_ ).
 
 Introduction
 =============
@@ -710,4 +710,3 @@ is to use one of the hundreds of Tk-defined literals such as "black", "aquamarin
 See the `Tk colour page`_ for definitions.
 
 .. _`Tk colour page`: ../../_static/Tkcolors.htm
-
