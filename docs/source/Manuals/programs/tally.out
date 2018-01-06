@@ -1,0 +1,15 @@
+
+Histogram for myTally: 
+Number of observations: 100000 
+          wait time (sec) < 0.0000:      0 (cum:      0/  0.0%) 
+0.0000 <= wait time (sec) < 0.1000:  10135 (cum:  10135/ 10.1%) 
+0.1000 <= wait time (sec) < 0.2000:   9973 (cum:  20108/ 20.1%) 
+0.2000 <= wait time (sec) < 0.3000:  10169 (cum:  30277/ 30.3%) 
+0.3000 <= wait time (sec) < 0.4000:  10020 (cum:  40297/ 40.3%) 
+0.4000 <= wait time (sec) < 0.5000:  10126 (cum:  50423/ 50.4%) 
+0.5000 <= wait time (sec) < 0.6000:   9866 (cum:  60289/ 60.3%) 
+0.6000 <= wait time (sec) < 0.7000:   9910 (cum:  70199/ 70.2%) 
+0.7000 <= wait time (sec) < 0.8000:   9990 (cum:  80189/ 80.2%) 
+0.8000 <= wait time (sec) < 0.9000:   9852 (cum:  90041/ 90.0%) 
+0.9000 <= wait time (sec) < 1.0000:   9959 (cum: 100000/100.0%) 
+1.0000 <= wait time (sec)         :      0 (cum: 100000/100.0%)

@@ -350,9 +350,9 @@ methods and, in particular, an ``__init__`` method, may be defined.
   has "Arrived"::
 
       def go(self):
-          print now(), self.i, 'Starting'
-          yield hold,self,100.0
-          print now(), self.i, 'Arrived'
+          print(now(), self.i, 'Starting')
+          yield hold, self, 100.0
+          print(now(), self.i, 'Arrived')
 
   A process object's PEM starts execution when the object is
   activated, provided the ``simulate(until= ...)`` statement has been
@@ -508,7 +508,7 @@ activate
      Example: to activate a process object, ``cust`` with name
      ``cust001`` at time 10.0 using a PEM called ``lifetime``::
 
-       activate(cust,cust.lifetime(name='cust001'),at=10.0)
+       activate(cust, cust.lifetime(name='cust001'), at=10.0)
 
 
      However, ``delay`` overrides ``at``, in the sense that when a
@@ -550,7 +550,7 @@ method. There are a number of ways of using it:
      For example, to activate the process object ``cust`` using the PEM
      with identifier, ``lifetime`` at time 10.0 we would use::
 
-       cust.start(cust.lifetime(name='cust001'),at=10.0)
+       cust.start(cust.lifetime(name='cust001'), at=10.0)
 
 -    *p.*\ ``start([``\ *p.*\ ``ACTIONS()]`` |arguments|
 
@@ -593,7 +593,7 @@ control Process objects.
 passivate
 ++++++++++++++
 
--    ``yield passivate,self``
+-    ``yield passivate, self``
 
      suspends the process object itself. It becomes "passive". To get
      it going again another process must ``reactivate`` it.
@@ -1100,7 +1100,7 @@ condition to be waited for has occurred.
 
 **Example 7**. This program using the ``yield waituntil ...``
 statement. Here the function ``killed()``, in the ``life()`` PEM of
-the ``Player`` process, defines the condition to be waited for :
+the ``Player`` process, defines the condition to be waited for:
 
 .. include:: programs/romulans.py
    :literal:
@@ -1477,43 +1477,21 @@ order from the last process preempted to the first of them.
 
 ------------
 
-.. .. literalinclude:: programs/diffpriority.py
-      :language: python
 
+.. index:: example; diffpriority
 
 **Example** In this example two clients of different priority compete
-for the same resource unit::
+for the same resource unit:
 
-   from SimPy.Simulation import *
-
-   class Client(Process):
-      def __init__(self,name):
-         Process.__init__(self,name)
-
-      def getserved(self,servtime,priority,myServer):
-          print self.name, 'requests 1 unit at t=',now()
-          yield request, self, myServer, priority
-          yield hold, self, servtime
-          yield release, self,myServer
-          print self.name,'done at t= ',now()
-
-   initialize()
-   # create the *server* Resource object
-   server=Resource(capacity=1,qType=PriorityQ,preemptable=1)
-   # create some Client process objects
-   c1=Client(name='c1')
-   c2=Client(name='c2')
-   activate(c1,c1.getserved(servtime=100,priority=1,myServer=server),at=0)
-   activate(c2,c2.getserved(servtime=100,priority=9,myServer=server),at=50)
-   simulate(until=500)
+.. include:: programs/diffpriority.py
+   :literal:
 
 
-The output from this program is::
+The output from this program is:
 
-   c1 requests 1 unit at t= 0
-   c2 requests 1 unit at t= 50
-   c2 done at t= 150
-   c1 done at t= 200
+.. include:: programs/diffpriority.out
+   :literal:
+
 
 Here, ``c1`` is preempted by ``c2`` at ``t=50``. At that time, ``c1``
 had held the resource for 50 of its total of 100 time units. When
@@ -1643,11 +1621,11 @@ reneging.
 A SimPy program that models Resource requests with reneging must use
 the following pattern of statements::
 
- yield (request,self,r),(<reneging clause>)
+ yield (request, self, r),(<reneging clause>)
  if self.acquired(resource):
     ## process got resource and so did NOT renege
     . . . .
-    yield release,self,resource
+    yield release, self, resource
  else:
     ## process reneged before acquiring resource
     . . . . .
@@ -1685,19 +1663,19 @@ request (reneges) and leaves the ``waitQ``.
 **Example**: part of a parking lot simulation::
 
     . . . .
-    parking_lot=Resource(capacity=10)
-    patience=5   # wait no longer than "patience" time units
-                 # for a parking space
-    park_time=60 # park for "park_time" time units if get a parking space
+    parking_lot = Resource(capacity=10)
+    patience = 5   # wait no longer than "patience" time units
+                   # for a parking space
+    park_time = 60 # park for "park_time" time units if get a parking space
     . . . .
-    yield (request,self,parking_lot),(hold,self,patience)
+    yield (request, self, parking_lot), (hold, self, patience)
     if self.acquired(parking_lot):
        # park the car
-       yield hold,self,park_time
-       yield release,self,parking_lot
+       yield hold, self, park_time
+       yield release, self, parking_lot
     else:
        # patience exhausted, so give up
-       print 'I'm not waiting any longer. I am going home now.'
+       print("I'm not waiting any longer. I am going home now.")
 
 ------------
 
@@ -1734,20 +1712,20 @@ either one event, a list, or a tuple of several SimEvents.)
 **Example** Queuing for movie tickets (part)::
 
     . . . .
-    seats=Resource(capacity=100)
-    sold_out=SimEvent() # signals "out of seats"
-    too_late=SimEvent() # signals "too late for this show"
+    seats = Resource(capacity=100)
+    sold_out = SimEvent() # signals "out of seats"
+    too_late = SimEvent() # signals "too late for this show"
     . . . .
     # Leave the ticket counter queue when movie sold out
     # or it is too late for the show
-    yield (request,self,seats),(waitevent,self,[sold_out,too_late])
+    yield (request, self, seats), (waitevent, self, [sold_out, too_late])
     if self.acquired(seats):
        # watch the movie
-       yield hold,self,120
-       yield release,self,seats
+       yield hold, self, 120
+       yield release, self, seats
     else:
        # did not get a seat
-       print 'Who needs to see this silly movie anyhow?'
+       print('Who needs to see this silly movie anyhow?')
 
 ------------
 
@@ -1832,6 +1810,8 @@ methods, see the section on `Recording Simulation Results`_.
 
 ------------
 
+.. index:: example; resourcemonitor
+
 **Example** The following program uses a ``Monitor`` to record the
 ``server`` resource's queues.  After the simulation ends, it displays
 some summary statistics for each queue, and then their complete time
@@ -1841,45 +1821,10 @@ series:
 .. include:: programs/resourcemonitor.py
    :literal:
 
-The output from this program is::
+The output from this program is:
 
-   c1 requests 1 unit at t = 0
-   c2 requests 1 unit at t = 0
-   c3 requests 1 unit at t = 0
-   c4 requests 1 unit at t = 0
-   c1 done at t = 100
-   c2 done at t = 200
-   c3 done at t = 300
-   c4 done at t = 400
-
-   (Time) Average no. waiting: 1.5
-   (Number) Average no. waiting: 1.5
-   (Number) Var of no. waiting: 0.916666666667
-   (Number) SD of no. waiting: 0.957427107756
-   (Time) Average no. in service: 1.0
-   (Number) Average no. in service: 0.5
-   (Number) Var of no. in service: 0.25
-   (Number) SD of no. in service: 0.5
-   ========================================
-   Time history for the 'server' waitQ:
-   [time, waitQ]
-   [0, 1]
-   [0, 2]
-   [0, 3]
-   [100, 2]
-   [200, 1]
-   [300, 0]
-   ========================================
-   Time history for the 'server' activeQ:
-   [time, activeQ]
-   [0, 1]
-   [100, 0]
-   [100, 1]
-   [200, 0]
-   [200, 1]
-   [300, 0]
-   [300, 1]
-   [400, 0]
+.. include:: programs/resourcemonitor.out
+   :literal:
 
 This output illustrates the difference between the *(Time) Average*
 and the *number statistics*. Here process ``c1`` was in the ``waitQ``
@@ -2125,7 +2070,7 @@ In either case if reneging has *not* occurred the quantity will have
 been put into the Level and ``self.stored(``\ *lev*\ ``)`` will be
 ``True``. This must be tested immediately after the ``yield``::
 
- yield (put,self,lev,ask[,P]),(<reneging clause>)
+ yield (put, self, lev, ask[,P]), (<reneging clause>)
  if self.stored(lev):
     ## process  did not renege
     . . . .
@@ -2136,7 +2081,7 @@ been put into the Level and ``self.stored(``\ *lev*\ ``)`` will be
 The ``yield get`` can also be subject to reneging_ using one of the compound
 statements:
 
-*  ``yield (get,self,lev,ask[,P]),(hold,self,waittime)``
+*  ``yield (get, self, lev, ask[,P]), (hold, self, waittime)``
 
 where if the process does not acquire the amount before *waittime* is
 elapsed, the offerer leaves the ``waitQ`` and its execution continues.
@@ -2151,7 +2096,7 @@ In either case if reneging has *not* occurred ``self.got == ask`` and
 ``self.acquired(lev)`` will be ``True``. ``self.acquired(lev)`` must be called
 immediately after the ``yield``::
 
- yield (get,self,lev,ask[,P]),(<reneging clause>)
+ yield (get, self, lev, ask[,P]), (<reneging clause>)
  if self.acquired(lev):
     ## process  did not renege, self.got == ask
     . . . .
@@ -2262,7 +2207,7 @@ A process, the *offerer*, which is usually but not necessarily
 different from the *requester*, can offer a list of
 items to *sObj* by a ``yield put`` statement:
 
-* ``yield put,self,sObj,give[,P]``
+* ``yield put, self, sObj, give[,P]``
 
 Here ``give`` is a list of any Python objects. If this statement would
 lead to an overflow (that is, ``sObj.nrBuffered + len(give) >
@@ -2292,7 +2237,7 @@ of items chosen by a *filter function*.
 
 Getting *n* items is achieved by the following statement:
 
-* ``yield get,self,sObj,n [,P]``
+* ``yield get, self, sObj, n [,P]``
 
 Here *n* must be a positive integer and *P* is an optional priority
 value (real or integer).  If *sObj* does not currently hold enough
@@ -2320,7 +2265,7 @@ function*, written by the user.
 
 The command, using filter function *ffn* is as follows:
 
-* ``yield get,self,sObj,ffn [,P]``
+* ``yield get, self, sObj, ffn [,P]``
 
 
 The user provides a filter function that has a single list argument and
@@ -2344,15 +2289,15 @@ list appears to the calling process as ``self.got``::
 
         def allweight(buff):
             """filter: get all items with .weight >=W from store"""
-            result=[]
+            result = []
             for i in buff:
-                if i.weight>=W:
+                if i.weight >= W:
                     result.append(i)
             return result
 
 This might be used as follows::
 
-    yield get,self,sObj,allweight [,P]
+    yield get, self, sObj, allweight [,P]
 
 The retrieved objects are returned in the list attribute ``got`` of
 the requesting process.
@@ -2383,30 +2328,10 @@ distinguished by their weight:
 
 
 This program produces the following outputs
-(some lines may be formatted differently)::
+(some lines may be formatted differently):
 
-    0 Got widget weights [5, 5, 5]
-    0 Got widget weights [5, 5, 5]
-    0 Got widget weights [5, 5, 5]
-    11 Got widget weights [5, 9, 7]
-    11 Got widget weights [9, 7, 9]
-    11 Got widget weights [7, 9, 7]
-    22 Got widget weights [9, 7, 9]
-    22 Got widget weights [7, 9, 7]
-    22 Got widget weights [9, 7, 9]
-    33 Got widget weights [7, 9, 7]
-    33 Got widget weights [9, 7, 9]
-    40 Got widget weights [7, 9, 7]
-    44 Got widget weights [9, 7, 9]
-    50 Got widget weights [7, 9, 7]
-    LenBuffer: [[0, 10], [0, 7], [0, 9], [0, 11], [0, 8], [0, 10], [0, 7],
-        [10, 9], [10, 11], [11, 8], [11, 10], [11, 7], [11, 4],
-        [20, 6], [20, 8], [21, 10], [22, 7], [22, 4], [22, 1],
-        [30, 3], [30, 5], [31, 7], [33, 4], [33, 1],
-        [40, 3], [40, 0], [40, 2], [41, 4], [44, 1], [50, 3], [50, 0], [50, 2]]
-    getQ: [[0, 0], [33, 1], [40, 0], [44, 1], [50, 0]]
-    putQ [[0, 0], [0, 1], [0, 2], [0, 3], [0, 2], [0, 1], [0, 0], [10, 1],\
-        [11, 0]]
+.. include:: programs/storewidget.out
+   :literal:
 
 --------------
 
@@ -2438,7 +2363,7 @@ be ``True``.
 
 The mandatory pattern for a ``put`` with reneging is::
 
- yield (put,self,sObj,give [,P]),(<reneging clause>)
+ yield (put, self, sObj, give [,P]),(<reneging clause>)
  if self.stored(sObj):
     ## process  did not renege
     . . . .
@@ -2505,13 +2430,13 @@ queue.
 
    class Parcel:
         def __init__(self,weight):
-            self.weight=weight
+            self.weight = weight
 
    lightFirst=Store()
 
-   def getLightFirst(self,par):
+   def getLightFirst(self, par):
         """Lighter parcels to front of queue"""
-        tmplist=[(x.weight,x) for x in par]
+        tmplist = [(x.weight,x) for x in par]
         tmplist.sort()
         return [x for (key,x) in tmplist]
 
@@ -2576,21 +2501,10 @@ a ``doneSignal`` to it when it has finished:
 .. include:: programs/carwash.py
    :literal:
 
-The output of this program, running to time 30, is::
+The output of this program, running to time 30, is:
 
-   5 car -1 done by Carwash 0
-   5 car -2 done by Carwash 1
-   10 car -3 done by Carwash 0
-   10 car -4 done by Carwash 1
-   15 car 0 done by Carwash 0
-   15 car 1 done by Carwash 1
-   20 car 2 done by Carwash 0
-   20 car 3 done by Carwash 1
-   25 car 4 done by Carwash 0
-   25 car 5 done by Carwash 1
-   30 car 6 done by Carwash 0
-   30 car 7 done by Carwash 1
-   waitingCars [10, 11, 12, 13, 14]
+.. include:: programs/carwash.out
+   :literal:
 
 It is also possible to model this car wash with the cars as Master
 and the ``Carwash`` as Slaves.
@@ -2695,7 +2609,7 @@ is defined it is automatically added  to the global list ``allTallies``.
 
 To define a new Tally object:
 
-* ``m=Tally(name='a_Tally', ylab='y', tlab='t')``
+* ``m = Tally(name='a_Tally', ylab='y', tlab='t')``
 
  - ``name`` is a descriptive name for the tally object (default='``a_Tally``' ).
 
@@ -2716,7 +2630,7 @@ automatically added to the global list ``allMonitors``.
 
 To define a new Monitor object:
 
-* ``m=Monitor(name='a_Monitor', ylab='y', tlab='t')``
+* ``m = Monitor(name='a_Monitor', ylab='y', tlab='t')``
 
  - ``name`` is a descriptive name for the Monitor object (default='``a_Monitor``').
 
@@ -2860,7 +2774,7 @@ form using ``printHistogram`` method or using the ``plotHistogram`` method in th
 ``SimPy.SimPlot`` package.
 
 
-* ``h = Histogram(low=<float>,high=<float>,nbins=<integer>)`` is a
+* ``h = Histogram(low=<float>, high=<float>, nbins=<integer>)`` is a
   histogram object that counts the
   number of ``y`` values in each of its bins, based on the
   recorded ``y`` values.
@@ -2901,33 +2815,12 @@ A Histogram, *h*, can be printed out in text form using
 
 **Example** Printing a histogram from a Tally::
 
-   from SimPy.Simulation import *
-   import random as r
+.. index:: example; tally
+.. literalinclude:: programs/tally.py
 
-   print version
+This gives a printed histogram like this:
 
-   t=Tally(name="myTally",ylab="wait time (sec)")
-   t.setHistogram(low=0.0,high=1.0,nbins=10)
-   for i in range(100000):
-       t.observe(y=r.random())
-   print t.printHistogram(fmt="%6.4f")
-
-This gives a printed histogram like this::
-
-   Histogram for myTally:
-   Number of observations: 100000
-             wait time (sec) < 0.0000:      0 (cum:      0/  0.0%)
-   0.0000 <= wait time (sec) < 0.1000:   9983 (cum:   9983/ 10.0%)
-   0.1000 <= wait time (sec) < 0.2000:  10121 (cum:  20104/ 20.1%)
-   0.2000 <= wait time (sec) < 0.3000:   9800 (cum:  29904/ 29.9%)
-   0.3000 <= wait time (sec) < 0.4000:   9911 (cum:  39815/ 39.8%)
-   0.4000 <= wait time (sec) < 0.5000:   9996 (cum:  49811/ 49.8%)
-   0.5000 <= wait time (sec) < 0.6000:   9881 (cum:  59692/ 59.7%)
-   0.6000 <= wait time (sec) < 0.7000:  10144 (cum:  69836/ 69.8%)
-   0.7000 <= wait time (sec) < 0.8000:  10029 (cum:  79865/ 79.9%)
-   0.8000 <= wait time (sec) < 0.9000:  10088 (cum:  89953/ 90.0%)
-   0.9000 <= wait time (sec) < 1.0000:  10047 (cum: 100000/100.0%)
-   1.0000 <= wait time (sec)         :      0 (cum: 100000/100.0%)
+.. literalinclude:: programs/tally.out
 
 ---------
 
@@ -2974,18 +2867,9 @@ Then, after ``observing`` the data:
 to observe values of an exponential random variate. It uses a
 histogram with 30 bins (plus the under- and over-count bins)::
 
-   from SimPy.Simulation import *
-   from random import expovariate
+.. index:: example; tally
+.. literalinclude:: programs/tally2.py
 
-   r = Tally('Tally')                          # define a tally object, r
-   r.setHistogram(name='exponential',
-                  low=0.0,high=20.0,nbins=30)  # set before observations
-
-   for i in range(1000):    # make the observations
-      y = expovariate(0.1)
-      r.observe(y)
-
-   h = r.getHistogram()     # return the completed histogram
 
 ---------
 

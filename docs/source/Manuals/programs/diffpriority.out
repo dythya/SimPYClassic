@@ -1,0 +1,4 @@
+c1 requests 1 unit at t=0
+c2 requests 1 unit at t=50
+c2 done at t=150
+c1 done at t=200
