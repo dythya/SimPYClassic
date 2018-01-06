@@ -12,11 +12,11 @@ The Bank Tutorial part 2: More  examples of SimPy Simulation
     add example of using SimpyTrace
     Reneging due to an event
     Interrupts - YES
-    SimEvents?     
+    SimEvents?
 
 .. ---------------------------------------------------
 
-:Author: G A Vignaux  
+:Author: G A Vignaux
 :Date:  2012 February
 :Updated: January 2018
 :SimPy release: |release|
@@ -24,7 +24,7 @@ The Bank Tutorial part 2: More  examples of SimPy Simulation
 
 
 .. highlight:: python
-   :linenothreshold: 5  
+   :linenothreshold: 5
 
 
 .. .. contents:: Table Of Contents
@@ -52,7 +52,7 @@ The Bank Tutorial part 2: More  examples of SimPy Simulation
 
 
 .. .. sectnum::
-      :depth: 2 
+      :depth: 2
 
 .. raw:: latex
 
@@ -76,9 +76,9 @@ developed since it was written. These facilities are generally more
 complicated than those introduced before. They include queueing with priority,
 possibly with preemption, reneging, plotting, interrupting, waiting
 until a condition occurs (``waituntil``) and waiting for events to
-occur. 
+occur.
 
-.. _SimPy: http://simpy.sourceforge.net/
+.. _SimPy: https://github.com/SimPyClassic/SimPyClassic
 
 The programs are available without line numbers and ready to go, in
 directory ``bankprograms``. Some have trace statements for
@@ -91,7 +91,7 @@ Python version 2.7 onwards.  The examples in this documentation run
 with SimPy version 1.5 and later.
 
 This tutorial should be read with the SimPy Manual or Cheatsheet at
-your side for reference. 
+your side for reference.
 
 .. raw:: latex
 
@@ -109,7 +109,7 @@ Processes
 In some simulations it is valuable for one SimPy Process to interrupt
 another. This can only be done when the *victim* is "active"; that is
 when it has an event scheduled for it. It must be executing a ``yield
-hold`` statement. 
+hold`` statement.
 
 A process waiting for a resource (after a ``yield request``
 statement) is passive and cannot be interrupted by another. Instead
@@ -129,7 +129,7 @@ In this example, ``call`` is an object of the ``Call`` Process class
 whose only purpose is to make the cellphone ring after a delay,
 ``timeOfCall``, an argument to its ``ring`` PEM (label #7).
 
-.. 
+..
    12  1
    13 2
    14 3
@@ -155,10 +155,10 @@ finishes (label #4) he can resume the conversation, with, now we
 assume, a thoroughly irritated bank manager (label #5).
 
 .. literalinclude:: bankprograms/bank22.py
-   
+
 
 .. literalinclude:: bankprograms/bank22.out
-   
+
 
 As this has no random numbers the results are reasonably clear: the
 interrupting call occurs at 9.0. It takes ``klaus`` 3 minutes to
@@ -178,7 +178,7 @@ This model uses the ``waituntil`` yield command. In the program listing
 the door is initially closed (label #1) and a function to test if
 it is open is defined at label #2.
 
-.. 
+..
    07  1
    08  2
    11  3
@@ -191,7 +191,7 @@ it is open is defined at label #2.
 The ``Doorman`` class is defined starting at label #3 and the single
 ``doorman`` is created and activated at at labels #7 and #8. The
 doorman waits for an average 10 minutes (label #4) and then
-opens the door. 
+opens the door.
 
 The ``Customer`` class is defined at label #5 and a new customer prints out
 ``Here I am`` on arrival. If the door is still closed, he adds ``but
@@ -202,13 +202,13 @@ for the door) proceed. A customer arriving when the door is open will
 not be delayed.
 
 .. literalinclude:: bankprograms/bank14.py
-   
+
 The output from a run for this programs shows how the first customer
 has to wait until the door is opened.
 
 .. literalinclude:: bankprograms/bank14.out
-   
-Wait for the doorman to give a signal: ``waitevent`` 
+
+Wait for the doorman to give a signal: ``waitevent``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Customers arrive at random, some of them getting to the bank before
@@ -227,7 +227,7 @@ closed behind them.
    39 6
    66 7
    67 8
-    
+
 
 This model uses the ``yield waitevent`` command which requires a
 ``SimEvent`` to be defined (label #1).  The ``Doorman`` class is
@@ -245,13 +245,13 @@ the door to be opened using the ``yield waitevent`` command (label
 
 
 .. literalinclude:: bankprograms/bank13.py
-   
+
 
 An output run for this programs shows how the first three customers
 have to wait until the door is opened.
 
 .. literalinclude:: bankprograms/bank13.out
-   
+
 
 .. ==================================================================
 
@@ -313,7 +313,7 @@ simple plotting of results from simulations.  Here we use the SimPlot
 #6 and #7. The ``plotHistogram`` call is in label #7.
 
 .. literalinclude:: bankprograms/bank17.py
-   
+
 
 
 Plotting from  Resource Monitors
@@ -357,18 +357,18 @@ program the graph is plotted; the user has to terminate the plotting
 
 
 .. literalinclude:: bankprograms/bank16.py
-   
+
 
 
 
 .. Some of the following links need changing
 
-.. _`SimPy`: http://simpy.sourceforge.net/
+.. _`SimPy`: https://github.com/SimPyClassic/SimPyClassic
 .. _Python: http://www.Python.org
 .. _`Python web site`: http://www.Python.org
 
 
- 
+
 Acknowledgements
 ------------------------------
 
@@ -378,7 +378,7 @@ their comments. I would be grateful for any further corrections or
 suggestions. Please send them to: *vignaux* at
 *users.sourceforge.net*.
 
- 
+
 References
 -------------------------------------
 
@@ -401,4 +401,3 @@ References
    sentence-end-double-space: t
    fill-column: 70
    End:
-

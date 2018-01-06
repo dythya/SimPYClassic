@@ -10,7 +10,7 @@
 :Authors: - Klaus Muller <Muller@users.sourceforge.net>
           - Tony Vignaux <Vignaux@users.sourceforge.net>
 :SimPy release: |release|
-:Web-site: http://simpy.sourceforge.net/
+:Web-site: https://github.com/SimPyClassic/SimPyClassic
 :Python-Version: 2.7+
 :Date: December 2011
 :Updated: January 2018

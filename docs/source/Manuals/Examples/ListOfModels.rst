@@ -3,7 +3,7 @@
 ==========================================
 
 :SimPy version: 2.3
-:Web-site: http://simpy.sourceforge.net/
+:Web-site: https://github.com/SimPyClassic/SimPyClassic
 :Python-Version: 2.7 or later and 3.x except for the GUI ones
 
 These models are examples of SimPy use written by several authors and usually

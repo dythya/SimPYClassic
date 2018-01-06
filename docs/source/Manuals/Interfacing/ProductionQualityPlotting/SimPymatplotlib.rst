@@ -40,7 +40,7 @@ home page:
     servers, and six graphical user interface toolkits."*
 
 The matplotlib screenshots (with Python code) at
-http://matplotlib.sourceforge.net/users/screenshots.html show the great range
+https://matplotlib.org/gallery/index.html show the great range
 of quality displays the library can produce with little coding. For the
 investment in time in downloading, installing and learning matplotlib, the
 SimPy user is rewarded with a powerful plotting capability.
@@ -49,9 +49,8 @@ SimPy user is rewarded with a powerful plotting capability.
 Downloading matplotlib
 --------------------------
 
-You can download matplotlib from https://sourceforge.net/projects/matplotlib.
 Extensive installation instructions are provided at
-http://matplotlib.sourceforge.net/users/installing.html.
+https://matplotlib.org/users/installing.html
 
 
 matplotlib input data

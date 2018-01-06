@@ -4,7 +4,7 @@ Installation
 
 This file describes the installation of SimPy |release|.
 
-#. Check that you have Python 2.6 or above.
+#. Check that you have Python 2.7 or above.
 
 #. You can install SimPy easily via `PIP <http://pypi.python.org/pypi/pip>`_
    ::

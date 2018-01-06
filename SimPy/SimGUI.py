@@ -143,7 +143,7 @@ class SimGUI(object):
         tx = Text(t, width = 60, height = 7)
         txt = 'SimGUI version %s\n\nSimGUI is a framework for SimPy - based simulations. '%__version__+\
         'It has been developed by Klaus Muller, Simon Frost and Tony Vignaux. \n'+\
-        '\n\nHomepage and download: simpy.sourceforge.net\n'
+        '\n\nHomepage and download: https://github.com/SimPyClassic/SimPyClassic\n'
         tx.insert(END, txt)
         tx.pack()
 
@@ -393,4 +393,3 @@ Uses Monitor objects to record waiting times and total service times."""
        trace = 0,
        nrRuns = 1)
     gui.mainloop()
-

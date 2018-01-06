@@ -27,7 +27,7 @@ Starting with SimPy 2.0 an object-oriented programmer's interface was
 added to the package. It is compatible with the current procedural
 approach which is used in most of the models described here.
 
-.. _`SimPy`: http://simpy.sourceforge.net/
+.. _`SimPy`: https://github.com/SimPyClassic/SimPyClassic
 
 SimPy can be obtained from: https://github.com/SimPyClassic/SimPyClassic.
 The examples run with SimPy version 1.5 and later.  This tutorial is
@@ -959,7 +959,7 @@ References
 
 - Python website: http://www.Python.org
 
-- SimPy website: http://sourceforge.net/projects/simpy
+- SimPy website: https://github.com/SimPyClassic/SimPyClassic
 
 
 ==================================

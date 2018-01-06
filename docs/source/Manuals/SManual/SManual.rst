@@ -1038,11 +1038,6 @@ the ``gasstation``.)
 .. literalinclude:: programs/carsT.out
    :linenos:
 
-..
-   .. image:: http://sourceforge.net/sflogo.php?group_id=62366&type=4
-      :width: 125
-      :alt:  SourceForge Logo
-      :height: 37
 
 .. ------------------------------------------------------------------------
 .. some useful stuff used above
@@ -1050,11 +1045,6 @@ the ``gasstation``.)
 
 .. _`simpydownload`: https://github.com/SimPyClassic/SimPyClassic
 .. _`Python web-site` : http://www.Python.org
-
-
-.. _`SimPy.SimulationRT`: http://simpy.sourceforge.net/SimPyDocs/SimRTManual.html
-.. _`SimPy.SimulationStep`: http://simpy.sourceforge.net/SimPyDocs/SimStepManual/SimStepManual.html
-.. _`The Bank`: http://simpy.sourceforge.net/SimPyDocs/TheBank.html
 
 
 .. .. _Top: Contents_

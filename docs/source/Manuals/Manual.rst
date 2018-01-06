@@ -13,7 +13,7 @@ SimPy Manual
           - Klaus Muller <Muller@users.sourceforge.net>
           - Bob Helmbold
 :SimPy release: |release|
-:SimPy Web-site: http://simpy.sourceforge.net/
+:SimPy Web-site: https://github.com/SimPyClassic/SimPyClassic
 :SimPy Source: https://github.com/SimPyClassic/SimPyClassic
 :Python-Version: 2.7 and later
 :Date: |today|
