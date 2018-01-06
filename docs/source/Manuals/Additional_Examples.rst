@@ -68,6 +68,17 @@ Output:
 .. literalinclude:: programs/breakdown.out
 
 
+Diffpriority
+------------
+
+.. index:: example; diffpriority
+.. literalinclude:: programs/diffpriority.py
+
+Output:
+
+.. literalinclude:: programs/diffpriority.out
+
+
 Firework
 --------
 
@@ -100,6 +111,12 @@ Output:
 
 .. literalinclude:: programs/message.out
 
+
+Monitor
+-------
+
+.. index:: example; monitor
+.. literalinclude:: programs/monitor.py
 
 Resource
 --------
@@ -156,3 +173,18 @@ Output:
 .. literalinclude:: programs/storewidget.out
 
 
+Tally
+-----------
+
+.. index:: example; tally
+.. literalinclude:: programs/tally.py
+
+Output:
+
+.. literalinclude:: programs/tally.out
+
+
+Second tally example:
+
+.. index:: example; tally
+.. literalinclude:: programs/tally2.py

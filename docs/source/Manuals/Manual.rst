@@ -2813,7 +2813,7 @@ A Histogram, *h*, can be printed out in text form using
 
 ------------
 
-**Example** Printing a histogram from a Tally::
+**Example** Printing a histogram from a Tally:
 
 .. index:: example; tally
 .. literalinclude:: programs/tally.py
@@ -2865,9 +2865,9 @@ Then, after ``observing`` the data:
 
 **Example** In the following example we establish a ``Tally`` recorder
 to observe values of an exponential random variate. It uses a
-histogram with 30 bins (plus the under- and over-count bins)::
+histogram with 30 bins (plus the under- and over-count bins):
 
-.. index:: example; tally
+.. index:: example; tally2
 .. literalinclude:: programs/tally2.py
 
 
@@ -2898,19 +2898,10 @@ This  call is  equivalent to the following pair:
 
 **Example** Here we establish a ``Monitor`` to observe values of an
 exponential random variate. It uses a histogram with 30 bins (plus the
-under- and over-count bins)::
+under- and over-count bins):
 
-   from SimPy.Simulation import *
-   from random import expovariate
-
-   m = Monitor()        # define the Monitor object, m
-
-   for i in range(1000):    # make the observations
-      y = expovariate(0.1)
-      m.observe(y)
-
-      # set up and return the completed histogram
-   h = m.histogram(low=0.0, high=20, nbins=30)
+.. index:: example; monitor
+.. literalinclude:: programs/monitor.py
 
 ---------
 
@@ -3114,12 +3105,6 @@ Glossary
 .. _`Appendix A0`: `A0. Changes from the previous  version of SimPy`_
 .. _Python: http://www.Python.org
 
-
-..
- .. image:: http://sourceforge.net/sflogo.php?group_id=62366&type=4
-    :width: 125
-    :height: 37
-    :alt:  SourceForge Logo
 
 ..
   Local Variables:
