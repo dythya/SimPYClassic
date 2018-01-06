@@ -33,11 +33,11 @@ Jobs arrive at random into a c-server queue with exponential service-time
 distribution. Simulate to determine the average number in the system and the
 average time jobs spend in the system.
 
-.. literalinclude:: ../MMC.py
-.. literalinclude:: ../program_output/MMC.out
+.. literalinclude:: ../../../examples/MMC.py
+.. literalinclude:: ../../../examples/program_output/MMC.out
 
-.. literalinclude:: ../MMC_OO.py
-.. literalinclude:: ../program_output/MMC.out
+.. literalinclude:: ../../../examples/MMC_OO.py
+.. literalinclude:: ../../../examples/program_output/MMC.out
 
 
 BCC: bcc.py, bcc_OO.py
@@ -48,14 +48,14 @@ with different service-time distributions. No queues allowed, blocked
 customers are rejected (BCC). Distributions are Erlang, exponential, and
 hyperexponential. The theoretical probability is also calculated.  (TV)
 
-.. literalinclude:: ../bcc.py
-.. literalinclude:: ../program_output/bcc.out
+.. literalinclude:: ../../../examples/bcc.py
+.. literalinclude:: ../../../examples/program_output/bcc.out
 
-.. literalinclude:: ../bcc_OO.py
-.. literalinclude:: ../program_output/bcc.out
+.. literalinclude:: ../../../examples/bcc_OO.py
+.. literalinclude:: ../../../examples/program_output/bcc.out
 
 
-callCenter.py, callCenter_OO.py
+allCenter.py, callCenter_OO.py
 ===============================
 
 Scenario: A call center runs around the clock. It has a number of agents
@@ -71,13 +71,13 @@ The model returns the frequency distribution of client waiting times, the
 percentage of reneging clients, and the load on the agents.  This model
 demonstrates the use of yield get with a filter function. (KGM)
 
-.. literalinclude:: ../callCenter.py
-.. literalinclude:: ../program_output/callCenter.out
+.. literalinclude:: ../../../examples/callCenter.py
+.. literalinclude:: ../../../examples/program_output/callCenter.out
 
 Object Oriented version.
 
-.. literalinclude:: ../callCenter_OO.py
-.. literalinclude:: ../program_output/callCenter.out
+.. literalinclude:: ../../../examples/callCenter_OO.py
+.. literalinclude:: ../../../examples/program_output/callCenter.out
 
 
 cellphone.py, cellphone_OO.py
@@ -93,13 +93,13 @@ the mean and variance of the total time blocked, and the number of times
 blocking occurred in each hour. An observational gap occurs between the
 observation periods to make each one's measurement independent.  (TV)
 
-.. literalinclude:: ../cellphone.py
-.. literalinclude:: ../program_output/cellphone.out
+.. literalinclude:: ../../../examples/cellphone.py
+.. literalinclude:: ../../../examples/program_output/cellphone.out
 
 Object orientated
 
-.. literalinclude:: ../cellphone_OO.py
-.. literalinclude:: ../program_output/cellphone.out
+.. literalinclude:: ../../../examples/cellphone_OO.py
+.. literalinclude:: ../../../examples/program_output/cellphone.out
 
 
 Computer CPU: centralserver.py, centralserver_OO.py
@@ -125,13 +125,13 @@ another compute time (exp, mean 1.$ sec).
 
 The objective is to measure the throughput of the CPU (tasks per second)
 
-.. literalinclude:: ../centralserver.py
-.. literalinclude:: ../program_output/centralserver.out
+.. literalinclude:: ../../../examples/centralserver.py
+.. literalinclude:: ../../../examples/program_output/centralserver.out
 
 OO version
 
-.. literalinclude:: ../centralserver_OO.py
-.. literalinclude:: ../program_output/centralserver.out
+.. literalinclude:: ../../../examples/centralserver_OO.py
+.. literalinclude:: ../../../examples/program_output/centralserver.out
 
 
 Messages on a Jackson Network: jacksonnetwork.py, jacksonnetwork_OO.py
@@ -144,13 +144,13 @@ system.  (TV)
 Messages arrive randomly at rate 1.5 per second at a communication network
 with 3 nodes (computers). Each computer (node) can queue messages.
 
-.. literalinclude:: ../jacksonnetwork.py
-.. literalinclude:: ../program_output/jacksonnetwork.out
+.. literalinclude:: ../../../examples/jacksonnetwork.py
+.. literalinclude:: ../../../examples/program_output/jacksonnetwork.out
 
 OO version
 
-.. literalinclude:: ../jacksonnetwork_OO.py
-.. literalinclude:: ../program_output/jacksonnetwork.out
+.. literalinclude:: ../../../examples/jacksonnetwork_OO.py
+.. literalinclude:: ../../../examples/program_output/jacksonnetwork.out
 
 
 Miscellaneous Models
@@ -165,13 +165,13 @@ Bank Customers who can renege: bank08renege.py, bank08renege_OO.py
 Use of reneging (compound ``yield request``) based on ``bank08.py`` of the
 tutorial TheBank. Customers leave if they lose patience with waiting.
 
-.. literalinclude:: ../bank08renege.py
-.. literalinclude:: ../program_output/bank08renege.out
+.. literalinclude:: ../../../examples/bank08renege.py
+.. literalinclude:: ../../../examples/program_output/bank08renege.out
 
 OO version
 
-.. literalinclude:: ../bank08renege_OO.py
-.. literalinclude:: ../program_output/bank08renege.out
+.. literalinclude:: ../../../examples/bank08renege_OO.py
+.. literalinclude:: ../../../examples/program_output/bank08renege.out
 
 
 Carwash: Carwash.py, Carwash_OO.py
@@ -182,13 +182,13 @@ processes.  Scenario is a carwash installation with multiple machines. Two
 model implementations are shown, one with the carwash as master in the
 cooperation, and the other with the car as master.
 
-.. literalinclude:: ../Carwash.py
-.. literalinclude:: ../program_output/Carwash.out
+.. literalinclude:: ../../../examples/Carwash.py
+.. literalinclude:: ../../../examples/program_output/Carwash.out
 
 Here is the OO version:
 
-.. literalinclude:: ../Carwash_OO.py
-.. literalinclude:: ../program_output/Carwash.out
+.. literalinclude:: ../../../examples/Carwash_OO.py
+.. literalinclude:: ../../../examples/program_output/Carwash.out
 
 
 Game of Life: CellularAutomata.py
@@ -196,8 +196,8 @@ Game of Life: CellularAutomata.py
 
 A two-dimensional cellular automaton. Does the game of Life. (KGM)
 
-.. literalinclude:: ../CellularAutomata.py
-.. literalinclude:: ../program_output/CellularAutomata.out
+.. literalinclude:: ../../../examples/CellularAutomata.py
+.. literalinclude:: ../../../examples/program_output/CellularAutomata.out
 
 
 SimPy's event signalling synchronisation constructs: demoSimPyEvents.py
@@ -208,8 +208,8 @@ Pavlov's drooling dogs, an activity simulation where a job is completed after
 a number of parallel activities, and the simulation of a US-style 4-way stop
 intersection.
 
-.. literalinclude:: ../demoSimPyEvents.py
-.. literalinclude:: ../program_output/demoSimPyEvents.out
+.. literalinclude:: ../../../examples/demoSimPyEvents.py
+.. literalinclude:: ../../../examples/program_output/demoSimPyEvents.out
 
 
 Find the Shortest Path: shortestPath_SimPy.py, shortestPath_SimPy_OO.py
@@ -218,13 +218,13 @@ Find the Shortest Path: shortestPath_SimPy.py, shortestPath_SimPy_OO.py
 A fun example of using SimPy for non-queuing work. It simulates a searcher
 through a graph, seeking the shortest path. (KGM)
 
-.. literalinclude:: ../shortestPath_SimPy.py
-.. literalinclude:: ../program_output/shortestPath_SimPy.out
+.. literalinclude:: ../../../examples/shortestPath_SimPy.py
+.. literalinclude:: ../../../examples/program_output/shortestPath_SimPy.out
 
 Here is the OO version:
 
-.. literalinclude:: ../shortestPath_SimPy_OO.py
-.. literalinclude:: ../program_output/shortestPath_SimPy.out
+.. literalinclude:: ../../../examples/shortestPath_SimPy_OO.py
+.. literalinclude:: ../../../examples/program_output/shortestPath_SimPy.out
 
 
 Machine Shop Model: Machineshop.py, Machineshop_OO.py
@@ -238,13 +238,13 @@ with the machine repair. The workshop works continuously.
 
 This is an example of the use of the ``interrupt()`` method. (KGM)
 
-.. literalinclude:: ../Machineshop.py
-.. literalinclude:: ../program_output/Machineshop.out
+.. literalinclude:: ../../../examples/Machineshop.py
+.. literalinclude:: ../../../examples/program_output/Machineshop.out
 
 Here is the OO version:
 
-.. literalinclude:: ../Machineshop_OO.py
-.. literalinclude:: ../program_output/Machineshop.out
+.. literalinclude:: ../../../examples/Machineshop_OO.py
+.. literalinclude:: ../../../examples/program_output/Machineshop.out
 
 Supermarket: Market.py, Market_OO.py
 ====================================
@@ -252,13 +252,13 @@ Supermarket: Market.py, Market_OO.py
 A supermarket checkout with multiple counters and extended Monitor objects.
 Written and analysed by David Mertz in an article for developerWorks (). (MM)
 
-.. literalinclude:: ../Market.py
-.. literalinclude:: ../program_output/Market.out
+.. literalinclude:: ../../../examples/Market.py
+.. literalinclude:: ../../../examples/program_output/Market.out
 
 Here is the OO version:
 
-.. literalinclude:: ../Market_OO.py
-.. literalinclude:: ../program_output/Market.out
+.. literalinclude:: ../../../examples/Market_OO.py
+.. literalinclude:: ../../../examples/program_output/Market.out
 
 
 Movie Theatre Ticket Counter: Movie_renege.py, Movie_renege_OO.py
@@ -269,13 +269,13 @@ occurrence of an event. Scenario is a movie ticket counter with a limited
 number of tickets for three movies (next show only). When a movie is sold out,
 all people waiting to buy ticket for that movie renege (leave queue).
 
-.. literalinclude:: ../Movie_renege.py
-.. literalinclude:: ../program_output/Movie_renege.out
+.. literalinclude:: ../../../examples/Movie_renege.py
+.. literalinclude:: ../../../examples/program_output/Movie_renege.out
 
 Here is the OO version:
 
-.. literalinclude:: ../Movie_renege_OO.py
-.. literalinclude:: ../program_output/Movie_renege.out
+.. literalinclude:: ../../../examples/Movie_renege_OO.py
+.. literalinclude:: ../../../examples/program_output/Movie_renege.out
 
 
 
@@ -286,13 +286,13 @@ Demo of ``waitUntil`` capability. It simulates three workers each requiring a
 set of tools to do their jobs. Tools are shared, scarce resources for which
 they compete.
 
-.. literalinclude:: ../needResources.py
-.. literalinclude:: ../program_output/needResources.out
+.. literalinclude:: ../../../examples/needResources.py
+.. literalinclude:: ../../../examples/program_output/needResources.out
 
 Here is the OO version:
 
-.. literalinclude:: ../needResources_OO.py
-.. literalinclude:: ../program_output/needResources.out
+.. literalinclude:: ../../../examples/needResources_OO.py
+.. literalinclude:: ../../../examples/program_output/needResources.out
 
 
 Widget Factory: SimPy_worker_extend.py, SimPy_worker_extend_OO.py
@@ -300,13 +300,13 @@ Widget Factory: SimPy_worker_extend.py, SimPy_worker_extend_OO.py
 
 Factory making widgets with queues for machines. (MM)
 
-.. literalinclude:: ../SimPy_worker_extend.py
-.. literalinclude:: ../program_output/SimPy_worker_extend.out
+.. literalinclude:: ../../../examples/SimPy_worker_extend.py
+.. literalinclude:: ../../../examples/program_output/SimPy_worker_extend.out
 
 Here is the OO version:
 
-.. literalinclude:: ../SimPy_worker_extend_OO.py
-.. literalinclude:: ../program_output/SimPy_worker_extend.out
+.. literalinclude:: ../../../examples/SimPy_worker_extend_OO.py
+.. literalinclude:: ../../../examples/program_output/SimPy_worker_extend.out
 
 
 Widget Packing Machine: WidgetPacking.py, WidgetPacking_OO.py
@@ -318,13 +318,13 @@ are shown: the first uses a Level for buffering non-distinguishable items
 (widgets), and the second a Store for distinguishable items (widgets of
 different weight).
 
-.. literalinclude:: ../WidgetPacking.py
-.. literalinclude:: ../program_output/WidgetPacking.out
+.. literalinclude:: ../../../examples/WidgetPacking.py
+.. literalinclude:: ../../../examples/program_output/WidgetPacking.out
 
 Here is the OO version:
 
-.. literalinclude:: ../WidgetPacking_OO.py
-.. literalinclude:: ../program_output/WidgetPacking.out
+.. literalinclude:: ../../../examples/WidgetPacking_OO.py
+.. literalinclude:: ../../../examples/program_output/WidgetPacking.out
 
 
 GUI Input
@@ -340,11 +340,11 @@ Fireworks using SimGUI: GUIdemo.py, GUIdemo_OO.py
 A firework show. This is a very basic model, demonstrating the ease
 of interfacing to SimGUI.
 
-.. literalinclude:: ../GUIdemo.py
+.. literalinclude:: ../../../examples/GUIdemo.py
 
 Here is the OO version:
 
-.. literalinclude:: ../GUIdemo_OO.py
+.. literalinclude:: ../../../examples/GUIdemo_OO.py
 
 
 Bank Customers using SimGUI: bank11GUI.py, bank11GUI_OO.py
@@ -353,11 +353,11 @@ Bank Customers using SimGUI: bank11GUI.py, bank11GUI_OO.py
 Simulation with customers arriving at random to a bank with two counters. This
 is a modification of the bank11 simulation using SimGUI to run the simulation.
 
-.. literalinclude:: ../bank11GUI.py
+.. literalinclude:: ../../../examples/bank11GUI.py
 
 Here is the OO version:
 
-.. literalinclude:: ../bank11GUI_OO.py
+.. literalinclude:: ../../../examples/bank11GUI_OO.py
 
 
 Bank Customers using SimulationStep: SimGUIStep.py
@@ -368,7 +368,7 @@ Bank Customers using SimulationStep: SimGUIStep.py
 Another modification of the bank11 simulation this time showing the ability to
 step between events.
 
-.. literalinclude:: ../SimGUIStep.py
+.. literalinclude:: ../../../examples/SimGUIStep.py
 
 
 Plot
@@ -399,11 +399,11 @@ c) What percentage of customer has to wait longer than 15 minutes?
 
 SimPy.SimPlot is used to graph the number of baguettes over time. (KGM)
 
-.. literalinclude:: ../bakery.py
+.. literalinclude:: ../../../examples/bakery.py
 
 Here is the OO version:
 
-.. literalinclude:: ../bakery_OO.py
+.. literalinclude:: ../../../examples/bakery_OO.py
 
 
 Bank Customers Demos SimPlot: bank11Plot.py
@@ -412,7 +412,7 @@ Bank Customers Demos SimPlot: bank11Plot.py
 A modification of the bank11 simulation with graphical output. It plots
 service and waiting times.
 
-.. literalinclude:: ../bank11Plot.py
+.. literalinclude:: ../../../examples/bank11Plot.py
 
 Debugger
 +++++++++
@@ -423,11 +423,11 @@ Stepping thru Simpulation Events: SimpleDebugger.py
 A utility module for stepping through the events of a simulation
 under user control, using SimulationTrace.
 
-.. literalinclude:: ../SimpleDebugger.py
+.. literalinclude:: ../../../examples/SimpleDebugger.py
 
 Here is the OO version:
 
-.. literalinclude:: ../SimpleDebugger_OO.py
+.. literalinclude:: ../../../examples/SimpleDebugger_OO.py
 
 
 
@@ -440,7 +440,7 @@ Here is the OO version:
 :Date: 2012-April
 
 
-.. |simpylogo| image:: ../../../docs/source/_static/sm_SimPy_Logo.png
+.. |simpylogo| image:: ../../_static/sm_SimPy_Logo.png
 
 
 ..

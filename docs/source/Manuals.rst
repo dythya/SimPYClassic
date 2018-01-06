@@ -11,4 +11,5 @@ Manuals
    Manuals/SimRTManual
    Manuals/SimStepManual
    Cheatsheets
-   Manuals/Examples
+   Manuals/Additional_Examples
+   Manuals/Examples/index
