@@ -13,3 +13,4 @@ Manuals
    Cheatsheets
    Manuals/Additional_Examples
    Manuals/Examples/index
+   Manuals/SManual/index
