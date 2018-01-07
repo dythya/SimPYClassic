@@ -1,6 +1,6 @@
-===============
-SimPy Tutorials
-===============
+=======================
+SimPy Classic Tutorials
+=======================
 
 There are two styles of modelling using SimPy. The first, which we
 call the Classical style, uses user-defined Process objects each

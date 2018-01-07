@@ -1,5 +1,5 @@
 =================================
-Documentation for SimPy
+Documentation for SimPy Classic
 =================================
 
 SimPy is a process-based discrete-event simulation language based on

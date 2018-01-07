@@ -56,7 +56,7 @@ authors = [
     u'Ontje Lünsdorf',
     'Stefan Scherfke',
 ]
-project = u'SimPy'
+project = u'SimPy Classic'
 copyright = '2002-2012, ' + ', '.join(authors)
 
 # The version info for the project you're documenting, acts as replacement for

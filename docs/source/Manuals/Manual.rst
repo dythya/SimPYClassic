@@ -1,12 +1,12 @@
 .. meta::
-   :description: SimPy Python Simulation Language
+   :description: SimPy Classic Python Simulation Language
    :keywords: simulation python stochastic
 
 .. highlight:: python
    :linenothreshold: 5
 
 =====================
-SimPy Manual
+SimPy Classic Manual
 =====================
 
 :Authors: - Tony Vignaux <Vignaux@users.sourceforge.net>
@@ -28,7 +28,7 @@ SimPy Manual
    :depth: 2
 
 
-This document describes SimPy version |release|.  Changes from the previous
+This document describes SimPy Classic version |release|.  Changes from the previous
 version are listed in `Appendix A0`_.
 
 

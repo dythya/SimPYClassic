@@ -1,8 +1,8 @@
-===========
-SimPy Tools
-===========
+===================
+SimPy Classic Tools
+===================
 
-This section contains descriptions of tools written for SimPy which help with
+This section contains descriptions of tools written for SimPy Classic which help with
 its use.
 
 .. toctree::
