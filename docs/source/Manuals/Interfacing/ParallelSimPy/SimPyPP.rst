@@ -14,7 +14,7 @@ using `Parallel Python`_ if you have a larger number of independent processors
 your SimPy processes to all cores of your CPU and even to other computers. You
 should read the PP documentation for further information on how this works.
 
-.. _`Parallel Python`: http://www.parallelpython.com/
+.. _`Parallel Python`: https://www.parallelpython.com/
 
 Please, note that *Parallel Python* is not included in the SimPy  distribution
 and needs to be `downloaded <http://www.parallelpython.com/>` and installed
@@ -473,5 +473,3 @@ File process.py::
         sim.activate(observer, observer.run(), at = 0)
         sim.simulate(until = 4 + tau)
         print observer.getData()
-
-

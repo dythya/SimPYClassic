@@ -364,8 +364,8 @@ program the graph is plotted; the user has to terminate the plotting
 .. Some of the following links need changing
 
 .. _`SimPy`: https://github.com/SimPyClassic/SimPyClassic
-.. _Python: http://www.Python.org
-.. _`Python web site`: http://www.Python.org
+.. _Python: https://www.python.org
+.. _`Python web site`: https://www.python.org
 
 
 
@@ -382,7 +382,7 @@ suggestions. Please send them to: *vignaux* at
 References
 -------------------------------------
 
-- Python website: http://www.Python.org
+- Python website: https://www.python.org
 
 - SimPy homepage: https://github.com/SimPyClassic/SimPyClassic
 

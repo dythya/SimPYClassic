@@ -18,7 +18,7 @@ platforms.  You can find out more about it and download it from the
 tutorials. SimPy requires Python version 2.3 or later.
 
 
-.. _`Python web-site` : http://www.Python.org
+.. _`Python web-site` : https://www.python.org
 
 Contents:
 

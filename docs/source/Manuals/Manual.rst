@@ -145,7 +145,7 @@ Before attempting to use SimPy, you should be able to write Python
 code. In particular, you should be able to define and use classes and
 their objects. Python is free and usable on most platforms.  We do not
 expound it here. You can find out more about it and download it from
-the Python_ web-site (http://www.Python.org). SimPy requires *Python*
+the Python_ web-site (https://www.python.org). SimPy requires *Python*
 2.3 or later.
 
 [Return to Top_ ]
@@ -2529,7 +2529,7 @@ normal, log-normal, weibull, and vonMises.  It can also generate random
 variates from some discrete distributions. Consult the module's
 documentation for details.  (Excellent brief descriptions of these
 distributions, and many others, can be found in the `Wikipedia
-<http://www.wikipedia.com/>`_.)
+<https://en.wikipedia.org/wiki/Main_Page>`_.)
 
 Python's ``random`` module can be used in two ways: you can import the
 methods directly or you can import the ``Random`` class and make your
@@ -2927,15 +2927,15 @@ Several example SimPy models are included with the SimPy code
 distribution in the file ``SimPyModels``.
 
 Klaus Muller and Tony Vignaux, *SimPy: Simulating Systems in Python*,
-O'Reilly ONLamp.com, 2003-Feb-27,  http://www.onlamp.com/pub/a/python/2003/02/27/simpy.html
+O'Reilly ONLamp.com, 2003-Feb-27,  http://archive.oreilly.com/pub/a/python/2003/02/27/simpy.html
 
 Norman Matloff, *Introduction to the SimPy Discrete-Event Simulation
 Package*, U Cal: Davis, 2003,
-http://heather.cs.ucdavis.edu/~matloff/simpy.html
+http://heather.cs.ucdavis.edu/~matloff/simcourse.html
 
 David Mertz, *Charming Python: SimPy simplifies complex models*, IBM
 Developer Works, Dec 2002,
-http://www-106.ibm.com/developerworks/linux/library/l-simpy.html
+https://www.ibm.com/developerworks/library/l-simpy/index.html
 
 [Return to Top_ ]
 
@@ -3084,7 +3084,7 @@ Glossary
 .. .. |simpylogo| image:: images/sm_SimPy_Logo.png
 .. _`simpydownload`: https://github.com/SimPyClassic/SimPyClassic
 
-.. _`Python random module`: http://www.python.org/doc/current/lib/module-random.html
+.. _`Python random module`: https://docs.python.org/3/library/random.html
 
 
 
@@ -3102,7 +3102,7 @@ Glossary
 .. _Store: `Stores`_
 .. _Resource: `Resources`_
 .. _`Appendix A0`: `A0. Changes from the previous  version of SimPy`_
-.. _Python: http://www.Python.org
+.. _Python: https://www.python.org
 
 
 ..

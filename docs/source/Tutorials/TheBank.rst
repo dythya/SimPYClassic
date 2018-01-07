@@ -40,8 +40,8 @@ free and available for most machine types. You can find out more about
 it at the `Python web site`_.  SimPy is compatible with Python version
 2.7 and Python 3.x.
 
-.. _Python: http://www.Python.org
-.. _`Python web site`: http://www.Python.org
+.. _Python: https://www.python.org
+.. _`Python web site`: https://www.python.org
 
 
 
@@ -957,7 +957,7 @@ corrections. Please send them to: *vignaux* at
 References
 -------------------------------------
 
-- Python website: http://www.Python.org
+- Python website: https://www.python.org
 
 - SimPy website: https://github.com/SimPyClassic/SimPyClassic
 
