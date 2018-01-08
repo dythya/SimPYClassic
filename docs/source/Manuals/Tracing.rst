@@ -1,12 +1,12 @@
 .. highlight:: python
    :linenothreshold: 5 
  
-=============================
-Simulation with Tracing
-=============================
+=====================================
+SimPy Classic Simulation with Tracing
+=====================================
 
 :Authors: - Klaus Muller <Muller@users.sourceforge.net>
-:SimPy release: |release|
+:Release: |release|
 :Web-site: https://github.com/SimPyClassic/SimPyClassic
 :Python-Version: 2.7 and later
 :Date: December 2011

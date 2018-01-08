@@ -3,9 +3,9 @@
 .. .. image:: images/sm_SimPy_Logo.png
       :align: left
 
-=============================================================
-The Bank Tutorial part 2: More  examples of SimPy Simulation
-=============================================================
+===================================================================
+The Bank Tutorial part 2: More  examples of SimPy Classic Simulation
+====================================================================
 
 .. ---------------------------------------------------
 ..  TO DO
@@ -19,7 +19,7 @@ The Bank Tutorial part 2: More  examples of SimPy Simulation
 :Author: G A Vignaux
 :Date:  2012 February
 :Updated: January 2018
-:SimPy release: |release|
+:Release: |release|
 :Python-Version: 2.7 and later
 
 

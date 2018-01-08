@@ -1,8 +1,8 @@
-SimPyClassic |travis| |appveyor| |codecov|
+SimPy Classic |travis| |appveyor| |codecov|
 ==========================================
 
-SimPy is a process-based discrete-event simulation language based on standard
-Python and released under the GNU LGPL.
+SimPy Classic is a process-based discrete-event simulation language based on
+standard Python and released under the GNU LGPL.
 
 It provides the modeler with components of a simulation model. These include
 processes for active components like customers, messages and vehicles as well
@@ -23,12 +23,12 @@ accessible packages, such as GUI, database or mapping and to share these new
 capabilities with the community under the GNU LGPL.
 
 This the original SimPy. Around 2012 SimPy forked and this original version
-is now known as SimpyClassic.
+is now known as Simpy Classic.
 
 Installation
 ------------
 
-SimPy requires Python 2.7 or Python 3.
+SimPy Classoc requires Python 2.7 or Python 3.
 
 You can install SimPy easily via `PIP <http://pypi.python.org/pypi/pip>`_::
 

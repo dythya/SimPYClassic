@@ -1,10 +1,10 @@
 =============================================================
-SimPy's Object Oriented API
+SimPy Classic's Object Oriented API
 =============================================================
 
 :Authors: - Klaus Muller <Muller@users.sourceforge.net>
-:SimPy release: |release|
-:Python version: 2.7 and later
+:Release: |release|
+:Python Version: 2.7 and later
 :Date: |today|
 
 .. contents:: Contents

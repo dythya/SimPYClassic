@@ -1,5 +1,5 @@
 ==========================================
-SimPy - Examples
+SimPy Classic - Examples
 ==========================================
 
 These are the examples that ship with the SimPy source.
@@ -7,7 +7,7 @@ These are the examples that ship with the SimPy source.
 These pages are to index the examples that ship with SimPy and give
 users another way to find them.
 
-.. _`Python web-site` : http://www.Python.org
+.. _`Python web-site` : http://www.yython.org
 
 Contents:
 

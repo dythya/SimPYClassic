@@ -11,7 +11,7 @@ Introduction to SimPy
 
 :Authors: G A Vignaux and Klaus Muller
 :Date:  |today|
-:SimPy release: |release|
+:Release: |release|
 :Python-Version: 2.7 and later
 
 .. THIS WAS PUT UNDER SUBVERSION 2008/08/07
@@ -1044,7 +1044,7 @@ the ``gasstation``.)
 
 
 .. _`simpydownload`: https://github.com/SimPyClassic/SimPyClassic
-.. _`Python web-site` : https://www.Python.org
+.. _`Python web-site` : https://www.python.org
 
 
 .. .. _Top: Contents_
@@ -1053,7 +1053,7 @@ the ``gasstation``.)
 
 
 .. _`Python random module`: https://docs.python.org/3/library/random.html
-.. _Python: https://www.Python.org
+.. _Python: https://www.python.org
 
 
 

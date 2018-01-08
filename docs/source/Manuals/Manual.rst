@@ -12,8 +12,8 @@ SimPy Classic Manual
 :Authors: - Tony Vignaux <Vignaux@users.sourceforge.net>
           - Klaus Muller <Muller@users.sourceforge.net>
           - Bob Helmbold
-:SimPy release: |release|
-:SimPy Web-site: https://github.com/SimPyClassic/SimPyClassic
+:Release: |release|
+:Web-site: https://github.com/SimPyClassic/SimPyClassic
 :Python-Version: 2.7 and later
 :Date: |today|
 

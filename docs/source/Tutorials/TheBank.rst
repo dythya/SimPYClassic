@@ -959,7 +959,7 @@ References
 
 - Python website: https://www.python.org
 
-- SimPy website: https://github.com/SimPyClassic/SimPyClassic
+- SimPy Classic website: https://github.com/SimPyClassic/SimPyClassic
 
 
 ==================================

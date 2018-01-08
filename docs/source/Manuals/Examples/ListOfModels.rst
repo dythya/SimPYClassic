@@ -1,6 +1,6 @@
-==========================================
-|simpylogo| LIST OF MODELS using SimPy
-==========================================
+==============================================
+|simpylogo| LIST OF MODELS using SimPy Classic
+==============================================
 
 :SimPy version: 2.3
 :Web-site: https://github.com/SimPyClassic/SimPyClassic

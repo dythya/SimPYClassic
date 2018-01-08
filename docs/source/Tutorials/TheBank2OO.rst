@@ -4,12 +4,12 @@
       :align: left
 
 ===============================================================================
-The Bank Tutorial (OO API) Part 2: More  examples of SimPy Simulation
+The Bank Tutorial (OO API) Part 2: More  examples of SimPy Classic Simulation
 ===============================================================================
 
 :Authors: G A Vignaux, K G Muller
 :Date:  2010 April
-:SimPy release: |release|
+:Release: |release|
 :Python-Version: 2.7 and later
 
 .. ---------------------------------------------------
