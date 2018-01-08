@@ -6,7 +6,7 @@
    :linenothreshold: 5
 
 ======================================================
-Introduction to SimPy
+Introduction to SimPy Classic
 ======================================================
 
 :Authors: G A Vignaux and Klaus Muller
