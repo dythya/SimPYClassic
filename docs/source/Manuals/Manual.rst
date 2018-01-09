@@ -214,7 +214,7 @@ function is called to display the results::
 
   initialize()
   m = Message()
-  activate(m,m.go(),at=0.0)
+  activate(m, m.go(), at=0.0)
   simulate(until=1000.0)
 
   Report()  #  report results when the simulation finishes
@@ -232,10 +232,10 @@ this Manual. Using the object-oriented API, the program fragment listed
 at the end of the previous subsection would look like this::
 
 
-  s=Simulation()
+  s = Simulation()
   s.initialize()
   m = Message(sim=s)
-  s.activate(m,m.go(),at=0.0)
+  s.activate(m, m.go(), at=0.0)
   s.simulate(until=1000.0)
 
   Report()  #  report results when the simulation finishes
@@ -693,7 +693,7 @@ any arguments::
        def execute(self, finish):
           while now() < finish:
              c = Customer()         # create a new customer object, and
-                 # activate it (using default parameters)
+             # activate it (using default parameters)
              activate(c, c.run())
              print('%s %s) % (now(), 'customer')
              yield hold, self, 10.0
@@ -1173,8 +1173,8 @@ Defining a Resource object
 A Resource object, ``r``,  is established by the following statement::
 
  r = Resource(capacity=1, name='a_resource', unitName='units',
-            qType=FIFO, preemptable=False,
-            monitored=False, monitorType=Monitor)
+              qType=FIFO, preemptable=False,
+              monitored=False, monitorType=Monitor)
 
 where
 
@@ -1263,7 +1263,7 @@ yield request
 yield release
 +++++++++++++++
 
-  ``yield release,self,r``
+  ``yield release, self, r``
 
   releases the  unit of *r*.
 
@@ -1644,7 +1644,7 @@ Reneging after a time limit
 To make a process give up (renege) after a certain time, use a
 reneging clause of the following form:
 
- |rrequest|\ ``(hold,self,``\ *waittime*\ ``)``
+ |rrequest|\ ``(hold, self, ``\ *waittime*\ ``)``
 
 
 Here the process requests one unit of the resource *r* with optional
@@ -1663,9 +1663,9 @@ request (reneges) and leaves the ``waitQ``.
 
     . . . .
     parking_lot = Resource(capacity=10)
-    patience = 5   # wait no longer than "patience" time units
-                   # for a parking space
-    park_time = 60 # park for "park_time" time units if get a parking space
+    patience = 5    # wait no longer than "patience" time units
+                    # for a parking space
+    park_time = 60  # park for "park_time" time units if get a parking space
     . . . .
     yield (request, self, parking_lot), (hold, self, patience)
     if self.acquired(parking_lot):
@@ -2394,7 +2394,7 @@ the list of retrieved objects and ``self.acquired(Sobj)`` will be
 
 The mandatory pattern for a ``get`` with reneging is::
 
- yield (get,self,lev,sObj,<n or ffn> [,P]),(<reneging clause>)
+ yield (get, self, lev, sObj, <n or ffn> [,P]),(<reneging clause>)
  if self.acquired(sObj):
     ## process  did not renege,
     . . . .
@@ -2662,7 +2662,7 @@ Here and in the next section, *r* is either a Tally or a Monitor object:
   of jobs in a system, the correct sequence of commands on an arrival
   is::
 
-     N = N+1      # FIRST, increment the number of jobs
+     N = N + 1    # FIRST, increment the number of jobs
      r.observe(N) # THEN observe the new value of N using r
 
 

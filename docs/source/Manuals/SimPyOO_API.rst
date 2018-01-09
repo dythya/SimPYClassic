@@ -94,51 +94,18 @@ A ``SimulationXX`` instance can effectively be considered as a simulated, isolat
 world. Any *Process*, *Resource*, *Store*, *Level*, *Monitor*, *Tally* or *SimEvent*
 instance belongs to one and only one world (i.e., ``Simulationxx`` instance).
 
-The following program shows what this means for API and program structure::
+The following program shows what this means for API and program structure:
 
-    from SimPy.Simulation import *
-    """Object Oriented SimPy API"""
+.. include:: programs/SimPyOO_car.py
+   :literal:
 
-    ## Model components -------------------------------
-
-    class Car(Process):
-        def run(self,res):
-            yield request,self,res
-            yield hold,self,10
-            yield release,self,res
-            print "Time: %s"%self.sim.now()
-
-    ## Model and Experiment ---------------------------
-
-    s=Simulation()
-    s.initialize()
-    r = Resource(capacity=5,sim=s)
-    auto = Car(sim=s)
-    s.activate(auto,auto.run(res=r))
-    s.simulate(until=100)
 
 Using the existing API, the following program is semantically the same and also works
-under the OO version::
+under the OO version:
 
-    from SimPy.Simulation import *
-    """Traditional SimPy API"""
+.. include:: programs/SimPyOO_car_traditional.py
+   :literal:
 
-    ## Model components -------------------------------
-
-    class Car(Process):
-        def run(self,res):
-            yield request,self,res
-            yield hold,self,10
-            yield release,self,res
-            print "Time: %s"%now()
-
-    ## Model and Experiment ---------------------------
-
-    initialize()
-    r = Resource(capacity=5)
-    auto = Car()
-    activate(auto,auto.run(res=r))
-    simulate(until=100)
 
 This full (backwards) compatibility is achieved by the automatic generation
 of a *SimulationXX* instance "behind the scenes".
@@ -148,46 +115,11 @@ Models as SimulationXX subclasses
 
 The advanced OO API can be used to generate model classes which are SimulationXX subclasses.
 This ties a model and a SimulationXX instance together beautifully. See the following
-example::
+example:
 
-    ## CarModel.py
-    from SimPy.Simulation import *
-    """Advanced Object Oriented SimPy API"""
+.. include:: programs/CarModel.py
+   :literal:
 
-    ## Model components -------------------------------
-
-    class Car(Process):
-        def park(self):
-            yield request,self,sim.self.parking
-            yield hold,self,10
-            yield release,self,sim.self.parking
-            print "%s done at %s"%(self.name, self.sim.now())
-
-    ## Model ------------------------------------------
-
-    class Model(Simulation):
-        def __init__(self,name,nrCars,spaces):
-            Simulation.__init__(self)
-            self.name = name
-            self.nrCars = nrCars
-            self.spaces = spaces
-        def runModel(self):
-            ## Initialize Simulation instance
-            self.initialize()
-            self.parking = Resource(name="Parking lot",unitName="spaces",
-                                    capacity=self.spaces,sim=self)
-            for i in range(self.nrCars):
-                auto = Car(name="Car%s"%i, sim=self)
-                self.activate(auto, auto.park())
-            self.simulate(until=100)
-
-    if __name__=="__main__":
-
-        ## Experiment ----------------------------------
-
-        myModel = Model(name="Experiment 1", nrCars=10, spaces=5)
-        myModel.runModel()
-        print myModel.now()
 
 class ``Model`` here is a subclass of ``Simulation``. Every model execution, i.e. call to
 ``runModel``, reinitializes the simulation (creates an empty event list and sets
@@ -198,13 +130,13 @@ the same experiment setup::
 
         ## Experiments ---------------------------------
 
-        myModel = Model(name="Experiment 1",nrCars=10,spaces=5)
+        myModel = Model(name="Experiment 1", nrCars=10, spaces=5)
         for repetition in range(100):
 
         ## One Experiment -------------------------------
 
             myModel.runModel()
-            print myModel.now()
+            print(myModel.now())
 
 Model extension by subclassing
 ---------------------------------
@@ -214,62 +146,26 @@ effectively allows the creation of model libraries.
 
 For example, the model in the previous example can be extended to one in which also vans
 compete for parking spaces. This is done by importing the ``CarModel`` module
-and subclassing ``Model`` as follows::
+and subclassing ``Model`` as follows:
 
-    ## CarModelExtension.py
+.. include:: programs/CarModelExtension.py
+   :literal:
 
-    ## Model components -------------------------------
-
-    from CarModel import *
-
-    class Van(Process):
-        def park(self):
-            yield request,self,sim.self.parking
-            yield hold,self,5
-            yield release,self,sim.self.parking
-            print "%s done at %s"%(self.name,self.sim.now())
-
-    ## Model ------------------------------------------
-
-    class ModelExtension(Model):
-        def __init__(self,name,nrCars,capacity,spaces,nrTrucks):
-            Model.__init__(self,name=name,nrCars=nrCars,spaces=spaces)
-            self.nrTrucks = nrTrucks
-
-        def runModel(self):
-            self.initialize()
-            r = Resource(capacity=self.resCapacity,sim=self)
-            for i in range(self.nrCars):
-                auto = Car(name="Car%s"%i,sim=self)
-                self.activate(auto,auto.park())
-            for i in range(self.nrTrucks):
-                truck = Van(name="Van%s"%i,sim=self)
-                self.activate(truck,truck.park())
-            self.simulate(until=100)
-
-    ## Experiment ----------------------------------
-
-    myModel1 = ModelExtension(name="Experiment 2",nrCars=10,spaces=5,nrTrucks=3)
-    myModel1.runModel()
 
 Let's walk through this:
 
-*Line 5*:
-    This import makes available all the objects of SimPy.Simulation and the ones defined by
-    the ``CarModel`` module (class ``Car`` and class ``Model``).
-
-*Lines 7-12*:
+*Lines 9-14*:
     Addition of a ``Van`` class with a ``park`` PEM.
 
-*Line 16*:
+*Line 20*:
     Definition of a subclass ``ModelExtension`` which extends class ``Model``.
 
-*Lines 17-18*:
+*Lines 22-23*:
     Initialization of the model class (``Model``) from which ``ModelExtension``
     is derived. When subclassing a class in Python, this is always necessary:
     Python does **not** automatically initialize the super-class.
 
-*Lines 21-30*:
+*Lines 25-36*:
     Defines a ``runModel`` method for ``ModelExtension`` which also generates
     and activates ``Van`` objects.
 
@@ -328,9 +224,9 @@ The simulation capabilities of a model are provided by instantiating class
 Better OO programming style is actually to define a model class which inherits
 from ``Simulation``::
 
-    from SimPy.Simulation import *
+    import SimPy.Simulation as Simulation
 
-    class MyModel(Simulation):
+    class MyModel(Simulation.Simulation):
         def run(self):
             self.initialize()
             ## model code follows
