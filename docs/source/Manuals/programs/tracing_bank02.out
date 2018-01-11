@@ -1,0 +1,15 @@
+0 activate <Klaus> at time: 5.0 prior: False
+0 activate <Tony> at time: 2.0 prior: False
+0 activate <Evelyn> at time: 12.0 prior: False
+ 2.0000 Tony: Here I am
+2.0 hold <Tony> delay: 8.0
+ 5.0000 Klaus: Here I am
+5.0 hold <Klaus> delay: 10.0
+10.0000 Tony: I must leave
+10.0 <Tony> terminated
+12.0000 Evelyn: Here I am
+12.0 hold <Evelyn> delay: 20.0
+15.0000 Klaus: I must leave
+15.0 <Klaus> terminated
+32.0000 Evelyn: I must leave
+32.0 <Evelyn> terminated

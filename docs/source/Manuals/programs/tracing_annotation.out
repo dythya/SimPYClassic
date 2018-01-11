@@ -1,0 +1,56 @@
+
+
++++test_interrupt
+0 activate <Bus 1> at time: 0 prior: False
+---- Start Bus 1
+0 activate <Breakdown Bus 1> at time: 0 prior: False
+---- Start the Breakdown process for Bus 1
+200 reactivate <Bus 1> time: 200 prior: False
+200 interrupt by: <Breakdown Bus 1> of: <Bus 1>
+---- Breakdown of Bus 1
+200 hold <Breakdown Bus 1> delay: 200
+---- Breakdown process waiting for 200
+200 hold <Bus 1> delay: 20
+---- Start repair taking 20 time units
+220 hold <Bus 1> delay: 800
+---- Try to go for 800
+400 reactivate <Bus 1> time: 400 prior: False
+400 interrupt by: <Breakdown Bus 1> of: <Bus 1>
+---- Breakdown of Bus 1
+400 hold <Breakdown Bus 1> delay: 200
+---- Breakdown process waiting for 200
+400 hold <Bus 1> delay: 20
+---- Start repair taking 20 time units
+420 hold <Bus 1> delay: 620
+---- Try to go for 620
+600 reactivate <Bus 1> time: 600 prior: False
+600 interrupt by: <Breakdown Bus 1> of: <Bus 1>
+---- Breakdown of Bus 1
+600 hold <Breakdown Bus 1> delay: 200
+---- Breakdown process waiting for 200
+600 hold <Bus 1> delay: 20
+---- Start repair taking 20 time units
+620 hold <Bus 1> delay: 440
+---- Try to go for 440
+800 reactivate <Bus 1> time: 800 prior: False
+800 interrupt by: <Breakdown Bus 1> of: <Bus 1>
+---- Breakdown of Bus 1
+800 hold <Breakdown Bus 1> delay: 200
+---- Breakdown process waiting for 200
+800 hold <Bus 1> delay: 20
+---- Start repair taking 20 time units
+820 hold <Bus 1> delay: 260
+---- Try to go for 260
+1000 reactivate <Bus 1> time: 1000 prior: False
+1000 interrupt by: <Breakdown Bus 1> of: <Bus 1>
+---- Breakdown of Bus 1
+1000 hold <Breakdown Bus 1> delay: 200
+---- Breakdown process waiting for 200
+1000 hold <Bus 1> delay: 20
+---- Start repair taking 20 time units
+1020 hold <Bus 1> delay: 80
+---- Try to go for 80
+1100 <Bus 1> terminated
+---- <Bus 1> has arrived
+1200 <Breakdown Bus 1> terminated
+SimPy: No more events at time 1200

@@ -1,0 +1,41 @@
+0 activate <Client 0> at time: 0 prior: False
+0 activate <Client 1> at time: 0 prior: False
+0 activate <Tanker> at time: 0 prior: False
+0 activate <RENEGE - hold for Client 0> at time: 0 prior: False
+0 get <Client 0>to get: 10 gallons from <Tank> priority: default 
+. . .getQ: ['Client 0'] 
+. . .putQ: [] 
+. . .in buffer: 0
+|| RENEGE COMMAND:
+||	 hold <Client 0> delay: 1.5
+0 activate <RENEGE - hold for Client 1> at time: 0 prior: False
+0 get <Client 1>to get: 10 gallons from <Tank> priority: default 
+. . .getQ: ['Client 0', 'Client 1'] 
+. . .putQ: [] 
+. . .in buffer: 0
+|| RENEGE COMMAND:
+||	 hold <Client 1> delay: 1.5
+0 hold <Tanker> delay: 1
+0 hold <RENEGE - hold for Client 0> delay: 1.5
+0 hold <RENEGE - hold for Client 1> delay: 1.5
+1 put <Tanker> to put: 10 gallons into <Tank> priority: default 
+. . .getQ: ['Client 1'] 
+. . .putQ: [] 
+. . .in buffer: 0
+1 hold <Tanker> delay: 1
+Client 0 got 10 gallons
+1 <Client 0> terminated
+1.5 reactivate <Client 1> time: 1.5 prior: False
+1.5 <RENEGE - hold for Client 1> terminated
+Client 1 reneged
+1.5 <Client 1> terminated
+2 put <Tanker> to put: 10 gallons into <Tank> priority: default 
+. . .getQ: [] 
+. . .putQ: [] 
+. . .in buffer: 10
+2 hold <Tanker> delay: 1
+3 put <Tanker> to put: 10 gallons into <Tank> priority: default 
+. . .getQ: [] 
+. . .putQ: [] 
+. . .in buffer: 20
+3 <Tanker> terminated

@@ -12,7 +12,7 @@ The Bank
 Introduction
 -------------------------------------
 
-In this tutorial, `SimPy`_ is used to develop a simple simulation of a
+In this tutorial, `SimPy`_ is used to develop a simple simulation of a 
 bank with a number of tellers.  This Python package provides
 *Processes* to model active components such as messages, customers,
 trucks, and planes. It has three classes to model facilities where

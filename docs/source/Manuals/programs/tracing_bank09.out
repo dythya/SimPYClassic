@@ -1,0 +1,67 @@
+0 activate <a_process> at time: 0 prior: False
+0 activate <Customer00> at time: 0 prior: False
+0 hold <a_process> delay: 5.233270649230373
+ 0.0000 Customer00: Here I am 
+0 request <Customer00> <Clerk> priority: default
+. . .waitQ: []
+. . .activeQ: ['Customer00']
+ 0.0000 Customer00: Waited  0.000
+0 hold <Customer00> delay: 7.381572718122725
+5.233270649230373 activate <Customer01> at time: 5.233270649230373 prior: False
+5.233270649230373 hold <a_process> delay: 3.143788168695102
+ 5.2333 Customer01: Here I am 
+5.233270649230373 request <Customer01> <Clerk> priority: default
+. . .waitQ: []
+. . .activeQ: ['Customer00', 'Customer01']
+ 5.2333 Customer01: Waited  0.000
+5.233270649230373 hold <Customer01> delay: 4.682088802960792
+7.381572718122725 release <Customer00> <Clerk>
+. . .waitQ: []
+. . .activeQ: ['Customer01']
+ 7.3816 Customer00: Finished
+7.381572718122725 <Customer00> terminated
+8.377058817925475 activate <Customer02> at time: 8.377058817925475 prior: False
+8.377058817925475 hold <a_process> delay: 27.48543627922535
+ 8.3771 Customer02: Here I am 
+8.377058817925475 request <Customer02> <Clerk> priority: default
+. . .waitQ: []
+. . .activeQ: ['Customer01', 'Customer02']
+ 8.3771 Customer02: Waited  0.000
+8.377058817925475 hold <Customer02> delay: 4.794048240751665
+9.915359452191165 release <Customer01> <Clerk>
+. . .waitQ: []
+. . .activeQ: ['Customer02']
+ 9.9154 Customer01: Finished
+9.915359452191165 <Customer01> terminated
+13.17110705867714 release <Customer02> <Clerk>
+. . .waitQ: []
+. . .activeQ: []
+13.1711 Customer02: Finished
+13.17110705867714 <Customer02> terminated
+35.86249509715083 activate <Customer03> at time: 35.86249509715083 prior: False
+35.86249509715083 hold <a_process> delay: 1.689628489159899
+35.8625 Customer03: Here I am 
+35.86249509715083 request <Customer03> <Clerk> priority: default
+. . .waitQ: []
+. . .activeQ: ['Customer03']
+35.8625 Customer03: Waited  0.000
+35.86249509715083 hold <Customer03> delay: 2.3587184864997446
+37.55212358631073 activate <Customer04> at time: 37.55212358631073 prior: False
+37.55212358631073 hold <a_process> delay: 16.436229751334626
+37.5521 Customer04: Here I am 
+37.55212358631073 request <Customer04> <Clerk> priority: default
+. . .waitQ: []
+. . .activeQ: ['Customer03', 'Customer04']
+37.5521 Customer04: Waited  0.000
+37.55212358631073 hold <Customer04> delay: 14.912274566432991
+38.221213583650574 release <Customer03> <Clerk>
+. . .waitQ: []
+. . .activeQ: ['Customer04']
+38.2212 Customer03: Finished
+38.221213583650574 <Customer03> terminated
+52.46439815274372 release <Customer04> <Clerk>
+. . .waitQ: []
+. . .activeQ: []
+52.4644 Customer04: Finished
+52.46439815274372 <Customer04> terminated
+53.98835333764535 <a_process> terminated
