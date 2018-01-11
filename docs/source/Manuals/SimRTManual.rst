@@ -90,6 +90,8 @@ Here is a quote from the documentation of the *time* module::
     The resolution is typically better than one microsecond.
     "
 
+Also it is deprecated in 3.3 and up.
+
 
 The SimulationRT API
 ======================
