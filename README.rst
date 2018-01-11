@@ -23,12 +23,12 @@ accessible packages, such as GUI, database or mapping and to share these new
 capabilities with the community under the GNU LGPL.
 
 This the original SimPy. Around 2012 SimPy forked and this original version
-is now known as Simpy Classic.
+is now known as SimPy Classic.
 
 Installation
 ------------
 
-SimPy Classoc requires Python 2.7 or Python 3.
+SimPy Classic requires Python 2.7 or Python 3.
 
 You can install SimPy easily via `PIP <http://pypi.python.org/pypi/pip>`_::
 
@@ -41,7 +41,7 @@ You can also download and install SimPy manually. It can be found at `https://gi
 
 To run SimPy's test suite on your installation, execute::
 
-    $ pytest
+    $ python -m pytest
 
 
 Getting started
