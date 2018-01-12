@@ -37,33 +37,10 @@ through a simulation model event by event. It caters for:
 SimulationStep overview
 =======================
 
-Here is a simple program which shows basic event stepping capabilities::
+Here is a simple program which shows basic event stepping capabilities:
 
-    ## Stepping1.py
-    from __future__ import generators
-    from SimPy.SimulationStep import *                  # (1)
-
-    def callbackTimeTrace():                            # (2)
-        """Prints event times
-        """
-        print "at time=%s"%now()
-            
-    class Man(Process):
-        def walk(self):
-            print "got up"
-            yield hold,self,1
-            print "got to door"
-            yield hold,self,10
-            print "got to mail box"
-            yield hold,self,10
-            print "got home again"
-            
-    #trace event times
-    initialize()
-    otto=Man()
-    activate(otto,otto.walk())
-    startStepping()                                     # (3)
-    simulate(callback=callbackTimeTrace,until=100)      # (4)
+.. include:: programs/simstep_stepping1.py
+   :literal:
 
 A trivial simulation model, but with event stepping:
 
@@ -71,54 +48,19 @@ A trivial simulation model, but with event stepping:
  	(2) define a procedure which gets called after every event
  	(3) switch into event stepping mode
 	(4) run the model with event callback to the procedure defined at (2); ``simulate`` in SimulationStep has an extra named parameter, ``callback``.
-    
-Running it produces this output::
 
-    got up
-    at time=0
-    got to door
-    at time=1
-    got to mail box
-    at time=11
-    got home again
-    at time=21
-    at time=21
+Running it produces this output:
+
+.. include:: programs/simstep_stepping1.out
+   :literal:
 
 The callback outputs the simulation time after every event.
 
-Here is another example, the same model, but now with the user getting control back after every 
-event::
+Here is another example, the same model, but now with the user getting control back after every
+event:
 
-    ## Stepping2.py
-    from __future__ import generators
-    from SimPy.SimulationStep import *
-
-    def callbackUserControl():
-        """Allows user to control stepping
-        """
-        a=raw_input("[Time=%s] Select one: End run (e), Continue stepping (s), Run to end (r)= "%now())
-        if a=="e":
-            stopSimulation()
-        elif a=="s":
-            return
-        else:
-            stopStepping()
-            
-    class Man(Process):
-        def walk(self):
-            print "got up"
-            yield hold,self,1
-            print "got to door"
-            yield hold,self,10
-            print "got to mail box"
-            yield hold,self,10
-            print "got home again"
-    #allow user control
-    initialize()
-    otto=Man()
-    activate(otto,otto.walk())
-    startStepping()
-    simulate(callback=callbackUserControl,until=100)
+.. include:: programs/simstep_stepping2.py
+   :literal:
 
 Its interactive output looks like this::
 
@@ -131,7 +73,7 @@ Its interactive output looks like this::
     got home again
     [Time=21] Select one: End run (e), Continue stepping (s), Run to end (r)= s
     [Time=21] Select one: End run (e), Continue stepping (s), Run to end (r)= s
-    
+
 or this (the user stopped stepping mode at time=1)::
 
     got up
@@ -142,51 +84,16 @@ or this (the user stopped stepping mode at time=1)::
     got home again
 
 If one wants to run a tested/debugged model full speed, i.e. without stepping,
-one can write a program as follows::
+one can write a program as follows:
 
-    ## Stepping2Fast.py
-    from __future__ import generators
-    if __debug__:
-	    from SimPy.SimulationStep import *
-    else:
-	    from SimPy.Simulation import *
+.. include:: programs/simstep_stepping2fast.py
+   :literal:
 
-    def callbackUserControl():
-        """Allows user to control stepping
-        """
-        if __debug__:
-		    a=raw_input("[Time=%s] Select one: End run (e), Continue stepping (s),\
-                         Run to end (r)= "%now())
-		    if a=="e":
-		        stopSimulation()
-		    elif a=="s":
-		        return
-		    else:
-		        stopStepping()
-            
-    class Man(Process):
-        def walk(self):
-            print "got up"
-            yield hold,self,1
-            print "got to door"
-            yield hold,self,10
-            print "got to mail box"
-            yield hold,self,10
-            print "got home again"
-    #allow user control if debugging
-    initialize()
-    otto=Man()
-    activate(otto,otto.walk())
-    if __debug__:
-	    startStepping()
-	    simulate(callback=callbackUserControl,until=100)
-    else:
-	    simulate(until=100)
-	    
-If one runs this with the Python command line option '-O', any 
+
+If one runs this with the Python command line option '-O', any
 statement starting with ``if __debug__:`` is ignored/skipped by the
 Python interpreter.
-    
+
 The SimulationStep API
 ======================
 
