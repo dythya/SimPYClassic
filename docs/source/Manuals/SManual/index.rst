@@ -1,16 +1,16 @@
 =================================
-Short Manual for SimPy
+Short Manual for SimPy Classic
 =================================
-SimPy is a free, open-source discrete-event simulation system written
+SimPy Classic is a free, open-source discrete-event simulation system written
 in Python. It provides a number of tools for programmers writing
 simulation programs. This document is a description of basic
 techniques of SimPy. It describes a subset of SimPy's capabilities -
 sufficient, we think, to develop standard simulations. You may also
 find The Bank tutorial included in SimPy's distribution helpful in
-the early stages.  The full SimPy Manual, included in the distribution, is
+the early stages.  The full SimPy Classic Manual, included in the distribution, is
 more detailed.
 
-You need to write Python code to develop a SimPy model. In
+You need to write Python code to develop a SimPy Classic model. In
 particular, you will have to define and use classes and their
 objects. Python is free and open-source and is available on most
 platforms.  You can find out more about it and download it from the
