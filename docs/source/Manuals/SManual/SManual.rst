@@ -404,7 +404,7 @@ of Process objects:
      For example, to activate the process object ``cust`` using the PEM
      with identifier ``lifetime`` at time 10.0 we would use::
 
-         cust.start(cust.lifetime(),at=10.0)
+         cust.start(cust.lifetime(), at=10.0)
 
 The standard PEM name, ACTIONS
 +++++++++++++++++++++++++++++++++
@@ -443,7 +443,7 @@ and is not modelled by ``yield hold``)
 yield hold
 ++++++++++++
 
-    ``yield hold,self,``\ *t*
+    ``yield hold, self, t``
 
     Causes the entity to delay *t* time units.  After the delay, it
     continues  with the next statement in its PEM.  During the ``hold`` the
@@ -466,7 +466,7 @@ More about Processes
 
 An entity (Process object) can be "put to sleep" or passivated using
 
-     ``yield passivate,self`` 
+     ``yield passivate, self`` 
 
 (and it can be reactivated by another entity
 using ``reactivate``), or permanently removed from the future event
@@ -497,13 +497,16 @@ listing. ``p2`` actually starts first in the simulation. Nothing
 happens until the ``simulate(until=200)`` statement at which point the
 event scheduler starts operating by finding the first event to
 execute. When both cars have finished (at time ``6.0+100.0=106.0``)
-there will be no more events so the simulation will stop::
+there will be no more events so the simulation will stop:
 
-..  .. literalinclude:: programs/car.py
+.. include:: programs/car.py
+   :literal:
 
-Running this program gives the following output::
 
-..  .. literalinclude:: programs/car.out
+Running this program gives the following output:
+
+.. include:: programs/car.out
+   :literal:
 
 If, instead one chose to import ``SimPy.SimulateTrace`` at the start
 of the program one would obtain the following output. (The meaning of
@@ -554,7 +557,8 @@ Defining a Resource object
 A Resource object, ``r``,  is established by the following statement::
 
  r = Resource(capacity=1,
-              name='a_resource', unitName='units',
+              name='a_resource',
+              unitName='units',
               monitored=False)
 
 where
@@ -583,7 +587,7 @@ where
 
 For example, in the model of a 2-pump gas-station we might define::
 
-   gasstation = Resource(capacity=2,name='gasStation',unitName='pump')
+   gasstation = Resource(capacity=2, name='gasStation', unitName='pump')
 
 .. index:: resource; attributes
 
@@ -608,7 +612,7 @@ Each Resource object, ``r``,  has the following additional attributes:
 .. index:: resource; waitMon
 
 - ``r.waitMon``, the record (made by a ``Monitor`` whenever
-  ``monitored==True``) of the activity in ``r.waitQ``. So, for
+  ``monitored == True``) of the activity in ``r.waitQ``. So, for
   example, ``r.waitMon.timeaverage()`` is the average number of
   processes in ``r.waitQ``.  See `Data Summaries`_
   for an example.
@@ -650,7 +654,7 @@ the ``r.waitQ`` takes it and continues its execution.
 
 For example, a ``Car`` might request a ``pump``::
 
-  yield request,self,gasstation
+  yield request, self, gasstation
 
 (It is actually requesting a *unit* of the ``gasstation``, i.e. a
 ``pump``.) An entity holds a resource unit until it releases it.
@@ -668,7 +672,7 @@ command. See the main SimPy Manual.
 yield release
 +++++++++++++++
 
-  ``yield release,self,r``
+  ``yield release, self, r``
 
 Releases the  unit of ``r``.
 
@@ -681,7 +685,7 @@ move into the ``activeQ`` and go one with its PEM.
 For example the ``Car`` might release the ``pump`` unit of the
 gasstation::
 
-  yield release,self,gasstation
+  yield release, self, gasstation
 
 
 
