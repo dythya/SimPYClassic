@@ -9,20 +9,15 @@ try:  # Python 3
     from tkinter.messagebox import *
     from tkinter.simpledialog import askinteger, askstring, askfloat
     from tkinter.filedialog import *
-except:  # Python 2
+    from SimPy.canvas import Line, CanvasText, Rectangle
+except:   # Python 2
     from Tkinter import *
     from tkMessageBox import *
     from tkSimpleDialog import askinteger, askstring, askfloat
     from tkFileDialog import *
     from Canvas import Line, CanvasText, Rectangle
 
-import string, math
-from math import pi
-
-from SimPy.Simulation import Monitor
-
-import warnings
-warnings.warn('This module be removed in SimPy 3.', DeprecationWarning)
+import math
 
 
 def minCoordinate(clist):
@@ -66,7 +61,7 @@ def maxBound(clist):
     return x, y
 
 class SimPlot(object):
-    def __init__(self, root = Tk()):
+    def __init__(self, root=Tk()):
         self.root = root
         pass
 
@@ -85,9 +80,9 @@ class SimPlot(object):
             step1[2 * x + 1] = step0[x]
             prev = step0[x]
         #draw the line
-        return self.makeLine(step1, smooth = False, **attr)
+        return self.makeLine(step1, smooth=False, **attr)
 
-    def makeHistogram(self, points,**attr):
+    def makeHistogram(self, points, **attr):
         """Makes a histogram graph. 'points' must be a Histogram - like
         object.
         """
@@ -104,18 +99,18 @@ class SimPlot(object):
         step1.append([prev[0] + deltax, prev[1]])
         step1.append([prev[0] + deltax, 0])
         #make the line
-        return self.makeLine(step1, smooth = False,
-                             xaxis = (step1[0][0],step1[-1][0]),
+        return self.makeLine(step1, smooth=False,
+                             xaxis=(step1[0][0], step1[-1][0]),
                              **attr)
 
-    def makeSymbols(self, points,**attr):
-        return GraphSymbols(points,**attr)
-    def makeBars(self, points,**attr):
-        return GraphBars(points,**attr)
+    def makeSymbols(self, points, **attr):
+        return GraphSymbols(points, **attr)
+    def makeBars(self, points, **attr):
+        return GraphBars(points, **attr)
     def makeGraphObjects(self, objects):
         return GraphObjects(objects)
-    def makeGraphBase(self, master, width, height,
-                 background = 'white', title = '', xtitle = '', ytitle = '', **kw):
+    def makeGraphBase(self, master, width, height, background='white',
+                      title='', xtitle='', ytitle='', **kw):
         return GraphBase(master, width, height,
                  background, title, xtitle, ytitle,**kw)
 
@@ -127,12 +122,12 @@ class SimPlot(object):
         def postscriptout():
             graph.postscr()
         file = Menu(mainMenu)
-        file.add_command(label = 'Postscript', command = postscriptout)
-        mainMenu.add_cascade(label = 'File', menu = file, underline = 0)
+        file.add_command(label='Postscript', command=postscriptout)
+        mainMenu.add_cascade(label='File', menu=file, underline=0)
 
-    def plotLine(self, points, windowsize = (500, 300),title = '', width = 1, color = 'black',
-                 smooth = 0, background = 'white', xlab = 'x', ylab = 'y',
-                 xaxis = 'automatic', yaxis = 'automatic'):
+    def plotLine(self, points, windowsize=(500, 300),title='', width=1, color='black',
+                 smooth=0, background='white', xlab='x', ylab='y',
+                 xaxis='automatic', yaxis='automatic'):
         """Generates a line chart, with menu to save as Postscript file.
         'points' can be a Monitor instance.
         """
@@ -145,13 +140,13 @@ class SimPlot(object):
                 if not title: title = points.name
             except:
                 pass
-            line = self.makeLine(points, width = width, color = color, smooth = smooth)
+            line = self.makeLine(points, width=width, color=color, smooth=smooth)
             gr = self.makeGraphObjects([line])
             graph = self.makeGraphBase(f, windowsize[0], windowsize[1],
-                                   title = title, xtitle = xlab,
-                                   ytitle = ylab, background = background)
-            graph.pack(side = LEFT, fill = BOTH, expand = YES)
-            graph.draw(gr, xaxis = xaxis, yaxis = yaxis)
+                                   title=title, xtitle=xlab,
+                                   ytitle=ylab, background=background)
+            graph.pack(side=LEFT, fill=BOTH, expand=YES)
+            graph.draw(gr, xaxis=xaxis, yaxis=yaxis)
             #File menu
             self.graphMenu(root, graph)
             f.pack()
@@ -160,9 +155,9 @@ class SimPlot(object):
             print('SimPlot.plotline: dataset empty, no plot.')
             return None
 
-    def plotStep(self, points, windowsize = (500, 300),title = '', width = 1, color = 'black',
-                 background = 'white', xlab = 'x', ylab = 'y',
-                 xaxis = 'automatic', yaxis = 'automatic'):
+    def plotStep(self, points, windowsize=(500, 300),title='', width=1, color='black',
+                 background='white', xlab='x', ylab='y',
+                 xaxis='automatic', yaxis='automatic'):
         """Generates a step chart, with menu to save as Postscript file.
         'points' can be a Monitor instance.
         """
@@ -191,9 +186,9 @@ class SimPlot(object):
             print('SimPlot.plotStep: dataset empty, no plot.')
             return None
 
-    def plotHistogram(self, points, windowsize = (500, 300),title = '', width = 1, color = 'black',
-                 background = 'white', xlab = 'x', ylab = 'y',
-                 xaxis = 'automatic', yaxis = 'automatic'):
+    def plotHistogram(self, points, windowsize = (500, 300),title='', width=1, color='black',
+                 background='white', xlab='x', ylab='y',
+                 xaxis='automatic', yaxis='automatic'):
         """Makes a histogram plot. 'points' can be a Monitor  instance.
         """
         if points != []:
@@ -218,18 +213,18 @@ class SimPlot(object):
                 pass
             #draw the line
             smooth = False
-            return self.plotLine(step1, windowsize = windowsize, title = title, width = width,
-                             color = color, smooth = smooth, background = background,
-                             xlab = xlab, ylab = ylab, xaxis = (step1[0][0],step1[-1][0]),
-                             yaxis = yaxis)
+            return self.plotLine(step1, windowsize=windowsize, title=title, width=width,
+                             color=color, smooth=smooth, background=background,
+                             xlab=xlab, ylab=ylab, xaxis=(step1[0][0],step1[-1][0]),
+                             yaxis=yaxis)
         else:
             print('SimPlot.plotHistogram: dataset empty, no plot.')
             return None
 
-    def plotBars(self, points, windowsize = (500, 300),title = '', color = 'black',
-                 width = 1, size = 3, fillcolor = 'black', fillstyle = '',
-                 outline = 'black', background = 'white', xlab = 'x', ylab = 'y',
-                 xaxis = 'automatic', yaxis = 'automatic', anchor = 0.0):
+    def plotBars(self, points, windowsize=(500, 300),title='', color='black',
+                 width=1, size=3, fillcolor='black', fillstyle='',
+                 outline='black', background='white', xlab='x', ylab='y',
+                 xaxis='automatic', yaxis='automatic', anchor=0.0):
         """Generates a bar chart, with menu to save as Postscript file.
         'points' can be a Monitor instance.
         """
@@ -242,15 +237,15 @@ class SimPlot(object):
                 if not title: title = points.name
             except:
                 pass
-            bars = self.makeBars(points, width = width, size = size, color = color,
-                           fillcolor = fillcolor, fillstyle = fillstyle,
-                           outline = outline, anchor = anchor)
+            bars = self.makeBars(points, width=width, size=size, color=color,
+                           fillcolor=fillcolor, fillstyle=fillstyle,
+                           outline=outline, anchor=anchor)
             gr = self.makeGraphObjects([bars])
             graph = self.makeGraphBase(f, windowsize[0],windowsize[1],
-                                   title = title, xtitle = xlab,
-                                   ytitle = ylab, background = background)
-            graph.pack(side = LEFT, fill = BOTH, expand = YES)
-            graph.draw(gr, xaxis = xaxis, yaxis = yaxis)
+                                   title=title, xtitle=xlab,
+                                   ytitle=ylab, background=background)
+            graph.pack(side=LEFT, fill=BOTH, expand=YES)
+            graph.draw(gr, xaxis=xaxis, yaxis=yaxis)
             #File menu
             self.graphMenu(root, graph)
             f.pack()
@@ -259,11 +254,11 @@ class SimPlot(object):
             print('SimPlot.plotBars dataset empty, no plot.')
             return None
 
-    def plotScatter(self, points, windowsize = (500, 300),title = '', width = 1, color = 'black',
-                    fillcolor = 'black', size = 2, fillstyle = '',
-                    outline = 'black', marker = 'circle',
-                    background = 'white', xlab = 'x', ylab = 'y',
-                    xaxis = 'automatic', yaxis = 'automatic'):
+    def plotScatter(self, points, windowsize=(500, 300),title='', width=1, color='black',
+                    fillcolor='black', size=2, fillstyle='',
+                    outline='black', marker='circle',
+                    background='white', xlab='x', ylab='y',
+                    xaxis='automatic', yaxis='automatic'):
         if points != []:
             root = Toplevel()
             f = Frame(root)
@@ -273,15 +268,15 @@ class SimPlot(object):
                 if not title: title = points.name
             except:
                 pass
-            scat = self.makeSymbols(points, width = width, color = color, size = size,
-                              marker = marker, fillcolor = fillcolor,
-                              fillstyle = fillstyle, outline = outline)
+            scat = self.makeSymbols(points, width=width, color=color, size=size,
+                              marker=marker, fillcolor=fillcolor,
+                              fillstyle=fillstyle, outline=outline)
             gr = self.makeGraphObjects([scat])
             graph = self.makeGraphBase(f, windowsize[0],windowsize[1],
-                                   title = title, xtitle = xlab,
-                                   ytitle = ylab, background = background)
-            graph.pack(side = LEFT, fill = BOTH, expand = YES)
-            graph.draw(gr, xaxis = xaxis, yaxis = yaxis)
+                                   title=title, xtitle=xlab,
+                                   ytitle=ylab, background=background)
+            graph.pack(side=LEFT, fill=BOTH, expand=YES)
+            graph.draw(gr, xaxis=xaxis, yaxis=yaxis)
             #File menu
             self.graphMenu(root, graph)
             f.pack()
@@ -307,7 +302,7 @@ class GraphPoints:
     def boundingBox(self):
         return minBound(self.points),  maxBound(self.points)
 
-    def fitToScale(self, scale = (1, 1), shift = (0, 0)):
+    def fitToScale(self, scale=(1, 1), shift=(0, 0)):
         self.scaled = []
         for x, y in self.points:
             self.scaled.append(((scale[0] * x) + shift[0],\
@@ -365,79 +360,79 @@ class GraphSymbols(GraphPoints):
         self._drawmarkers(canvas, self.scaled, marker, color,
                           fillstyle, fillcolor, size)
 
-    def _drawmarkers(self, c, coords, marker = 'circle', color = 'black',
-                     fillstyle = '', fillcolor = '', size = 2):
+    def _drawmarkers(self, c, coords, marker='circle', color='black',
+                     fillstyle='', fillcolor='', size=2):
         l = []
         f = eval('self._' + marker)
         for xc, yc in coords:
-            id = f(c, xc, yc, outline = color, size = size,
-                   fill = fillcolor, fillstyle = fillstyle)
+            id = f(c, xc, yc, outline=color, size=size,
+                   fill=fillcolor, fillstyle=fillstyle)
             if type(id) is type(()):
                 for item in id: l.append(item)
             else:
                 l.append(id)
         return l
 
-    def _circle(self, c, xc, yc, size = 1, fill = '', outline = 'black',
-                fillstyle = ''):
+    def _circle(self, c, xc, yc, size=1, fill='', outline='black',
+                fillstyle=''):
         id = c.create_oval(xc - 0.5, yc - 0.5, xc + 0.5, yc + 0.5,
-                           fill = fill, outline = outline,
-                           stipple = fillstyle)
+                           fill=fill, outline=outline,
+                           stipple=fillstyle)
         c.scale(id, xc, yc, size * 5, size * 5)
         return id
 
-    def _dot(self, c, xc, yc, size = 1, fill = '', outline = 'black',
-             fillstyle = ''):
-        id = c.create_oval(xc - 0.5, yc - 0.5, xc + 0.5, yc + 0.5,
-                           fill = fill, outline = outline,
-                           stipple = fillstyle)
+    def _dot(self, c, xc, yc, size=1, fill='', outline='black',
+             fillstyle=''):
+        id=c.create_oval(xc - 0.5, yc - 0.5, xc + 0.5, yc + 0.5,
+                           fill=fill, outline=outline,
+                           stipple=fillstyle)
         c.scale(id, xc, yc, size * 2.5, size * 2.5)
         return id
 
-    def _square(self, c, xc, yc, size = 1, fill = '', outline = 'black',
-                fillstyle = ''):
-        id = c.create_rectangle(xc - 0.5, yc - 0.5, xc + 0.5, yc + 0.5,
-                                fill = fill, outline = outline,
-                                stipple = fillstyle)
+    def _square(self, c, xc, yc, size=1, fill='', outline='black',
+                fillstyle=''):
+        id=c.create_rectangle(xc - 0.5, yc - 0.5, xc + 0.5, yc + 0.5,
+                                fill=fill, outline=outline,
+                                stipple=fillstyle)
         c.scale(id, xc, yc, size * 5, size * 5)
         return id
 
-    def _triangle(self, c, xc, yc, size = 1, fill = '', outline = 'black',
-                  fillstyle = ''):
+    def _triangle(self, c, xc, yc, size=1, fill='', outline='black',
+                  fillstyle=''):
         id = c.create_polygon(-0.5, 0.288675134595,
                               0.5, 0.288675134595,
-                              0.0, -0.577350269189, fill = fill,
-                              outline = outline, stipple = fillstyle)
+                              0.0, -0.577350269189, fill=fill,
+                              outline=outline, stipple=fillstyle)
         c.move(id, xc, yc)
         c.scale(id, xc, yc, size * 5, size * 5)
         return id
 
-    def _triangle_down(self, c, xc, yc, size = 1, fill = '',
-                       outline = 'black', fillstyle = ''):
+    def _triangle_down(self, c, xc, yc, size=1, fill='',
+                       outline='black', fillstyle=''):
         id = c.create_polygon(-0.5, -0.288675134595,
                               0.5, -0.288675134595,
-                              0.0, 0.577350269189, fill = fill,
-                              outline = outline, stipple = fillstyle)
+                              0.0, 0.577350269189, fill=fill,
+                              outline=outline, stipple=fillstyle)
         c.move(id, xc, yc)
         c.scale(id, xc, yc, size * 5, size * 5)
         return id
 
-    def _cross(self, c, xc, yc, size = 1, fill = 'black', outline = None,
-               fillstyle = ''):
+    def _cross(self, c, xc, yc, size=1, fill='black', outline=None,
+               fillstyle=''):
         if outline: fill = outline
         id1 = c.create_line(xc - 0.5, yc - 0.5, xc + 0.5, yc + 0.5,
-                            fill = fill)
+                            fill=fill)
         id2 = c.create_line(xc - 0.5, yc + 0.5, xc + 0.5, yc - 0.5,
-                            fill = fill)
+                            fill=fill)
         c.scale(id1, xc, yc, size * 5, size * 5)
         c.scale(id2, xc, yc, size * 5, size * 5)
         return id1, id2
 
-    def _plus(self, c, xc, yc, size = 1, fill = 'black', outline = None,
-              fillstyle = ''):
+    def _plus(self, c, xc, yc, size=1, fill='black', outline=None,
+              fillstyle=''):
         if outline: fill = outline
-        id1 = c.create_line(xc - 0.5, yc, xc + 0.5, yc, fill = fill)
-        id2 = c.create_line(xc, yc + 0.5, xc, yc - 0.5, fill = fill)
+        id1 = c.create_line(xc - 0.5, yc, xc + 0.5, yc, fill=fill)
+        id2 = c.create_line(xc, yc + 0.5, xc, yc - 0.5, fill=fill)
         c.scale(id1, xc, yc, size * 5, size * 5)
         c.scale(id2, xc, yc, size * 5, size * 5)
         return id1, id2
@@ -464,9 +459,9 @@ class GraphBars(GraphPoints):
         for i in range(len(self.points)):
             x1, y1 = self.scaled[i]
             canvas.create_rectangle(x1 - spread, y1, x1 + spread,
-                                    self.anchor, fill = color,
-                                    width = width, outline = outline,
-                                    stipple = fillstyle)
+                                    self.anchor, fill=color,
+                                    width=width, outline=outline,
+                                    stipple=fillstyle)
 
 class GraphObjects:
     def __init__(self, objects):
@@ -481,7 +476,7 @@ class GraphObjects:
             c2 = maxBound([c2, c2o])
         return c1, c2
 
-    def fitToScale(self, scale = (1, 1), shift = (0, 0)):
+    def fitToScale(self, scale=(1, 1), shift=(0, 0)):
         for object in self.objects:
             object.fitToScale(scale, shift)
 
@@ -491,18 +486,18 @@ class GraphObjects:
 
 class GraphBase(Frame):
     def __init__(self, master, width, height,
-                 background = 'white', title = '', xtitle = '', ytitle = '', **kw):
+                 background='white', title='', xtitle='', ytitle='', **kw):
         Frame.__init__(self, master, **kw)
         self.title = title
         self.xtitle = xtitle
         self.ytitle = ytitle
-        self.canvas = Canvas(self, width = width, height = height,
-                             background = background)
-        self.canvas.pack(fill = BOTH, expand = YES)
+        self.canvas = Canvas(self, width=width, height=height,
+                             background=background)
+        self.canvas.pack(fill=BOTH, expand=YES)
         border_w = self.canvas.winfo_reqwidth() - \
-                   string.atoi(self.canvas.cget('width'))
+                   int(self.canvas.cget('width'))
         border_h = self.canvas.winfo_reqheight() - \
-                   string.atoi(self.canvas.cget('height'))
+                   int(self.canvas.cget('height'))
         self.border = (border_w, border_h)
         self.canvas.bind('<Configure>', self.configure)
         self.plotarea_size = [None, None]
@@ -513,11 +508,11 @@ class GraphBase(Frame):
     def configure(self, event):
         new_width = event.width - self.border[0]
         new_height = event.height - self.border[1]
-        width = string.atoi(self.canvas.cget('width'))
-        height = string.atoi(self.canvas.cget('height'))
+        width = int(self.canvas.cget('width'))
+        height = int(self.canvas.cget('height'))
         if new_width == width and new_height == height:
             return
-        self.canvas.configure(width = new_width, height = new_height)
+        self.canvas.configure(width=new_width, height=new_height)
         self._setsize()
         self.clear()
         self.replot()
@@ -526,8 +521,8 @@ class GraphBase(Frame):
         self.canvas.bind(*args)
 
     def _setsize(self):
-        self.width = string.atoi(self.canvas.cget('width'))
-        self.height = string.atoi(self.canvas.cget('height'))
+        self.width = int(self.canvas.cget('width'))
+        self.height = int(self.canvas.cget('height'))
         #self.plotarea_size[0] = 0.90 * self.width
         #self.plotarea_size[1] = 0.90 * -self.height
         self.plotarea_size[0] = 0.90 * self.width
@@ -536,7 +531,7 @@ class GraphBase(Frame):
         yo = self.height - 0.5 * (self.height + self.plotarea_size[1])
         self.plotarea_origin = (xo, yo)
 
-    def draw(self, graphics, xaxis = 'automatic', yaxis = 'automatic'):
+    def draw(self, graphics, xaxis='automatic', yaxis='automatic'):
 
         self.last_drawn = (graphics, xaxis, yaxis)
         p1, p2 = graphics.boundingBox()
@@ -632,22 +627,22 @@ class GraphBase(Frame):
                 if once: pp2 = p2
                 once = 0
                 Line(self.canvas, p1[0], p1[1], p2[0], p2[1],
-                     fill = 'black', width = 1)
+                     fill = 'black', width=1)
                 if xticks:
                     for x, label in xticks:
                         p = (scale[0] * x) + shift[0], \
                             (scale[1] * y) + shift[1]
                         Line(self.canvas, p[0], p[1], p[0], p[1] + d,
-                             fill = 'black', width = 1)
+                             fill='black', width=1)
                         if text:
                             dict['text'] = label
                             CanvasText(self.canvas, p[0],
                                                p[1] + 2, **dict)    ##KGM 14 Aug 03
                 text = 0
             #write x - axis title
-            CanvasText(self.canvas,(pp2[0] - pp1[0]) / 2.+pp1[0],pp1[1] + 22, text = self.xtitle)
+            CanvasText(self.canvas,(pp2[0] - pp1[0]) / 2.+pp1[0],pp1[1] + 22, text=self.xtitle)
         #write graph title
-        CanvasText(self.canvas,(pp2[0] - pp1[0]) / 2.+pp1[0],7, text = self.title)
+        CanvasText(self.canvas,(pp2[0] - pp1[0]) / 2.+pp1[0],7, text=self.title)
         dict['anchor'] = E
         if yaxis is not None:
             #draw y - axis
@@ -660,20 +655,20 @@ class GraphBase(Frame):
                 if once: pp1 = p1 ;pp2 = p2
                 once = 0
                 Line(self.canvas, p1[0], p1[1], p2[0], p2[1],
-                     fill = 'black', width = 1)
+                     fill='black', width=1)
                 if yticks:
                     for y, label in yticks:
                         p = (scale[0] * x) + shift[0], \
                             (scale[1] * y) + shift[1]
                         Line(self.canvas, p[0], p[1], p[0] - d, p[1],
-                             fill = 'black', width = 1)
+                             fill='black', width=1)
                         if text:
                             dict['text'] = label
                             CanvasText(self.canvas,
                                               p[0] - 4, p[1] + 2, **dict)
                 text = 0
             #write y - axis title
-            CanvasText(self.canvas, pp2[0],pp2[1] - 10, text = self.ytitle)
+            CanvasText(self.canvas, pp2[0],pp2[1] - 10, text=self.ytitle)
 
     def _ticks(self, lower, upper):
         ideal = (upper - lower) / 7.
@@ -735,17 +730,17 @@ class GraphBase(Frame):
         if filename:
             if not filename[-3:] == '.ps':
                 filename += '.ps'
-            self.canvas.postscript(width = self.width, height = self.height, file = filename)
+            self.canvas.postscript(width=self.width, height=self.height, file=filename)
 
 class TextBox(Frame):
     def __init__(self, master, width, height,
-                 background = 'white', boxtext = '', **kw):
+                 background='white', boxtext='', **kw):
         Frame.__init__(self, master, **kw)
         self.width = width
         self.height = height
-        self.canvas = Canvas(self, width = width, height = height,
-                           background = background)
-        self.canvas.pack(fill = BOTH, expand = YES)
+        self.canvas = Canvas(self, width=width, height=height,
+                           background=background)
+        self.canvas.pack(fill=BOTH, expand=YES)
         #CanvasText(self.canvas, text = boxtext)
 
     def postscr(self):
@@ -755,7 +750,7 @@ class TextBox(Frame):
         if filename:
             if not filename[-3:] == '.ps':
                 filename += '.ps'
-            self.canvas.postscript(width = self.width, height = self.height, file = filename)
+            self.canvas.postscript(width=self.width, height=self.height, file=filename)
 
 if __name__ == '__main__':
     print('SimPlot.py')
@@ -806,22 +801,22 @@ if __name__ == '__main__':
     outline: 'black'
     """
     # Plot 1 -- smooth line + filled bars
-    di = 5.0 * pi / 40.
+    di = 5.0 * math.pi / 40.
     data = []
     for i in range(40):
         data.append((float(i) * di,
                      (math.sin(float(i) * di) - math.cos(float(i) * di))))
-    line1  = plt.makeLine(data, color = 'black', width = 1,
-                      smooth = 1)
-    line1a = plt.makeBars(data[1:], color = 'blue', fillstyle = 'gray25',
-                      anchor = 0.0)
+    line1  = plt.makeLine(data, color='black', width=1,
+                      smooth=1)
+    line1a = plt.makeBars(data[1:], color='blue', fillstyle='gray25',
+                      anchor=0.0)
 
 
     graphObject = plt.makeGraphObjects([line1a, line1])
     #Second panel -- Narrow bars
     line2 = plt.makeBars([(0, 0),(1, 145),(2,-90),(3, 147),(4, 22),(5, 31),
                         (6, 77),(7, 125),(8, 220),(9, 550),(10, 560),(11, 0)],
-                       outline = 'green', color = 'red', size = 7)
+                       outline='green', color='red', size=7)
 
 
     graphObject2 = plt.makeGraphObjects([line2])
@@ -829,13 +824,13 @@ if __name__ == '__main__':
     # Third plot -- Smooth line and unsmoothed line
     line3 = plt.makeLine([(1, 145 + 100),(2, 151 + 100),(3, 147 + 100),(4, 22 + 100),(5, 31 + 100),
                         (6, 77 + 100),(7, 125 + 100),(8, 220 + 100),(9, 550 + 100),(10, 560 + 100)],
-                       color = 'blue', width = 2, smooth = 1)
+                       color='blue', width=2, smooth=1)
     line3a = plt.makeLine([(1, 145),(2, 151),(3, 147),(4, 22),(5, 31),
                         (6, 77),(7, 125),(8, 220),(9, 550),(10, 560)],
-                       color = 'green', width = 2, smooth = 0)
+                       color='green', width=2, smooth=0)
     line3b = plt.makeStep([(1, 145 + 100),(2, 151 + 100),(3, 147 + 100),(4, 22 + 100),(5, 31 + 100),
                         (6, 77 + 100),(7, 125 + 100),(8, 220 + 100),(9, 550 + 100),(10, 560 + 100)],
-                       color = 'red', width = 2)
+                       color='red', width=2)
 
     graphObject3 = plt.makeGraphObjects([line3, line3a, line3b])
 
@@ -844,30 +839,30 @@ if __name__ == '__main__':
 
     line4 = plt.makeSymbols([(1, 100),(2, 100),(3, 100),(4, 100),(5, 100),
                         (6, 100),(7, 100),(8, 100),(9, 100),(10, 100)],
-                       color = 'black', fillcolor = 'red', width = 2, marker = 'triangle')
+                       color='black', fillcolor='red', width=2, marker='triangle')
     line5 = plt.makeSymbols([(1, 200),(2, 200),(3, 200),(4, 200),(5, 200),
                         (6, 200),(7, 200),(8, 200),(9, 200),(10, 200)],
-                       color = 'red', width = 2, marker = 'circle')
+                       color='red', width=2, marker='circle')
     line6 = plt.makeSymbols([(1, 300),(2, 300),(3, 300),(4, 300),(5, 300),
                         (6, 300),(7, 300),(8, 300),(9, 300),(10, 300)],
-                       color = 'green', width = 2, marker = 'dot')
+                       color='green', width=2, marker='dot')
     line7 = plt.makeSymbols([(1, 400),(2, 400),(3, 400),(4, 400),(5, 400),
                         (6, 400),(7, 400),(8, 400),(9, 400),(10, 400)],
-                       color = 'blue', fillcolor = 'white',
-                         size = 2, width = 2, marker = 'square')
+                       color='blue', fillcolor='white',
+                         size=2, width=2, marker='square')
     line8 = plt.makeSymbols([(1, 500),(2, 500),(3, 500),(4, 500),(5, 500),
                         (6, 500),(7, 500),(8, 500),(9, 500),(10, 500)],
-                       color = 'yellow', width = 2, marker = 'triangle')
+                       color='yellow', width=2, marker='triangle')
     line9 = plt.makeSymbols([(1, 600),(2, 600),(3, 600),(4, 600),(5, 600),
                         (6, 600),(7, 600),(8, 600),(9, 600),(10, 600)],
-                       color = 'magenta', width = 2, marker = 'cross')
+                       color='magenta', width=2, marker='cross')
     line10 = plt.makeSymbols([(1, 700),(2, 700),(3, 700),(4, 700),(5, 700),
                         (6, 700),(7, 700),(8, 700),(9, 700),(10, 700)],
-                       color = 'brown', width = 2, marker = 'plus')
+                       color='brown', width=2, marker='plus')
     line11 = plt.makeSymbols([(1, 800),(2, 800),(3, 800),(4, 800),(5, 800),
                         (6, 800),(7, 800),(8, 800),(9, 800),(10, 800)],
-                       color = 'black', fillcolor = 'orange',
-                          width = 2, marker = 'triangle_down')
+                       color='black', fillcolor='orange',
+                          width=2, marker='triangle_down')
 
 
     graphObject4 = GraphObjects([line4, line5, line6, line7, line8,
@@ -879,15 +874,15 @@ if __name__ == '__main__':
 
     graph={}
     # Plots 1 and 2 in panel f1, side by side
-    graph[1] = plt.makeGraphBase(f1, 500, 300, title = 'Plot 1: 1 makeLine call, 1 makeBars call',
-                         xtitle = 'the x-axis', ytitle = 'the y-axis')
-    graph[1].pack(side = LEFT, fill = BOTH, expand = YES)
-    graph[1].draw(graphObject, xaxis = 'minimal', yaxis = 'minimal')
+    graph[1] = plt.makeGraphBase(f1, 500, 300, title='Plot 1: 1 makeLine call, 1 makeBars call',
+                         xtitle='the x-axis', ytitle='the y-axis')
+    graph[1].pack(side=LEFT, fill=BOTH, expand=YES)
+    graph[1].draw(graphObject, xaxis='minimal', yaxis='minimal')
 
-    graph[2]  = plt.makeGraphBase(f1, 500, 300, title = 'Plot 2: 1 makeBars call',
-                        xtitle = 'time', ytitle = 'pulse [volt]')
+    graph[2]  = plt.makeGraphBase(f1, 500, 300, title='Plot 2: 1 makeBars call',
+                        xtitle='time', ytitle='pulse [volt]')
     # Set side - by - side plots
-    graph[2].pack(side = LEFT, fill = BOTH, expand = YES)
+    graph[2].pack(side=LEFT, fill=BOTH, expand=YES)
     graph[2].draw(graphObject2, 'minimal', 'automatic')
 
     # Pack panel 1 to make it visible
@@ -895,13 +890,13 @@ if __name__ == '__main__':
 
     # Plots 2 and 3 in panel f2, one under the other
     graph[3]  = plt.makeGraphBase(f2, 500, 300,
-                        title = 'Plot 3: 2 makeLine call (smooth, not smooth); 1 makeStep call')
-    graph[3].pack(side = TOP, fill = BOTH, expand = YES)
+                        title='Plot 3: 2 makeLine call (smooth, not smooth); 1 makeStep call')
+    graph[3].pack(side=TOP, fill=BOTH, expand=YES)
     graph[3].draw(graphObject3)
 
-    graph[4]  = plt.makeGraphBase(f2, 500, 300, border = 3, title = 'Plot 4: 8 makeSymbols calls')
+    graph[4]  = plt.makeGraphBase(f2, 500, 300, border=3, title='Plot 4: 8 makeSymbols calls')
     # Set one - over - other configuration of plots
-    graph[4].pack(side = TOP, fill = BOTH, expand = YES)
+    graph[4].pack(side=TOP, fill=BOTH, expand=YES)
     graph[4].draw(graphObject4)
 
     # Pack panel 2 to make it visible
