@@ -2,7 +2,7 @@
 Scenario:
 The Patisserie Francaise bakery has three ovens baking their renowned
 baguettes for retail and restaurant customers. They start baking one
-hour before the shop opens and stop at closing time. 
+hour before the shop opens and stop at closing time.
 They bake batches of 40 breads at a time,
 taking 25..30 minutes (uniformly distributed) per batch. Retail customers
 arrive at a rate of 40 per hour (exponentially distributed). They buy
@@ -82,7 +82,7 @@ for cType in ["retail","restaurant"]:
     nrLong = len([1 for x in waits[cType] if x>0.25])
     nrCust = len(waits[cType])
     print("Percentage of {0} customers having to wait for more than 0.25 hours: {1}"\
-        .foramt(cType,100*nrLong/nrCust))    
+        .format(cType,100*nrLong/nrCust))    
 
 
 if PLOTTING:
