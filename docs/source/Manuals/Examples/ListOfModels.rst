@@ -16,8 +16,8 @@ the Object Oriented API introduced in SimPy 2.0.
 
 All of these examples come with SimPY in the docs/examples directory.
 
-NOTE: The GUI examples do not work for Python 3 as the GUI libraries have not
-been ported to Python 3.
+NOTE: The SimGUI examples do not work for Python 3 as the SimGUI
+library has not been ported to Python 3.
 
 New Program Structure
 +++++++++++++++++++++++++

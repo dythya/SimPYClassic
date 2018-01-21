@@ -60,13 +60,17 @@ class ExampleFile(pytest.File):
                 literalincludes.append((lineno, filepath))
 
         # Check for directly following output specification.
+        # Loop thru all the files found.
         for idx in range(len(literalincludes) - 1):
             example_lineno, example = literalincludes[idx]
             output_lineno, output = literalincludes[idx + 1]
             if not example.endswith('.py'):
+                # Skip as this is not a py file to run
                 continue
             if not output.endswith('.out'):
-                continue
+                # The second file is not an output file but can still
+                # test the py. Just not test the output.
+                output = None
             yield ExampleItem(output_lineno, example, output, self)
 
 
@@ -79,48 +83,66 @@ class ExampleItem(pytest.Item):
         self.example = example
         self.output = output
         self.examplefile = os.path.join(self.fspath.dirname, self.example)
-        self.outputfile = os.path.join(self.fspath.dirname, self.output)
+        self.skip_run = self._skip_file(program=True)
+        if output is not None:
+            self.outputfile = os.path.join(self.fspath.dirname, self.output)
+            # Python 2 has some differences in program output. For instance
+            # less precision
+            if sys.version_info[0] < 3:
+                self.outputfile = self.outputfile.replace(
+                    'program_output', 'program_output_python2')
+            self.check_expected_output = not self._skip_file()
+        else:
+            self.outputfile = None
+            self.check_expected_output = False
 
-        # Python 2 has some differences in program output. For instance less
-        # precision
-        if sys.version_info[0] < 3:
-            self.outputfile = self.outputfile.replace(
-                'program_output', 'program_output_python2')
-        self.check_exected_output = self._check_exected_output()
-
-    def _check_exected_output(self):
+    def _skip_file(self, program=False):
         """
-        Check skip file to see if the exected output check should be skipped
+        Check skip file to see if the program or output check should be skipped
 
-        Format of skip file is each line is the name of the output file to skip
-        blank lines and lines starting with # are skipped
+        Format of avskip file is each line is the name of the program oroutput
+        file to skip.
+        Blank lines and lines starting with # are skipped
 
         This is done for examples that can never produce consistent output
-        Due to the nature of the program being tested.
+        Due to the nature of the program being tested. And programs that are
+        GUI based.
+
+        If program is true then this checks skipping program. Otherwise it
+        is checking whether the output check should be skipped. If the
+        outputfile is None then it should be skipped
         """
-        SKIP_FILE_NAME = '_skip_output_check'
-        check_exected_output = True
+        if not program:
+            if self.output is None:
+                # Output file name is already none so can not check it
+                return True
+            SKIP_FILE_NAME = '_skip_output_check'
+            filename = self.output  # name of file checking for
+        else:
+            SKIP_FILE_NAME = '_skip_program_check'
+            filename = self.example
+        skip = False
         try:
-            # Get name and dir path of skip file
-            # file name may or may not have path
-            match = re.match(r'(.*)/([^/]+)$', self.output)
+            # match to get directory path and file name
+            match = re.match(r'(.*)/([^/]+)$', filename)
             if match:
                 skip_file = "{}/".format(match.group(1))
-                outfile = match.group(2)
+                filename_nopath = match.group(2)
             else:
+                # No preceeding directory path
                 skip_file = "/"
-                outfile = self.output_lineno
+                filename_nopath = filename
             skip_file += SKIP_FILE_NAME
             for line in open(skip_file):
                 line = line.rstrip()
                 if re.search(r'^#', line) or re.search(r'^$', line):
                     continue
-                if line == outfile:
-                    check_exected_output = False
+                if line == filename_nopath:
+                    skip = True
                     break
         except IOError:  # chanage to FileNotFoundError when no python 2
             pass    # no list of files to skip that is ok
-        return check_exected_output
+        return skip
 
     def runtest(self):
         # Skip if random.expovariate with the old implementation is used.
@@ -131,9 +153,13 @@ class ExampleItem(pytest.Item):
             if int(random.expovariate(0.2)) == 0:
                 pytest.skip('Old exovariate implementation.')
 
-        # Read expected output.
-        with open(self.outputfile) as f:
-            expected = f.read()
+        if self.skip_run:
+            pytest.skip('Program {} is marked as skip'.
+                        format(self.examplefile))
+        if self.check_expected_output:
+            # Read expected output.
+            with open(self.outputfile) as f:
+                expected = f.read()
 
         # Execute the example.
         if not hasattr(subprocess, 'check_output'):  # The case on Python 2.6
@@ -149,7 +175,7 @@ class ExampleItem(pytest.Item):
         output = output.replace('\r', '')
 
         # Check the program produced the expected output
-        if self.check_exected_output and output != expected:
+        if self.check_expected_output and output != expected:
             # Hijack the ValueError exception to identify mismatching output.
             raise ValueError(expected, output)
 
@@ -160,7 +186,7 @@ class ExampleItem(pytest.Item):
 
             message = _diff_text(expected, output)
             return ReprFailExample(self.fspath.basename, self.lineno,
-                    self.outputfile, message)
+                                   self.outputfile, message)
         elif exc_info.errisinstance((IOError,)):
             # Something wrent wrong causing an IOError.
             if exc_info.value.errno != errno.ENOENT:

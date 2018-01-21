@@ -1,0 +1,13 @@
+# These examples are GUI based so can not run the normal test suit
+# over them
+bakery.py
+bakery_OO.py
+bank11Plot.py
+bank11GUI.py
+bank11GUI_OO.py
+ExampleGUIDebug.py
+GUIdemo.py
+GUIdemo_OO.py
+SimGUIStep.py
+SimpleDebugger.py
+SimpleDebugger_OO.py
