@@ -7,6 +7,7 @@ models.
 try:  # Python 3
     from tkinter import *
     from tkinter.messagebox import *
+    from SimPy.canvas import Line, CanvasText, Rectangle
 except: # Python 2
     from Tkinter import *
     from tkMessageBox import *
@@ -14,9 +15,6 @@ except: # Python 2
 
 from SimPy import tkconsole as tkcons
 from SimPy import __version__
-
-import warnings
-warnings.warn('This module be removed in SimPy 3.', DeprecationWarning)
 
 
 class SimGUI(object):

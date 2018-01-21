@@ -16,8 +16,15 @@ use, modify, or distribute the software for any purpose is hereby granted."""
 # TODO: blink or highlight matching brackets
 # TODO: delete the prompt when joining lines; allow a way to break lines
 
-from Tkinter import *
-import sys, string, traceback, types, __builtin__
+try:  # Python 3
+    from tkinter import *
+except:  # Python 2
+    from Tkinter import *
+import sys
+import string
+import traceback
+import types
+import __builtin__
 from SimPy import __version__
 REVISION = __version__
 VERSION = __version__
@@ -41,14 +48,15 @@ class OutputPipe:
         return ""
 
     def write(self, data):
-        if not self.closed: self.writer(data)
+        if not self.closed:
+            self.writer(data)
 
     def close(self):
         self.closed = 1
 
 
 class Console(Frame):
-    def __init__(self, parent = None, dict={}, **options):
+    def __init__(self, parent=None, dict={}, **options):
         """Construct from a parent widget, an optional dictionary to use
         as the namespace for execution, and any configuration options."""
         Frame.__init__(self, parent)
@@ -74,13 +82,15 @@ class Console(Frame):
 
         # Redirection.
 
-        self.stdout = OutputPipe(lambda data, w = self.write: w(data, 'stdout'))
-        self.stderr = OutputPipe(lambda data, w = self.write: w(data, 'stderr'))
+        self.stdout = OutputPipe(lambda data, w=self.write: w(data, 'stdout'))
+        self.stderr = OutputPipe(lambda data, w=self.write: w(data, 'stderr'))
 
         # Interpreter state.
 
-        if not hasattr(sys, 'ps1'): sys.ps1 = '>>> '
-        if not hasattr(sys, 'ps2'): sys.ps2 = '... '
+        if not hasattr(sys, 'ps1'):
+            sys.ps1 = '>>> '
+        if not hasattr(sys, 'ps2'):
+            sys.ps2 = '... '
         self.prefixes = [sys.ps1, sys.ps2, ' >> ', ' > ']
         self.startup = 'Python %s\n%s\n' % (sys.version, sys.copyright) + \
             'Python Console v%s by Ka - Ping Yee < ping@lfw.org>\n' % VERSION
@@ -88,7 +98,7 @@ class Console(Frame):
 
         # The text box.
 
-        self.text = Text(self, insertontime = 200, insertofftime = 150)
+        self.text = Text(self, insertontime=200, insertofftime=150)
         self.text.insert('end', self.startup)
         self.text.insert('end', sys.ps1)
         self.text.bind('<Return>', self.cb_return)
@@ -113,10 +123,10 @@ class Console(Frame):
 
         # The scroll bar.
 
-        self.scroll = Scrollbar(self, command = self.text.yview)
-        self.text.config(yscrollcommand = self.scroll.set)
-        self.scroll.pack(side = RIGHT, fill = Y)
-        self.text.pack(fill = BOTH, expand = 1)
+        self.scroll = Scrollbar(self, command=self.text.yview)
+        self.text.config(yscrollcommand=self.scroll.set)
+        self.scroll.pack(side=RIGHT, fill=Y)
+        self.text.pack(fill=BOTH, expand=1)
         self.text.focus()
 
         # Configurable options.
@@ -137,9 +147,9 @@ class Console(Frame):
             raise KeyError('no such configuration option \'%s\'' % key)
         self.options[key] = value
         if key == 'stdoutcolour':
-            self.text.tag_configure('stdout', foreground = value)
+            self.text.tag_configure('stdout', foreground=value)
         if key == 'stderrcolour':
-            self.text.tag_configure('stderr', foreground = value)
+            self.text.tag_configure('stderr', foreground=value)
 
     def config(self, *args, **dict):
         """Get or set configuration options in a Tkinter - like style."""
@@ -160,7 +170,7 @@ class Console(Frame):
                 return len(prefix), command[len(prefix):]
         return 0, command
 
-    def getline(self, line = None, trim = 0):
+    def getline(self, line=None, trim=0):
         """Return the command on the current line."""
         if line is None:
             line, pos = self.cursor()
@@ -175,21 +185,23 @@ class Console(Frame):
         [line, pos] = map(string.atoi, string.split(cursor, '.'))
         return line, pos
 
-    def write(self, data, tag = None):
+    def write(self, data, tag=None):
         """Show output from stdout or stderr in the console."""
-        if self.intraceback and data[-2:] == '\n ': data = data[:-1]
+        if self.intraceback and data[-2:] == '\n ':
+            data = data[:-1]
         start = self.text.index('insert')
         self.text.insert('insert', data)
         end = self.text.index('insert')
-        if tag: self.text.tag_add(tag, start, end)
+        if tag:
+            self.text.tag_add(tag, start, end)
 
     # History mechanism.
 
     def cb_back(self, event):
         """Step back in the history."""
         if self.history:
-            if self.historyindex == None:
-                self.current = self.getline(trim = 1)
+            if self.historyindex is None:
+                self.current = self.getline(trim=1)
                 self.historyindex = len(self.history) - 1
             elif self.historyindex > 0:
                 self.historyindex = self.historyindex - 1
@@ -209,7 +221,7 @@ class Console(Frame):
 
         return 'break'
 
-    def recall(self, command = None):
+    def recall(self, command=None):
         """Show a command from the history on the current line."""
         if command is None:
             command = self.history[self.historyindex]
@@ -248,8 +260,10 @@ class Console(Frame):
                     if preceding[pos] in startchars:
                         context = preceding[pos:] + '.' + context
                         preceding = string.strip(preceding[:pos])
-                    else: break
-                else: break
+                    else:
+                        break
+                else:
+                    break
 
         line, pos = self.cursor()
         endpos = pos
@@ -286,7 +300,8 @@ class Console(Frame):
 
                 def __getattr__(self, key):
                     for dict in self.dicts:
-                        if dict.has_key(key): return dict[key]
+                        if dict.has_key(key):
+                            return dict[key]
                     return None
             object = Lookup([self.dict, __builtin__.__dict__])
             keys = self.dict.keys() + dir(__builtin__)
@@ -295,7 +310,8 @@ class Console(Frame):
         if not ident:
             public = []
             for key in keys:
-                if key[:1] != '_': public.append(key)
+                if key[:1] != '_':
+                    public.append(key)
             keys = public
         skip = len(ident)
 
@@ -309,8 +325,10 @@ class Console(Frame):
             else:
                 self.text.delete('insert', end)
                 self.text.insert('insert', keys[0][skip:])
-                try: self.compfinish = finisher(getattr(object, keys[0]))
-                except: self.compfinish = ' '
+                try:
+                    self.compfinish = finisher(getattr(object, keys[0]))
+                except:
+                    self.compfinish = ' '
                 if self.compfinish == ' ':
                     # Object has no members; stop here.
                     self.text.insert('insert', ' ')
@@ -328,8 +346,10 @@ class Console(Frame):
             if len(keys[0]) == skip:
                 # Common prefix is a valid choice; next try can finish.
                 self.compindex = self.cursor()
-                try: self.compfinish = finisher(getattr(object, keys[0]))
-                except: self.compfinish = ' '
+                try:
+                    self.compfinish = finisher(getattr(object, keys[0]))
+                except:
+                    self.compfinish = ' '
 
             self.postmenus(keys, skip, end, object)
 
@@ -347,26 +367,29 @@ class Console(Frame):
 
         self.compmenus = []
         menufont = self.text.cget('font')
-        menu = Menu(font = menufont, bd = 1, tearoff = 0)
+        menu = Menu(font=menufont, bd=1, tearoff=0)
         self.compmenus.append(menu)
         while keys:
-            try: finishchar = finisher(getattr(object, keys[0]))
-            except: finishchar = ' '
-            def complete(s = self, k = keys[0][skip:], c = cut, f = finishchar):
-                if f == ' ': k = k + f
+            try:
+                finishchar = finisher(getattr(object, keys[0]))
+            except:
+                finishchar = ' '
+            def complete(s=self, k=keys[0][skip:], c=cut, f=finishchar):
+                if f == ' ':
+                    k = k + f
                 s.text.delete('insert', c)
                 s.text.insert('insert', k)
                 s.unpostmenus()
                 if f != ' ':
                     s.compfinish = f
                     s.compindex = s.cursor()
-            menu.add_command(label = keys[0], command = complete)
+            menu.add_command(label=keys[0], command=complete)
             menu.update()
             if y + menu.winfo_reqheight() >= height:
                 menu.delete('end')
                 x = x + menu.winfo_reqwidth()
                 y = 0
-                menu = Menu(font = menufont, bd = 1, tearoff = 0)
+                menu = Menu(font=menufont, bd=1, tearoff=0)
                 self.compmenus.append(menu)
             else:
                 keys = keys[1:]
@@ -374,14 +397,15 @@ class Console(Frame):
                 menu.destroy()
                 self.compmenus = self.compmenus[:-1]
                 self.compmenus[-1].delete('end')
-                self.compmenus[-1].add_command(label = '...')
+                self.compmenus[-1].add_command(label='...')
                 break
 
         x = self.text.winfo_rootx() + bbox[0] - 4
         y = self.text.winfo_rooty() + bbox[1] + bbox[3]
         for menu in self.compmenus:
             maxtop = height - menu.winfo_reqheight()
-            if y > maxtop: y = maxtop
+            if y > maxtop:
+                y = maxtop
             menu.post(x, y)
             x = x + menu.winfo_reqwidth()
         self.text.focus()
@@ -394,7 +418,7 @@ class Console(Frame):
         self.compmenus = []
         self.text.grab_release()
 
-    def cb_cleanup(self, event = None):
+    def cb_cleanup(self, event=None):
         if self.compmenus:
             self.unpostmenus()
         if self.pasted:
@@ -429,41 +453,48 @@ class Console(Frame):
 
         try:
             parent = eval(context[:-1], self.dict)
-        except: pass
+        except:
+            pass
 
         # Go merrily searching for the help string.
         if not object:
             try:
                 object = getattr(parent, word)
                 skip = len(word) - len(ident)
-            except: pass
+            except:
+                pass
 
         if not object:
             try:
                 object = getattr(parent, ident)
-            except: pass
+            except:
+                pass
 
         if not object:
             try:
                 object = self.dict[word]
                 skip = len(word) - len(ident)
-            except: pass
+            except:
+                pass
 
         if not object:
             try:
                 object = self.dict[ident]
-            except: pass
+            except:
+                pass
 
         if not object:
             try:
                 object = __builtin__.__dict__[word]
                 skip = len(word) - len(ident)
-            except: pass
+            except:
+                pass
 
         if not object:
             try:
                 object = __builtins__.__dict__[ident]
-            except: pass
+            except:
+                pass
 
         if not object:
             if not ident:
@@ -471,41 +502,45 @@ class Console(Frame):
 
         try:
             doc = object.__doc__
-        except: pass
+        except:
+            pass
 
         try:
             if hasattr(object, '__bases__'):
                 doc = object.__init__.__doc__ or doc
-        except: pass
+        except:
+            pass
 
         if doc:
             doc = string.rstrip(string.expandtabs(doc))
             leftmargin = 99
             for line in string.split(doc, '\n')[1:]:
                 spaces = len(line) - len(string.lstrip(line))
-                if line and spaces < leftmargin: leftmargin = spaces
+                if line and spaces < leftmargin:
+                    leftmargin = spaces
 
             bbox = self.text.bbox('insert + %d c' % skip)
             width = self.winfo_screenwidth()
             height = self.winfo_screenheight()
             menufont = self.text.cget('font')
 
-            help = Menu(font = menufont, bd = 1, tearoff = 0)
+            help = Menu(font=menufont, bd=1, tearoff=0)
             try:
                 classname = object.__class__.__name__
-                help.add_command(label = ' < object of class %s > ' % classname)
-                help.add_command(label = '')
+                help.add_command(label=' < object of class %s > ' % classname)
+                help.add_command(label='')
             except: pass
             for line in string.split(doc, '\n'):
                 if string.strip(line[:leftmargin]) == '':
                     line = line[leftmargin:]
-                help.add_command(label = line)
+                help.add_command(label=line)
             self.compmenus.append(help)
 
             x = self.text.winfo_rootx() + bbox[0] - 4
             y = self.text.winfo_rooty() + bbox[1] + bbox[3]
             maxtop = height - help.winfo_reqheight()
-            if y > maxtop: y = maxtop
+            if y > maxtop:
+                y = maxtop
             help.post(x, y)
             self.text.focus()
             self.text.grab_set()
@@ -525,18 +560,21 @@ class Console(Frame):
 
     def cb_backspace(self, event):
         self.cb_cleanup()
-        if self.text.tag_ranges('sel'): return
+        if self.text.tag_ranges('sel'):
+            return
 
         # Avoid backspacing over the prompt.
         line, pos = self.cursor()
         trimmed, command = self.trim(self.getline())
-        if pos <= trimmed: return 'break'
+        if pos <= trimmed:
+            return 'break'
 
         # Extremely basic outdenting.  Needs more work here.
         if not string.strip(command[:pos - trimmed]):
             step = (pos - trimmed) % 4
             cut = pos - (step or 4)
-            if cut < trimmed: cut = trimmed
+            if cut < trimmed:
+                cut = trimmed
             self.text.delete('%d.%d' % (line, cut), '%d.%d' % (line, pos))
             return 'break'
 
@@ -573,13 +611,13 @@ class Console(Frame):
     def cb_nothing(self, event):
         return 'break'
 
-    def cb_return(self, event, doindent = 1):
+    def cb_return(self, event, doindent=1):
         """Handle a < Return > keystroke by running from the current line
         and generating a new prompt."""
         self.cb_cleanup()
         self.text.tag_delete('compiled')
         self.historyindex = None
-        command = self.getline(trim = 1)
+        command = self.getline(trim=1)
         if string.strip(command):
             self.history.append(command)
 
@@ -617,23 +655,27 @@ class Console(Frame):
         self.error = 0
         self.pasted = 1
 
-        try: lines = string.split(self.selection_get(), '\n')
-        except: return
+        try:
+            lines = string.split(self.selection_get(), '\n')
+        except:
+            return
 
         for i in range(len(lines)):
             trimmed, line = self.trim(lines[i])
             line = string.rstrip(line)
-            if not line: continue
+            if not line:
+                continue
 
             self.text.insert('end', line)
             self.text.mark_set('insert', 'end')
             if i == len(lines) - 2 and lines[i + 1] == '':
                 # Indent the last line if it's blank.
-                self.cb_return(None, doindent = 1)
+                self.cb_return(None, doindent=1)
             elif i < len(lines) - 1:
-                self.cb_return(None, doindent = 0)
+                self.cb_return(None, doindent=0)
 
-            if self.error: break
+            if self.error:
+                break
 
         return 'break'
 
@@ -652,7 +694,8 @@ class Console(Frame):
             self.text.tag_add(
                 'compiled', '%d.%d' % (line, trimmed), '%d.0' % (line + 1))
             line = line - 1
-            if line < 0: break
+            if line < 0:
+                break
             lines[:0] = [self.getline(line)]
         if lines[0][:len(sys.ps1)] == sys.ps1:
             trimmed, lines[0] = self.trim(lines[0])
@@ -669,11 +712,11 @@ class Console(Frame):
         status, code = self.compile(source)
 
         if status == 'more':
-            self.text.tag_configure('compiled', background = self['morecolour'])
+            self.text.tag_configure('compiled', background=self['morecolour'])
             self.continuation = 1
 
         elif status == 'bad':
-            self.text.tag_configure('compiled', background = self['badcolour'])
+            self.text.tag_configure('compiled', background=self['badcolour'])
             self.error = 1
             self.continuation = 0
             self.intraceback = 1
@@ -687,7 +730,7 @@ class Console(Frame):
         elif status == 'okay':
             if self.getline(lastline) == sys.ps2:
                 self.text.tag_remove('compiled', '%d.0' % lastline, 'end')
-            self.text.tag_configure('compiled', background = self['runcolour'])
+            self.text.tag_configure('compiled', background=self['runcolour'])
             self.continuation = 0
             self.run(code)
 
@@ -766,23 +809,32 @@ class Console(Frame):
 # Helpers for the completion mechanism.
 
 def scanclass(klass, result):
-    for key in klass.__dict__.keys(): result[key] = 1
-    for base in klass.__bases__: scanclass(base, result)
+    for key in klass.__dict__.keys():
+        result[key] = 1
+    for base in klass.__bases__:
+        scanclass(base, result)
+
 
 def members(object):
     result = {}
     try:
-        for key in object.__members__: result[key] = 1
+        for key in object.__members__:
+            result[key] = 1
         result['__members__'] = 1
-    except: pass
+    except:
+        pass
     try:
-        for key in object.__methods__: result[key] = 1
+        for key in object.__methods__:
+            result[key] = 1
         result['__methods__'] = 1
-    except: pass
+    except:
+        pass
     try:
-        for key in object.__dict__.keys(): result[key] = 1
+        for key in object.__dict__.keys():
+            result[key] = 1
         result['__dict__'] = 1
-    except: pass
+    except:
+        pass
     if type(object) is types.ClassType:
         scanclass(object, result)
         result['__name__'] = 1
@@ -792,19 +844,23 @@ def members(object):
         result['__class__'] = 1
     return result.keys()
 
+
 def matchingkeys(keys, prefix):
-    prefixmatch = lambda key, l = len(prefix), p = prefix: key[:l] == p
+    prefixmatch = lambda key, l=len(prefix), p=prefix: key[:l] == p
     return filter(prefixmatch, keys)
 
 def commonprefix(keys):
-    if not keys: return ''
+    if not keys:
+        return ''
     max = len(keys[0])
-    prefixes = map(lambda i, key = keys[0]: key[:i], range(max + 1))
+    prefixes = map(lambda i, key=keys[0]: key[:i], range(max + 1))
     for key in keys:
         while key[:max] != prefixes[max]:
             max = max - 1
-            if max == 0: return ''
+            if max == 0:
+                return ''
     return prefixes[max]
+
 
 callabletypes = [types.FunctionType, types.MethodType, types.ClassType,
                  types.BuiltinFunctionType, types.BuiltinMethodType]
@@ -814,12 +870,15 @@ mappingtypes = [types.DictType]
 try:
     import ExtensionClass
     callabletypes.append(ExtensionClass.ExtensionClassType)
-except: pass
+except:
+    pass
 try:
     import curve
     c = curve.Curve()
     callabletypes.append(type(c.read))
-except: pass
+except:
+    pass
+
 
 def finisher(object):
     if type(object) in callabletypes:
@@ -838,6 +897,6 @@ def finisher(object):
 if __name__ == '__main__':
     c = Console(dict={})
     c.dict['console'] = c
-    c.pack(fill = BOTH, expand = 1)
+    c.pack(fill=BOTH, expand=1)
     c.master.title('Python Console v%s' % VERSION)
     mainloop()
