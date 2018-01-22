@@ -70,141 +70,63 @@ An example from the Bank Tutorial
 
 As an example of how to use matplotlib with SimPy, a modified version of
 bank12.py from the Bank Tutorial is used here. It produces a line plot of the
-counter's queue length and a histogram of the customer wait times::
+counter's queue length and a histogram of the customer wait times:
 
-    #! /usr/local/bin/python
-    """ Based on bank12.py in Bank Tutorial.
-       This program uses matplotlib. It produces two plots:
-       - Queue length over time
-       - Histogram of queue length
-    """
-    from SimPy.Simulation import *
-    import pylab as pyl
-    from random import Random
-    ## Model components
-    class Source(Process):
-        """ Source generates customers randomly"""
-        def __init__(self,seed=333):
-            Process.__init__(self)
-            self.SEED = seed
-        def generate(self,number,interval):
-            rv = Random(self.SEED)
-            for i in range(number):
-                c = Customer(name = "Customer%02d"%(i,))
-                activate(c,c.visit(timeInBank=12.0))
-                t = rv.expovariate(1.0/interval)
-                yield hold,self,t
-    class Customer(Process):
-        """ Customer arrives, is served and leaves """
-        def __init__(self,name):
-            Process.__init__(self)
-            self.name = name
-        def visit(self,timeInBank=0):
-            arrive=now()
-            yield request,self,counter
-            wait=now()-arrive
-            wate.observe(y=wait)
-            tib = counterRV.expovariate(1.0/timeInBank)
-            yield hold,self,tib
-            yield release,self,counter
-    class Observer(Process):
-        def __init__(self):
-            Process.__init__(self)
-        def observe(self):
-            while True:
-                yield hold,self,5
-                qu.observe(y=len(counter.waitQ))
-    ## Model
-    def model(counterseed=3939393):
-        global counter,counterRV,waitMonitor
-        counter = Resource(name="Clerk",capacity = 1)
-        counterRV = Random(counterseed)
-        waitMonitor = Monitor()
-        initialize()
-        sourceseed=1133
-        source = Source(seed = sourceseed)
-        activate(source,source.generate(100,10.0))
-        ob=Observer()
-        activate(ob,ob.observe())
-        simulate(until=2000.0)
-    qu=Monitor(name="Queue length")
-    wate=Monitor(name="Wait time")
-    ## Experiment data
-    sourceSeed=333
-    ## Experiment
-    model()
-    ## Output
-    pyl.figure(figsize=(5.5,4))
-    pyl.plot(qu.tseries(),qu.yseries())
-    pyl.title("Bank12: queue length over time",
-              fontsize=12,fontweight="bold")
-    pyl.xlabel("time",fontsize=9,fontweight="bold")
-    pyl.ylabel("queue length before counter",fontsize=9,fontweight="bold")
-    pyl.grid(True)
-    pyl.savefig(r".\bank12.png")
-
-    pyl.clf()
-    n, bins, patches = pyl.hist(qu.yseries(), 10, normed=True)
-    pyl.title("Bank12: Frequency of counter queue length",
-              fontsize=12,fontweight="bold")
-    pyl.xlabel("queuelength",fontsize=9,fontweight="bold")
-    pyl.ylabel("frequency",fontsize=9,fontweight="bold")
-    pyl.grid(True)
-    pyl.xlim(0,30)
-    pyl.savefig(r".\bank12histo.png")
+  .. include:: programs/bank12_withplotting.py
+     :literal:
 
 Here is the explanation of this program:
 
 **Line number and explanation**
 
-01
+07
     Imports the matplotlib **pylab** module (this import form is needed to avoid
     namespace clashes with SimPy).
 
-63
+75
     Sets the size of the figures following to a width of 5.5 and a height of 4 inches.
 
-64
+76
     Plots the series of queue-length values (qu.yseries()) over their observation
     times series (qu.tseries()).
 
-65
+77
     Sets the figure title, its font size, and its font weight.
 
-67
+79
     Sets the x-axis label, its font size, and its font weight.
 
-68
+80
     Sets the y-axis label, its font size, and its font weight.
 
-69
+81
     Gives the graph a grid.
 
-70
+83
     Saves the plot under the given name.
 
-72 	Clears the current figure (e.g., resets the axes values from the previous plot).
+86 	Clears the current figure (e.g., resets the axes values from the previous plot).
 
-73
+87
     Makes a histogram of the queue-length series (qu.series()) with 10 bins. The *normed*
     parameter makes the frequency counts relative to 1.
 
-74
+88
     Sets the title etc.
 
-76
+90
     Sets the x-axis label etc.
 
-77
+91
     Sets the y-axis label etc.
 
-78
+92
     Gives the graph a grid.
 
-79
+93
     Limits the x-axis to the range[0..30].
 
-80
+95
     Saves the plot under the given name.
 
 Running the program above results in two PNG files. The first (``bank12.png``)
