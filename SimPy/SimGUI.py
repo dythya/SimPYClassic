@@ -8,7 +8,7 @@ try:  # Python 3
     from tkinter import *
     from tkinter.messagebox import *
     from SimPy.canvas import Line, CanvasText, Rectangle
-except: # Python 2
+except ImportError:  # Python 2
     from Tkinter import *
     from tkMessageBox import *
     from Canvas import Line, CanvasText, Rectangle
