@@ -422,13 +422,11 @@ For example to create a new ``Message`` object with a name
   6.0+100.0=106.0) there will be no more events so the simulation will
   stop at that time:
 
-  .. include:: programs/message.py
-     :literal:
+  .. literalinclude:: programs/message.py
 
   Running this program gives the following output:
 
-  .. include:: programs/message.out
-     :literal:
+  .. literalinclude:: programs/message.out
 
 ------------
 
@@ -469,8 +467,7 @@ yield hold
    **Example 2:** In this example the Process Execution Method,
    ``buy``, has an extra argument, ``budget``:
 
-   .. include:: programs/shopping.py
-      :literal:
+   .. literalinclude:: programs/shopping.py
 
 ------
 
@@ -645,15 +642,13 @@ executed).
 **Example 3** This simulates a firework with a time fuse.  We have put
 in a few extra ``yield hold`` commands for added suspense.
 
-.. include:: programs/firework.py
-   :literal:
+.. literalinclude:: programs/firework.py
 
 
 Here is the output. No formatting was attempted so it looks a bit
 ragged:
 
-.. include:: programs/firework.out
-   :literal:
+.. literalinclude:: programs/firework.out
 
 
 ------------
@@ -810,13 +805,11 @@ for repairs, the reaction includes scheduling the next breakdown. In
 this example the ``Bus`` Process class does not require an
 ``__init__()`` method:
 
-.. include:: programs/breakdown.py
-   :literal:
+.. literalinclude:: programs/breakdown.py
 
 The output from this example:
 
-.. include:: programs/breakdown.out
-   :literal:
+.. literalinclude:: programs/breakdown.out
 
 
 The bus finishes at 1060 but the simulation finished at 1260. Why? The
@@ -1028,14 +1021,12 @@ constructs. (It also illustrates that a Process class may have more
 than one PEM. Here the ``Wait_Or_Queue`` class has two PEMs --
 ``waitup`` and ``queueup``.):
 
-.. include:: programs/wait_or_queue.py
-   :literal:
+.. literalinclude:: programs/wait_or_queue.py
 
 
 This program outputs:
 
-.. include:: programs/wait_or_queue.out
-   :literal:
+.. literalinclude:: programs/wait_or_queue.out
 
 
 Each output line, ``The activating event(s) were ...``, lists the
@@ -1101,8 +1092,7 @@ condition to be waited for has occurred.
 statement. Here the function ``killed()``, in the ``life()`` PEM of
 the ``Player`` process, defines the condition to be waited for:
 
-.. include:: programs/romulans.py
-   :literal:
+.. literalinclude:: programs/romulans.py
 
 
 One possible output from this program is shown below. Whether the
@@ -1313,8 +1303,7 @@ time. Even though they all specify a priority value in their requests,
 it is ignored and they get their Resource units in the same order as
 their requests:
 
-.. include:: programs/resource.py
-   :literal:
+.. literalinclude:: programs/resource.py
 
 
 This program results in the following output::
@@ -1482,14 +1471,12 @@ order from the last process preempted to the first of them.
 **Example** In this example two clients of different priority compete
 for the same resource unit:
 
-.. include:: programs/diffpriority.py
-   :literal:
+.. literalinclude:: programs/diffpriority.py
 
 
 The output from this program is:
 
-.. include:: programs/diffpriority.out
-   :literal:
+.. literalinclude:: programs/diffpriority.out
 
 
 Here, ``c1`` is preempted by ``c2`` at ``t=50``. At that time, ``c1``
@@ -1817,13 +1804,11 @@ some summary statistics for each queue, and then their complete time
 series:
 
 
-.. include:: programs/resourcemonitor.py
-   :literal:
+.. literalinclude:: programs/resourcemonitor.py
 
 The output from this program is:
 
-.. include:: programs/resourcemonitor.out
-   :literal:
+.. literalinclude:: programs/resourcemonitor.out
 
 This output illustrates the difference between the *(Time) Average*
 and the *number statistics*. Here process ``c1`` was in the ``waitQ``
@@ -2018,8 +2003,7 @@ intervals of 10 days. There are no back-orders, but a accumulated sum
 of the total stock-out quantities is to be maintained.  A trace is to
 be printed out each day and whenever there is a stock-out:
 
-.. include:: programs/levelinventory.py
-   :literal:
+.. literalinclude:: programs/levelinventory.py
 
 
 Here is the last ten day's output from one run of this program::
@@ -2322,15 +2306,13 @@ Store's buffer.
 model the production and consumption of "widgets". The widgets are
 distinguished by their weight:
 
-.. include:: programs/storewidget.py
-   :literal:
+.. literalinclude:: programs/storewidget.py
 
 
 This program produces the following outputs
 (some lines may be formatted differently):
 
-.. include:: programs/storewidget.out
-   :literal:
+.. literalinclude:: programs/storewidget.out
 
 --------------
 
@@ -2497,13 +2479,11 @@ waiting for a ``doneSignal`` from a car washer. The car washers cycle
 round ``getting`` the next car on the queue, washing it and then sending
 a ``doneSignal`` to it when it has finished:
 
-.. include:: programs/carwash.py
-   :literal:
+.. literalinclude:: programs/carwash.py
 
 The output of this program, running to time 30, is:
 
-.. include:: programs/carwash.out
-   :literal:
+.. literalinclude:: programs/carwash.out
 
 It is also possible to model this car wash with the cars as Master
 and the ``Carwash`` as Slaves.

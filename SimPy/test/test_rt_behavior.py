@@ -13,7 +13,7 @@ class Ticker(Process):
             tRT = self.sim.rtnow()
             self.timing.append((tSim,tRT))
 
-@pytest.mark.skip(reason="No way of guaranteeing how fast a machine runs")
+@pytest.mark.xfail(reason="No way of guaranteeing how fast a machine runs")
 def test_ticker():
     """Tests SimulationRT for degree to which simulation time and wallclock
     time can be synchronized."""

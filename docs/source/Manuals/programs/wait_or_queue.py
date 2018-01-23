@@ -4,18 +4,14 @@ class Wait_Or_Queue(Process):
     def waitup(self,myEvent):      # PEM illustrating "waitevent"
                                    # wait for "myEvent" to occur
         yield waitevent, self, myEvent
-        print 'At %s, some SimEvent(s) occurred that \
-        activated object %s.' %(now(), self.name)
-        print '   The activating event(s) were %s' \
-            %([x.name for x in self.eventsFired])
+        print('At %s, some SimEvent(s) occurred that activated object %s.' %(now(), self.name))
+        print('   The activating event(s) were %s'%([x.name for x in self.eventsFired]))
 
     def queueup(self, myEvent):    # PEM illustrating "queueevent"
                                    # queue up for "myEvent" to occur
         yield queueevent, self, myEvent
-        print 'At %s, some SimEvent(s) occurred that \
-        activated object %s.' %(now(), self.name)
-        print '   The activating event(s) were %s' \
-            %([x.name for x in self.eventsFired])
+        print('At %s, some SimEvent(s) occurred that activated object %s.' %(now(), self.name))
+        print('   The activating event(s) were %s'%([x.name for x in self.eventsFired]))
 
 class Signaller(Process):
     # here we just schedule some events to fire

@@ -72,8 +72,7 @@ As an example of how to use matplotlib with SimPy, a modified version of
 bank12.py from the Bank Tutorial is used here. It produces a line plot of the
 counter's queue length and a histogram of the customer wait times:
 
-  .. include:: programs/bank12_withplotting.py
-     :literal:
+  .. literalinclude:: programs/bank12_withplotting.py
 
 Here is the explanation of this program:
 

@@ -59,20 +59,17 @@ as::
 
 Here is an example (bank02.py from the Bank Tutorial):
 
-.. include:: programs/tracing_bank02.py
-   :literal:
+.. literalinclude:: programs/tracing_bank02.py
 
 
 This program produces the following output:
 
-.. include:: programs/tracing_bank02.out
-   :literal:
+.. literalinclude:: programs/tracing_bank02.out
 
 
 Another example:
 
-.. include:: programs/tracing_bank09.py
-   :literal:
+.. literalinclude:: programs/tracing_bank09.py
 
 
 This produces::
@@ -105,14 +102,12 @@ This produces::
  
 And here is an example showing the trace output for compound yield statements:
 
-.. include:: programs/tracing_compound_yield.py
-   :literal:
+.. literalinclude:: programs/tracing_compound_yield.py
 
 
 It produces this output:
 
-.. include:: programs/tracing_compound_yield.out
-   :literal:
+.. literalinclude:: programs/tracing_compound_yield.out
 
 
 In this example, the Client entities are requesting 10 gallons from the *tank* (a Level object). 
@@ -206,8 +201,7 @@ statement following it.
 
 Example:
 
-.. include:: programs/tracing_annotation.py
-   :literal:
+.. literalinclude:: programs/tracing_annotation.py
 
 
 This produces::

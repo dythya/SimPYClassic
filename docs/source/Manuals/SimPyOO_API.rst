@@ -96,15 +96,13 @@ instance belongs to one and only one world (i.e., ``Simulationxx`` instance).
 
 The following program shows what this means for API and program structure:
 
-.. include:: programs/SimPyOO_car.py
-   :literal:
+.. literalinclude:: programs/SimPyOO_car.py
 
 
 Using the existing API, the following program is semantically the same and also works
 under the OO version:
 
-.. include:: programs/SimPyOO_car_traditional.py
-   :literal:
+.. literalinclude:: programs/SimPyOO_car_traditional.py
 
 
 This full (backwards) compatibility is achieved by the automatic generation
@@ -117,8 +115,7 @@ The advanced OO API can be used to generate model classes which are SimulationXX
 This ties a model and a SimulationXX instance together beautifully. See the following
 example:
 
-.. include:: programs/CarModel.py
-   :literal:
+.. literalinclude:: programs/CarModel.py
 
 
 class ``Model`` here is a subclass of ``Simulation``. Every model execution, i.e. call to
@@ -148,8 +145,7 @@ For example, the model in the previous example can be extended to one in which a
 compete for parking spaces. This is done by importing the ``CarModel`` module
 and subclassing ``Model`` as follows:
 
-.. include:: programs/CarModelExtension.py
-   :literal:
+.. literalinclude:: programs/CarModelExtension.py
 
 
 Let's walk through this:

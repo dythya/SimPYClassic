@@ -499,14 +499,12 @@ event scheduler starts operating by finding the first event to
 execute. When both cars have finished (at time ``6.0+100.0=106.0``)
 there will be no more events so the simulation will stop:
 
-.. include:: programs/car.py
-   :literal:
+.. literalinclude:: programs/car.py
 
 
 Running this program gives the following output:
 
-.. include:: programs/car.out
-   :literal:
+.. literalinclude:: programs/car.out
 
 If, instead one chose to import ``SimPy.SimulateTrace`` at the start
 of the program one would obtain the following output. (The meaning of
@@ -515,8 +513,7 @@ the full SimPy Manual. ``prior`` is an advanced technique for fine control
 of PEM priorities but seldom affects simulated operations and so
 normally can be ignored/)
 
-.. include:: programs/carT.out
-   :literal:
+.. literalinclude:: programs/carT.out
 
 -------
 

@@ -39,8 +39,7 @@ SimulationStep overview
 
 Here is a simple program which shows basic event stepping capabilities:
 
-.. include:: programs/simstep_stepping1.py
-   :literal:
+.. literalinclude:: programs/simstep_stepping1.py
 
 A trivial simulation model, but with event stepping:
 
@@ -51,16 +50,14 @@ A trivial simulation model, but with event stepping:
 
 Running it produces this output:
 
-.. include:: programs/simstep_stepping1.out
-   :literal:
+.. literalinclude:: programs/simstep_stepping1.out
 
 The callback outputs the simulation time after every event.
 
 Here is another example, the same model, but now with the user getting control back after every
 event:
 
-.. include:: programs/simstep_stepping2.py
-   :literal:
+.. literalinclude:: programs/simstep_stepping2.py
 
 Its interactive output looks like this::
 
@@ -86,8 +83,7 @@ or this (the user stopped stepping mode at time=1)::
 If one wants to run a tested/debugged model full speed, i.e. without stepping,
 one can write a program as follows:
 
-.. include:: programs/simstep_stepping2fast.py
-   :literal:
+.. literalinclude:: programs/simstep_stepping2fast.py
 
 
 If one runs this with the Python command line option '-O', any

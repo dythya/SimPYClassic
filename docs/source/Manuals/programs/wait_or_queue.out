@@ -1,10 +1,10 @@
-At 2, some SimEvent(s) occurred that         activated object W-0.
+At 2, some SimEvent(s) occurred that activated object W-0.
    The activating event(s) were ['Event-1']
-At 10, some SimEvent(s) occurred that         activated object W-1.
+At 10, some SimEvent(s) occurred that activated object W-1.
    The activating event(s) were ['Event-2']
-At 15, some SimEvent(s) occurred that         activated object W-2.
+At 15, some SimEvent(s) occurred that activated object W-2.
    The activating event(s) were ['Event-3']
-At 15, some SimEvent(s) occurred that         activated object Q-1.
+At 15, some SimEvent(s) occurred that activated object Q-1.
    The activating event(s) were ['Event-3', 'Event-4']
-At 20, some SimEvent(s) occurred that         activated object Q-2.
+At 20, some SimEvent(s) occurred that activated object Q-2.
    The activating event(s) were ['Event-4']
