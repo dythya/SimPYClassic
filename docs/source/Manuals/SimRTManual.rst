@@ -53,6 +53,7 @@ Run under Python 2.6 on a Windows Vista-box (2.3 GHz), this output resulted
 over about 17.5 seconds of wallclock time:
 
 .. literalinclude:: SimulationRTprograms/RealTimeFireworks.out
+   :language: text
 
 Clearly, the wallclock time does not deviate significantly from the simulation time.
 

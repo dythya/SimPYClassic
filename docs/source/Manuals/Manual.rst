@@ -649,6 +649,7 @@ Here is the output. No formatting was attempted so it looks a bit
 ragged:
 
 .. literalinclude:: programs/firework.out
+   :language: text
 
 
 ------------
@@ -1097,28 +1098,10 @@ the ``Player`` process, defines the condition to be waited for:
 
 One possible output from this program is shown below. Whether the
 Romulans are wiped out or some escape depends on what simulation
-states the randomization feature produces::
+states the randomization feature produces:
 
-      Three Romulans attempting to escape!
-      Ha! Romulans hit! Damage = 1
-      Ha! Romulans hit! Damage = 2
-      Ha! Romulans hit! Damage = 3
-      Ha! Romulans hit! Damage = 4
-      Ha! Romulans hit! Damage = 5
-        Now only 2 Romulans left!
-      Ha! Romulans hit! Damage = 1
-      Ha! Romulans hit! Damage = 2
-      Ha! Romulans hit! Damage = 3
-      Ha! Romulans hit! Damage = 4
-      Ha! Romulans hit! Damage = 5
-        Now only 1 Romulans left!
-      Ha! Romulans hit! Damage = 1
-      Ha! Romulans hit! Damage = 2
-      Ha! Romulans hit! Damage = 3
-      Ha! Romulans hit! Damage = 4
-      Ha! Romulans hit! Damage = 5
-        No more Romulans left!
-      Romulans wiped out by Federation at time 73!
+.. literalinclude:: programs/romulans.out
+   :language: text
 
 ------------
 

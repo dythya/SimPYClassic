@@ -351,6 +351,7 @@ v(line 20).
 
 
 .. literalinclude:: bankprograms/bank22.out
+   :language: text
 
 
 As this has no random numbers the results are reasonably clear: the
@@ -393,6 +394,7 @@ An output run for this programs shows how the first three customers
 have to wait until the door is opened.
 
 .. literalinclude:: bankprograms/bank14.out
+   :language: text
 
 
 Wait for the doorman to give a signal: ``waitevent``
@@ -429,6 +431,7 @@ An output run for this programs shows how the first three customers
 have to wait until the door is opened.
 
 .. literalinclude:: bankprograms/bank13.out
+   :language: text
 
 
 .. ==================================================================
