@@ -5,6 +5,12 @@ python:
 - '3.4'
 - '3.5'
 - '3.6'
+jobs:
+  include:
+  - stage: flake8
+    python: 3.6
+    install: pip install flake8
+    script: flake8 docs
 install:
 - pip install -r dev-requirements.txt
 - pip install codecov
