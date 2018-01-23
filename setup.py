@@ -5,7 +5,7 @@ import SimPy
 
 
 setup(
-    name='SimPy',
+    name='SimPyClassic',
     version=SimPy.__version__,
     author='Klaus Muller, Tony Vignaux, Ontje Lünsdorf, Stefan Scherfke',
     author_email=('vignaux at user.sourceforge.net; '
