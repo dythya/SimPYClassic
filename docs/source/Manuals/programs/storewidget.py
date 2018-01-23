@@ -1,5 +1,5 @@
 from SimPy.Simulation import (Lister, Process, Store, activate, get, hold,
-    initialize, now, put, simulate)
+                              initialize, now, put, simulate)
 
 
 class ProducerD(Process):
@@ -22,7 +22,7 @@ class ConsumerD(Process):
             yield get, self, buf, toGet
             assert len(self.got) == toGet
             print('%s Get widget weights %s' % (now(),
-                    [x.weight for x in self.got]))
+                                                [x.weight for x in self.got]))
             yield hold, self, 11
 
 

@@ -24,7 +24,7 @@ class Series(SimulationRT.Process):
             diffWall = SimulationRT.wallclock() - tLastWallclock
             print("now(): %s, sim. time elapsed: %s, wall clock elapsed: "
                   "%6.3f, sim/wall time ratio: %6.3f" %
-                  (SimulationRT.now(), diffSim, diffWall, diffSim/diffWall))
+                  (SimulationRT.now(), diffSim, diffWall, diffSim / diffWall))
             if not ratio == oldratio:
                 print("At simulation time %s: ratio simulation/wallclock "
                       "time now changed to %s" % (SimulationRT.now(), ratio))

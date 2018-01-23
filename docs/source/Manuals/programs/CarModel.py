@@ -9,7 +9,7 @@ class Car(simulation.Process):
     def park(self):
         yield simulation.request, self, self.sim.parking
         yield simulation.hold, self, 10
-        yield simulation.release, self,  self.sim.parking
+        yield simulation.release, self, self.sim.parking
         print("%s done at %s" % (self.name, self.sim.now()))
 
 # Model ------------------------------------------

@@ -1,21 +1,25 @@
 """ bank13_OO: Wait for the doorman to give a signal: *waitevent*"""
-from SimPy.Simulation import Simulation, Process, Resource, SimEvent, hold, request, release, waitevent
+from SimPy.Simulation import (Simulation, Process, Resource, SimEvent, hold,
+                              request, release, waitevent)
 from random import *
 
-## Model components ------------------------
+# Model components ------------------------
+
 
 class Doorman(Process):
     """ Doorman opens the door"""
+
     def openthedoor(self):
         """ He will opens the door at fixed intervals"""
         for i in range(5):
-            yield hold, self,  30.0
+            yield hold, self, 30.0
             self.sim.dooropen.signal()
             print("%7.4f You may enter" % (self.sim.now()))
 
 
 class Source(Process):
     """ Source generates customers randomly"""
+
     def generate(self, number, rate):
         for i in range(number):
             c = Customer(name="Customer%02d" % (i), sim=self.sim)
@@ -25,6 +29,7 @@ class Source(Process):
 
 class Customer(Process):
     """ Customer arrives, is served and leaves """
+
     def visit(self, timeInBank=10):
         arrive = self.sim.now()
 
@@ -47,7 +52,8 @@ class Customer(Process):
 
         print("%7.4f %s: Finished    " % (self.sim.now(), self.name))
 
-## Model  ----------------------------------
+# Model  ----------------------------------
+
 
 class BankModel(Simulation):
     def run(self, aseed):
@@ -59,15 +65,16 @@ class BankModel(Simulation):
         self.activate(doorman, doorman.openthedoor())
         source = Source(sim=self)
         self.activate(source,
-             source.generate(number=5, rate=0.1), at=0.0)
+                      source.generate(number=5, rate=0.1), at=0.0)
         self.simulate(until=maxTime)
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxTime = 400.0  # minutes
 seedVal = 232323
 
-## Experiment  ----------------------------------
+# Experiment  ----------------------------------
 
 mymodel = BankModel()
 mymodel.run(aseed=seedVal)

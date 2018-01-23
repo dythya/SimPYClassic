@@ -1,17 +1,23 @@
 from SimPy.Simulation import *
 
-class Wait_Or_Queue(Process):
-    def waitup(self,myEvent):      # PEM illustrating "waitevent"
-                                   # wait for "myEvent" to occur
-        yield waitevent, self, myEvent
-        print('At %s, some SimEvent(s) occurred that activated object %s.' %(now(), self.name))
-        print('   The activating event(s) were %s'%([x.name for x in self.eventsFired]))
 
-    def queueup(self, myEvent):    # PEM illustrating "queueevent"
-                                   # queue up for "myEvent" to occur
+class Wait_Or_Queue(Process):
+    def waitup(self, myEvent):      # PEM illustrating "waitevent"
+                                    # wait for "myEvent" to occur
+        yield waitevent, self, myEvent
+        print('At %s, some SimEvent(s) occurred that activated object %s.' %
+              (now(), self.name))
+        print('   The activating event(s) were %s' %
+              ([x.name for x in self.eventsFired]))
+
+    def queueup(self, myEvent):     # PEM illustrating "queueevent"
+                                    # queue up for "myEvent" to occur
         yield queueevent, self, myEvent
-        print('At %s, some SimEvent(s) occurred that activated object %s.' %(now(), self.name))
-        print('   The activating event(s) were %s'%([x.name for x in self.eventsFired]))
+        print('At %s, some SimEvent(s) occurred that activated object %s.' %
+              (now(), self.name))
+        print('   The activating event(s) were %s' %
+              ([x.name for x in self.eventsFired]))
+
 
 class Signaller(Process):
     # here we just schedule some events to fire
@@ -28,6 +34,7 @@ class Signaller(Process):
         yield hold, self, 5
         event4.signal()        # event4 recurs at time 20
 
+
 initialize()
 
 # Now create each SimEvent and give it a name
@@ -35,18 +42,18 @@ event1 = SimEvent('Event-1')
 event2 = SimEvent('Event-2')
 event3 = SimEvent('Event-3')
 event4 = SimEvent('Event-4')
-Event_list = [event3,event4]   # define an event list
+Event_list = [event3, event4]   # define an event list
 
 s = Signaller()
 # Activate Signaller "s" *after* events created
-activate (s,s.sendSignals())
+activate(s, s.sendSignals())
 
 w0 = Wait_Or_Queue('W-0')
 # create object named "W-0", and set it to
 # "waitup" for SimEvent "event1" to occur
-activate (w0, w0.waitup(event1))
+activate(w0, w0.waitup(event1))
 w1 = Wait_Or_Queue('W-1')
-activate (w1, w1.waitup(event2))
+activate(w1, w1.waitup(event2))
 w2 = Wait_Or_Queue('W-2')
 activate(w2, w2.waitup(Event_list))
 q1 = Wait_Or_Queue('Q-1')

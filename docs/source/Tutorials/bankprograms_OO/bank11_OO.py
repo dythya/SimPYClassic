@@ -1,9 +1,10 @@
 """ bank11: The bank with a Monitor"""
 from SimPy.Simulation import Simulation, Process, Resource, Monitor, hold,\
-                               request, release
+    request, release
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
+
 
 class Source(Process):
     """ Source generates customers randomly"""
@@ -28,7 +29,8 @@ class Customer(Process):
         yield hold, self, tib
         yield release, self, b
 
-## Model -----------------------------------
+# Model -----------------------------------
+
 
 class BankModel(Simulation):
     def run(self, aseed):
@@ -40,7 +42,8 @@ class BankModel(Simulation):
         self.activate(s, s.generate(number=maxNumber, interval=ARRint), at=0.0)
         self.simulate(until=maxTime)
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxNumber = 50
 maxTime = 1000.0   # minutes
@@ -49,12 +52,12 @@ ARRint = 10.0      # mean, minutes
 Nc = 2             # number of counters
 seedVal = 99999
 
-## Experiment   -----------------------------
+# Experiment   -----------------------------
 
 experi = BankModel()
 experi.run(aseed=seedVal)
 
-## Result  ----------------------------------
+# Result  ----------------------------------
 
 result = experi.wM.count(), experi.wM.mean()
 print("Average wait for %3d completions was %5.3f minutes." % result)

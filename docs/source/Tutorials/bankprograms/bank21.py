@@ -2,7 +2,7 @@
 from SimPy.Simulation import *
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
 
 
 class Source(Process):
@@ -25,20 +25,22 @@ class Customer(Process):
 
         yield (request, self, counter), (hold, self, maxWaitTime)
         wait = now() - arrive  # waiting time
-        if self.acquired(counter):                                  #1
+        if self.acquired(counter):  # 1
             print("%8.3f %s: Waited %6.3f" % (now(), self.name, wait))
             yield hold, self, timeInBank
             yield release, self, counter
             print("%8.3f %s: Completed" % (now(), self.name))
         else:
-            print("%8.3f %s: Waited %6.3f. I am off" % (now(), self.name, wait))
+            print("%8.3f %s: Waited %6.3f. I am off" %
+                  (now(), self.name, wait))
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxTime = 400.0  # minutes
 maxWaitTime = 12.0  # minutes. maximum time to wait
 
-## Model  ----------------------------------
+# Model  ----------------------------------
 
 
 def model():
@@ -51,6 +53,7 @@ def model():
              source.generate(number=5, interval=10.0), at=0.0)
     simulate(until=maxTime)
 
-## Experiment  ----------------------------------
+# Experiment  ----------------------------------
+
 
 model()

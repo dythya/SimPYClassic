@@ -11,6 +11,7 @@ from random import Random
 # Model components
 class Source(Simulation.Process):
     """ Source generates customers randomly"""
+
     def __init__(self, seed=333):
         Simulation.Process.__init__(self)
         self.SEED = seed
@@ -20,12 +21,13 @@ class Source(Simulation.Process):
         for i in range(number):
             c = Customer(name="Customer%02d" % (i,))
             Simulation.activate(c, c.visit(timeInBank=12.0))
-            t = rv.expovariate(1.0/interval)
+            t = rv.expovariate(1.0 / interval)
             yield Simulation.hold, self, t
 
 
 class Customer(Simulation.Process):
     """ Customer arrives, is served and leaves """
+
     def __init__(self, name):
         Simulation.Process.__init__(self)
         self.name = name
@@ -35,7 +37,7 @@ class Customer(Simulation.Process):
         yield Simulation.request, self, counter
         wait = Simulation.now() - arrive
         wate.observe(y=wait)
-        tib = counterRV.expovariate(1.0/timeInBank)
+        tib = counterRV.expovariate(1.0 / timeInBank)
         yield Simulation.hold, self, tib
         yield Simulation.release, self, counter
 

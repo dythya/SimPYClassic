@@ -1,13 +1,14 @@
 """ bank04: Simulate a single customer. random time in system """
 from SimPy.Simulation import *
-from random import Random, expovariate
+from random import Random
 
-## Model components ------------------------
+# Model components ------------------------
 
 
 class Customer(Process):
     """ Customer arrives in the bank, looks around for
     a random time and then leaves """
+
     def __init__(self, name):
         Process.__init__(self)
         self.name = name
@@ -18,11 +19,12 @@ class Customer(Process):
         yield hold, self, t
         print("%7.4f %s: I must leave" % (now(), self.name))
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxTime = 100.0    # minutes
 
-## Model/Experiment ------------------------------
+# Model/Experiment ------------------------------
 
 
 def model():
@@ -31,5 +33,6 @@ def model():
     c = Customer(name="Klaus")
     activate(c, c.visit(rv, timeInBank=10.0), at=5.0)
     simulate(until=maxTime)
+
 
 model()

@@ -10,10 +10,10 @@ class Launcher(SimulationRT.Process):
         while True:
             print("Launch at %2.4f; wallclock: %2.4f" %
                   (SimulationRT.now(),
-                   time.clock()-startTime))
+                   time.clock() - startTime))
             yield SimulationRT.hold, self, uniform(1, maxFlightTime)
             print("Boom!!! Aaaah!! at %2.4f; wallclock: %2.4f" %
-                  (SimulationRT.now(), time.clock()-startTime))
+                  (SimulationRT.now(), time.clock() - startTime))
 
 
 def model():

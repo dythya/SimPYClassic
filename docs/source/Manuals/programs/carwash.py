@@ -1,10 +1,11 @@
 from SimPy.Simulation import (Process, SimEvent, Store, activate, get,
-        initialize, hold, now, put, simulate, waitevent)
+                              initialize, hold, now, put, simulate, waitevent)
 """Carwash is master"""
 
 
 class Carwash(Process):
     """Carwash is master"""
+
     def __init__(self, name):
         Process.__init__(self, name=name)
 
@@ -18,6 +19,7 @@ class Carwash(Process):
 
 class Car(Process):
     """Car is slave"""
+
     def __init__(self, name):
         Process.__init__(self, name=name)
         self.doneSignal = SimEvent()
@@ -38,18 +40,19 @@ class CarGenerator(Process):
             activate(c, c.lifecycle())
             i += 1
 
+
 washtime = 5
 initialize()
 
 # put four cars into the queue of waiting cars
 for j in range(1, 5):
-        c = Car(name='%d' % -j)
-        activate(c, c.lifecycle())
+    c = Car(name='%d' % -j)
+    activate(c, c.lifecycle())
 
 waitingCars = Store(capacity=40)
 for i in range(2):
-        cw = Carwash('Carwash %s' % i)
-        activate(cw, cw.lifecycle())
+    cw = Carwash('Carwash %s' % i)
+    activate(cw, cw.lifecycle())
 
 cg = CarGenerator()
 activate(cg, cg.generate())

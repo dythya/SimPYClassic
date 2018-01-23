@@ -2,7 +2,7 @@
 from SimPy.Simulation import *
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
 
 
 class Source(Process):
@@ -12,7 +12,7 @@ class Source(Process):
         for i in range(number):
             c = Customer(name="Customer%02d" % (i))
             activate(c, c.visit(timeInBank=12.0,
-                               res=resource, P=0))
+                                res=resource, P=0))
             t = expovariate(1.0 / interval)
             yield hold, self, t
 
@@ -36,19 +36,20 @@ class Customer(Process):
         print("%8.3f %s: Completed" %
               (now(), self.name))
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxTime = 400.0  # minutes
-k = Resource(name="Counter", unitName="Karen",         #1
+k = Resource(name="Counter", unitName="Karen",  # 1
              qType=PriorityQ, preemptable=True)
 
-## Model/Experiment ------------------------------
+# Model/Experiment ------------------------------
 seed(989898)
 initialize()
 s = Source('Source')
 activate(s, s.generate(number=5, interval=10.0,
-                      resource=k), at=0.0)
+                       resource=k), at=0.0)
 guido = Customer(name="Guido     ")
 activate(guido, guido.visit(timeInBank=12.0, res=k,
-                           P=100), at=23.0)
+                            P=100), at=23.0)
 simulate(until=maxTime)

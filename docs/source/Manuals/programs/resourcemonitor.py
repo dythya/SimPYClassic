@@ -1,21 +1,21 @@
 from math import sqrt
 from SimPy.Simulation import (Monitor, Process, Resource, activate, initialize,
-        hold, now, release, request, simulate)
+                              hold, now, release, request, simulate)
 
 
 class Client(Process):
-        inClients = []
-        outClients = []
+    inClients = []
+    outClients = []
 
-        def __init__(self, name):
-            Process.__init__(self, name)
+    def __init__(self, name):
+        Process.__init__(self, name)
 
-        def getserved(self, servtime, myServer):
-            print('%s requests 1 unit at t = %s' % (self.name, now()))
-            yield request, self, myServer
-            yield hold, self, servtime
-            yield release, self, myServer
-            print('%s done at t = %s' % (self.name, now()))
+    def getserved(self, servtime, myServer):
+        print('%s requests 1 unit at t = %s' % (self.name, now()))
+        yield request, self, myServer
+        yield hold, self, servtime
+        yield release, self, myServer
+        print('%s done at t = %s' % (self.name, now()))
 
 
 initialize()
@@ -45,9 +45,9 @@ print('=' * 40)
 print('Time history for the "server" waitQ:')
 print('[time, waitQ]')
 for item in server.waitMon:
-        print(item)
+    print(item)
 print('=' * 40)
 print('Time history for the "server" activeQ:')
 print('[time, activeQ]')
 for item in server.actMon:
-        print(item)
+    print(item)

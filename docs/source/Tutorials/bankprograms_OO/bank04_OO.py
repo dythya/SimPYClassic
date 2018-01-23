@@ -3,7 +3,7 @@ from SimPy.Simulation import Simulation, Process, hold
 from random import Random
 
 
-## Model components ------------------------
+# Model components ------------------------
 class Customer(Process):
     """ Customer arrives in the bank, looks around for
     a random time and then leaves """
@@ -14,12 +14,13 @@ class Customer(Process):
         yield hold, self, t
         print("%7.4f %s: I must leave" % (self.sim.now(), self.name))
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxTime = 100.0    # minutes
 
 
-## Model -----------------------------------
+# Model -----------------------------------
 class BankModel(Simulation):
     def __init__(self, seed):
         Simulation.__init__(self)
@@ -30,7 +31,8 @@ class BankModel(Simulation):
         c = Customer(name="Klaus", sim=self)
         self.activate(c, c.visit(timeInBank=10.0), at=5.0)
         self.simulate(until=maxTime)
-## Experiment ------------------------------
+
+
+# Experiment ------------------------------
 mymodel = BankModel(seed=1133)
 mymodel.run()
-

@@ -1,5 +1,6 @@
 from SimPy.Simulation import (PriorityQ, Process, Resource, activate,
-        initialize, hold, now, release, request, simulate)
+                              initialize, hold, now, release, request,
+                              simulate)
 
 
 class Client(Process):

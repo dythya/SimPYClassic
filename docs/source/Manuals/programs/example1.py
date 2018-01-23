@@ -11,7 +11,7 @@ class Customer(Process):
             print('I just bought something %s' % self.name)
             budget -= 10.00
         print('All I have left is %s I am going home %s' %
-            (budget, self.name))
+              (budget, self.name))
 
 
 initialize()

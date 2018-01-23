@@ -4,7 +4,7 @@ import re
 
 from docutils import nodes
 from pygments.filter import simplefilter
-from pygments.token import Comment, Token
+from pygments.token import Comment
 
 
 # Create the annotation token.
@@ -33,7 +33,7 @@ def annotation_filter(self, lexer, stream, options):
 
             for idx, token in enumerate(tokens):
                 yield ((ttype, token) if idx % 2 == 0 else
-                        (Annotation, token[1:-1]))
+                       (Annotation, token[1:-1]))
             continue
         yield ttype, value
 
@@ -43,7 +43,7 @@ class annotation(nodes.reference):
 
 
 def annotation_role(name, rawtext, text, lineno, inliner, options={},
-        content=[]):
+                    content=[]):
     return [annotation(rawtext, text)], []
 
 
@@ -63,7 +63,7 @@ def visit_annotation_latex(self, node):
     # Use a raisebox to lift annotation box a little bit, so that it appears
     # vertically centered in line.
     self.body.append(
-            '\\raisebox{0.2ex}[0pt][0pt]{\\tt\\tiny\\PYG{c+cAnnotation}{')
+        '\\raisebox{0.2ex}[0pt][0pt]{\\tt\\tiny\\PYG{c+cAnnotation}{')
 
 
 def depart_annotation_latex(self, node):
@@ -72,12 +72,12 @@ def depart_annotation_latex(self, node):
 
 def setup(app):
     # FIXME Hack: Add our own custom filter for highlighting annotations.
-    from sphinx.highlighting import PygmentsBridge, lexers
+    from sphinx.highlighting import lexers
     lexers['python'].add_filter(annotation_filter())
 
     # Add node and role for annotations.
     app.add_node(annotation,
-            html=(visit_annotation_html, depart_annotation_html),
-            latex=(visit_annotation_latex, depart_annotation_latex),
-    )
+                 html=(visit_annotation_html, depart_annotation_html),
+                 latex=(visit_annotation_latex, depart_annotation_latex),
+                 )
     app.add_role('an', annotation_role)

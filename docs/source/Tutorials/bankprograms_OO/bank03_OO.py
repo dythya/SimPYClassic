@@ -2,7 +2,7 @@
 from SimPy.Simulation import Simulation, Process, hold
 
 
-## Model components ------------------------
+# Model components ------------------------
 class Source(Process):
     """ Source generates customers regularly """
 
@@ -22,22 +22,23 @@ class Customer(Process):
         print("%7.4f %s: I must leave" % (self.sim.now(), self.name))
 
 
-## Model -----------------------------------
+# Model -----------------------------------
 class BankModel(Simulation):
     def run(self):
         """ PEM """
         s = Source(sim=self)
         self.activate(s, s.generate(number=maxNumber,
-                      TBA=ARRint), at=0.0)
+                                    TBA=ARRint), at=0.0)
         self.simulate(until=maxTime)
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxNumber = 5
 maxTime = 400.0  # minutes
 ARRint = 10.0    # time between arrivals, minutes
 
-## Experiment ------------------------------
+# Experiment ------------------------------
 
 mymodel = BankModel()
 mymodel.run()

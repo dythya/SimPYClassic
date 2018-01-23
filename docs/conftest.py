@@ -195,12 +195,12 @@ class ExampleItem(pytest.Item):
                 return pytest.Item.repr_failure(self, exc_info)
             # Otherwise provide a concise error description.
             return ReprFileNotFoundExample(self.fspath.basename, self.lineno,
-                    self.examplefile, exc_info)
+                                           self.examplefile, exc_info)
         elif exc_info.errisinstance((subprocess.CalledProcessError,)):
             # Something wrent wrong while executing the example. Provide a
             # concise error description.
             return ReprErrorExample(self.fspath.basename, self.lineno,
-                    self.examplefile, exc_info)
+                                    self.examplefile, exc_info)
         else:
             # Something went terribly wrong :(
             return pytest.Item.repr_failure(self, exc_info)
@@ -208,16 +208,16 @@ class ExampleItem(pytest.Item):
     def reportinfo(self):
         """Returns a description of the example."""
         return self.fspath, None, '[example %s]' % (
-                os.path.relpath(self.examplefile))
+            os.path.relpath(self.examplefile))
 
 
 class ReprFailExample(TerminalRepr):
     """Reports output mismatches in a nice and informative representation."""
 
     Markup = {
-            '+': dict(green=True),
-            '-': dict(red=True),
-            '?': dict(bold=True),
+        '+': dict(green=True),
+        '-': dict(red=True),
+        '?': dict(bold=True),
     }
     """Colorize codes for the diff markup."""
 
@@ -231,8 +231,10 @@ class ReprFailExample(TerminalRepr):
         for line in self.message:
             markup = ReprFailExample.Markup.get(line[0], {})
             tw.line(line, **markup)
-        tw.line('%s:%d (in %s): Unexpected output' % (self.filename,
-                self.lineno, os.path.relpath(self.outputfile)))
+        tw.line('%s:%d (in %s): Unexpected output' %
+                (self.filename,
+                 self.lineno,
+                 os.path.relpath(self.outputfile)))
 
 
 class ReprErrorExample(TerminalRepr):
@@ -248,9 +250,11 @@ class ReprErrorExample(TerminalRepr):
         tw.line('Execution failed! Captured output:', bold=True)
         tw.sep('-')
         tw.line(self.exc_info.value.output.decode(), red=True, bold=True)
-        tw.line('%s:%d (%s) Example failed (exitcode=%d)' % (self.filename,
-                self.lineno, os.path.relpath(self.examplefile),
-                self.exc_info.value.returncode))
+        tw.line('%s:%d (%s) Example failed (exitcode=%d)' %
+                (self.filename,
+                 self.lineno,
+                 os.path.relpath(self.examplefile),
+                 self.exc_info.value.returncode))
 
 
 class ReprFileNotFoundExample(TerminalRepr):
@@ -264,5 +268,7 @@ class ReprFileNotFoundExample(TerminalRepr):
 
     def toterminal(self, tw):
         tw.line(self.exc_info.value, red=True, bold=True)
-        tw.line('%s:%d (%s) Example failed' % (self.filename,
-                self.lineno, os.path.relpath(self.examplefile)))
+        tw.line('%s:%d (%s) Example failed' %
+                (self.filename,
+                 self.lineno,
+                 os.path.relpath(self.examplefile)))

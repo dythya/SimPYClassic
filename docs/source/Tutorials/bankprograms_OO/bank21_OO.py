@@ -1,8 +1,10 @@
 """ bank21_OO: One counter with impatient customers """
-from SimPy.Simulation import Simulation, Process, Resource, hold, request, release
+from SimPy.Simulation import (Simulation, Process, Resource, hold, request,
+                              release)
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
+
 
 class Source(Process):
     """ Source generates customers randomly """
@@ -30,10 +32,11 @@ class Customer(Process):
             yield release, self, self.sim.counter
             print("%8.3f %s: Completed" % (self.sim.now(), self.name))
         else:
-            print("%8.3f %s: Waited %6.3f. I am off" % (self.sim.now(), self.name, wait))
+            print("%8.3f %s: Waited %6.3f. I am off" %
+                  (self.sim.now(), self.name, wait))
 
 
-## Model  ----------------------------------
+# Model  ----------------------------------
 class BankModel(Simulation):
     def run(self, aseed):
         """ PEM """
@@ -41,16 +44,17 @@ class BankModel(Simulation):
         self.counter = Resource(name="Karen", sim=self)
         source = Source('Source', sim=self)
         self.activate(source,
-             source.generate(number=5, interval=10.0), at=0.0)
+                      source.generate(number=5, interval=10.0), at=0.0)
         self.simulate(until=maxTime)
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxTime = 400.0     # minutes
 maxWaitTime = 12.0  # minutes. maximum time to wait
 seedVal = 989898
 
-## Experiment  ----------------------------------
+# Experiment  ----------------------------------
 
 mymodel = BankModel()
 mymodel.run(aseed=seedVal)

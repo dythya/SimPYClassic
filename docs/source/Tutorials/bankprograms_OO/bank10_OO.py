@@ -1,8 +1,10 @@
 """ bank10_OO: Several Counters with individual queues"""
-from SimPy.Simulation import Simulation, Process, Resource, hold, request, release
+from SimPy.Simulation import (Simulation, Process, Resource, hold, request,
+                              release)
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
+
 
 class Source(Process):
     """ Source generates customers randomly"""
@@ -13,6 +15,7 @@ class Source(Process):
             self.sim.activate(c, c.visit(counters=self.sim.kk))
             t = expovariate(1.0 / interval)
             yield hold, self, t
+
 
 def NoInSystem(R):
     """ Total number of customers in the resource R"""
@@ -43,19 +46,20 @@ class Customer(Process):
         print("%7.4f %s: Finished" % (self.sim.now(), self.name))
 
 
-## Model -----------------------------------
+# Model -----------------------------------
 
 class BankModel(Simulation):
     def run(self, aseed):
         """ PEM """
         seed(aseed)
         self.kk = [Resource(name="Clerk0", sim=self),
-              Resource(name="Clerk1", sim=self)]
+                   Resource(name="Clerk1", sim=self)]
         s = Source('Source', sim=self)
         self.activate(s, s.generate(number=maxNumber, interval=ARRint), at=0.0)
         self.simulate(until=maxTime)
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxNumber = 5
 maxTime = 400.0    # minutes
@@ -64,8 +68,7 @@ ARRint = 10.0      # mean, minutes
 Nc = 2             # number of counters
 seedVal = 787878
 
-## Experiment ------------------------------
+# Experiment ------------------------------
 
 mymodel = BankModel()
 mymodel.run(aseed=seedVal)
-

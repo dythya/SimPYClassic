@@ -15,6 +15,6 @@ class Firework(Process):
 
 initialize()
 f = Firework()  # create a Firework object, and
-                # activate it (with some default parameters)
+# activate it (with some default parameters)
 activate(f, f.execute(), at=0.0)
 simulate(until=100)

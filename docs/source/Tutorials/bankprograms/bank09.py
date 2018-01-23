@@ -2,7 +2,7 @@
 from SimPy.Simulation import *
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
 
 
 class Source(Process):
@@ -30,7 +30,8 @@ class Customer(Process):
         yield release, self, b
         print("%8.4f %s: Finished      " % (now(), self.name))
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxNumber = 5
 maxTime = 400.0    # minutes
@@ -38,13 +39,13 @@ timeInBank = 12.0  # mean, minutes
 ARRint = 10.0      # mean, minutes
 theseed = 99999
 
-## Model/Experiment ------------------------------
+# Model/Experiment ------------------------------
 
 seed(theseed)
-k = Resource(capacity=2, name="Counter", unitName="Clerk")   #1
+k = Resource(capacity=2, name="Counter", unitName="Clerk")  # 1
 
 initialize()
 s = Source('Source')
 activate(s, s.generate(number=maxNumber, meanTBA=ARRint,
-                         resource=k), at=0.0)
+                       resource=k), at=0.0)
 simulate(until=maxTime)

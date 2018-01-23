@@ -2,23 +2,25 @@
 from SimPy.Simulation import *
 from random import *
 
-## Model components ------------------------
+# Model components ------------------------
 
-dooropen = SimEvent("Door Open")                         #1
+dooropen = SimEvent("Door Open")  # 1
 
 
-class Doorman(Process):                                  #2
+class Doorman(Process):  # 2
     """ Doorman opens the door"""
+
     def openthedoor(self):
         """ He will opens the door at fixed intervals"""
         for i in range(5):
-            yield hold, self, 30.0                       #3
-            dooropen.signal()                            #4
+            yield hold, self, 30.0  # 3
+            dooropen.signal()  # 4
             print("%7.4f You may enter" % (now()))
 
 
 class Source(Process):
     """ Source generates customers randomly"""
+
     def generate(self, number, rate):
         for i in range(number):
             c = Customer(name="Customer%02d" % (i))
@@ -26,8 +28,9 @@ class Source(Process):
             yield hold, self, expovariate(rate)
 
 
-class Customer(Process):                            #5
+class Customer(Process):  # 5
     """ Customer arrives, is served and leaves """
+
     def visit(self, timeInBank=10):
         arrive = now()
 
@@ -50,27 +53,28 @@ class Customer(Process):                            #5
 
         print("%7.4f %s: Finished    " % (now(), self.name))
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxTime = 400.0  # minutes
 
 counter = Resource(1, name="Clerk")
 
-## Model  ----------------------------------
+# Model  ----------------------------------
 
 
 def model(SEED=232323):
     seed(SEED)
 
     initialize()
-    doorman = Doorman()                           #7
-    activate(doorman, doorman.openthedoor())      #8
+    doorman = Doorman()  # 7
+    activate(doorman, doorman.openthedoor())  # 8
     source = Source()
     activate(source,
              source.generate(number=5, rate=0.1), at=0.0)
     simulate(until=maxTime)
 
 
-## Experiment  ----------------------------------
+# Experiment  ----------------------------------
 
 model()

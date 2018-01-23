@@ -1,17 +1,17 @@
 """ bank03: Many non-random Customers """
 from SimPy.Simulation import *
 
-## Model components ------------------------
+# Model components ------------------------
 
 
-class Source(Process):                               #1
+class Source(Process):  # 1
     """ Source generates customers regularly """
 
-    def generate(self, number, TBA):                 #2
+    def generate(self, number, TBA):  # 2
         for i in range(number):
-            c = Customer(name="Customer%02d" % (i))  #3
+            c = Customer(name="Customer%02d" % (i))  # 3
             activate(c, c.visit(timeInBank=12.0))
-            yield hold, self, TBA                    #4
+            yield hold, self, TBA  # 4
 
 
 class Customer(Process):
@@ -22,16 +22,17 @@ class Customer(Process):
         yield hold, self, timeInBank
         print("%7.4f %s: I must leave" % (now(), self.name))
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxNumber = 5
 maxTime = 400.0  # minutes
 ARRint = 10.0    # time between arrivals, minutes
 
-## Model/Experiment ------------------------------
+# Model/Experiment ------------------------------
 
 initialize()
-s = Source()                                         #5
-activate(s, s.generate(number=maxNumber,             #6
-                      TBA=ARRint), at=0.0)
+s = Source()  # 5
+activate(s, s.generate(number=maxNumber,  # 6
+                       TBA=ARRint), at=0.0)
 simulate(until=maxTime)

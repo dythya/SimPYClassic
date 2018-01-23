@@ -1,5 +1,5 @@
-import SimPy.SimulationTrace as Simulation  #   <== changed for tracing
-##import SimPy.Simulation as Simulation
+import SimPy.SimulationTrace as Simulation  # <== changed for tracing
+# import SimPy.Simulation as Simulation
 
 
 """ Simulate a single customer """
@@ -7,6 +7,7 @@ import SimPy.SimulationTrace as Simulation  #   <== changed for tracing
 
 class Customer(Simulation.Process):
     """ Customer arrives, looks around and leaves """
+
     def __init__(self, name):
         Simulation.Process.__init__(self)
         self.name = name

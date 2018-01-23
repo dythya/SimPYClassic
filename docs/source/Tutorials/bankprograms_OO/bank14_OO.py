@@ -1,21 +1,25 @@
 """bank14_OO: *waituntil* the Bank door opens"""
-from SimPy.Simulation import Simulation, Process, Resource, hold, waituntil, request, release
+from SimPy.Simulation import (Simulation, Process, Resource, hold, waituntil,
+                              request, release)
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
+
 
 class Doorman(Process):
     """ Doorman opens the door"""
+
     def openthedoor(self):
         """ He will open the door when he arrives"""
         yield hold, self, expovariate(1.0 / 10.0)
         self.sim.door = 'Open'
-        print("%7.4f Doorman: Ladies and "\
+        print("%7.4f Doorman: Ladies and "
               "Gentlemen! You may all enter." % (self.sim.now()))
 
 
 class Source(Process):
     """ Source generates customers randomly"""
+
     def generate(self, number, rate):
         for i in range(number):
             c = Customer(name="Customer%02d" % (i), sim=self.sim)
@@ -25,6 +29,7 @@ class Source(Process):
 
 class Customer(Process):
     """ Customer arrives, is served and leaves """
+
     def visit(self, timeInBank=10):
         arrive = self.sim.now()
 
@@ -47,7 +52,8 @@ class Customer(Process):
 
         print("%7.4f %s: Finished    " % (self.sim.now(), self.name))
 
-## Model  ----------------------------------
+# Model  ----------------------------------
+
 
 class BankModel(Simulation):
     def dooropen(self):
@@ -62,16 +68,16 @@ class BankModel(Simulation):
         self.activate(doorman, doorman.openthedoor())
         source = Source(sim=self)
         self.activate(source,
-             source.generate(number=5, rate=0.1), at=0.0)
+                      source.generate(number=5, rate=0.1), at=0.0)
         self.simulate(until=400.0)
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxTime = 2000.0   # minutes
 seedVal = 393939
 
-## Experiment  ----------------------------------
+# Experiment  ----------------------------------
 
 mymodel = BankModel()
 mymodel.run(aseed=seedVal)
-

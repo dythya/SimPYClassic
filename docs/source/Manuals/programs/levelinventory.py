@@ -1,6 +1,6 @@
 from random import normalvariate, seed
 from SimPy.Simulation import (Level, Process, activate, get, initialize, hold,
-        now, put, simulate)
+                              now, put, simulate)
 
 
 class Deliver(Process):
@@ -10,7 +10,7 @@ class Deliver(Process):
             delivery = 10.0  # amount in each refill
             yield put, self, stock, delivery
             print('at %6.4f, add %6.4f units, now amount = %6.4f' %
-                    (now(), delivery, stock.amount))
+                  (now(), delivery, stock.amount))
             yield hold, self, lead
 
 
@@ -30,11 +30,11 @@ class Demand(Process):
                 self.stockout += ds
                 # add unsupplied demand to self.stockout
                 print('day %6.4f, demand = %6.4f, shortfall = %6.4f' %
-                        (now(), dd, -ds))
+                      (now(), dd, -ds))
             else:  # can supply requested amount
                 yield get, self, stock, dd
                 print('day %6.4f, supplied %6.4f, now amount = %6.4f' %
-                        (now(), dd, stock.amount))
+                      (now(), dd, stock.amount))
 
 
 stock = Level(monitored=True)    # 'unbounded' capacity and other defaults

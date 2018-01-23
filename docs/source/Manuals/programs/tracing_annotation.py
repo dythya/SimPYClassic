@@ -23,7 +23,7 @@ class Bus(Simulation.Process):
 
 class Breakdown(Simulation.Process):
     def __init__(self, myBus):
-        Simulation.Process.__init__(self, name="Breakdown "+myBus.name)
+        Simulation.Process.__init__(self, name="Breakdown " + myBus.name)
         self.bus = myBus
 
     def breakBus(self, interval):

@@ -1,8 +1,10 @@
 """ bank24_OO. BCC system with several counters """
-from SimPy.Simulation import Simulation, Process, Resource, hold, request, release
+from SimPy.Simulation import (Simulation, Process, Resource, hold, request,
+                              release)
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
+
 
 class Source(Process):
     """ Source generates customers randomly """
@@ -34,19 +36,20 @@ class Customer(Process):
             print("%8.4f %s: BALKING   " % (self.sim.now(), self.name))
 
 
-## Model
+# Model
 class BankModel(Simulation):
     def run(self, aseed):
         """ PEM """
         seed(aseed)
         Customer.numBalking = 0
         self.k = Resource(capacity=numServers,
-             name="Counter", unitName="Clerk", sim=self)
+                          name="Counter", unitName="Clerk", sim=self)
         s = Source('Source', sim=self)
         self.activate(s, s.generate(number=maxNumber, meanTBA=ARRint), at=0.0)
         self.simulate(until=maxTime)
 
-## Experiment data -------------------------------
+# Experiment data -------------------------------
+
 
 timeInBank = 12.0  # mean, minutes
 ARRint = 10.0      # mean interarrival time, minutes
@@ -58,11 +61,11 @@ maxNumber = 8
 maxTime = 4000.0  # minutes
 theseed = 212121
 
-## Experiment --------------------------------------
+# Experiment --------------------------------------
 
 mymodel = BankModel()
 mymodel.run(aseed=theseed)
-## Results -----------------------------------------
+# Results -----------------------------------------
 
 nb = float(Customer.numBalking)
 print("balking rate is %8.4f per minute" % (nb / mymodel.now()))

@@ -24,10 +24,11 @@ the objective is to measure the throughput of
 the CPU (tasks per second)
 """
 from SimPy.Simulation import *
-## from SimPy.SimulationTrace import *
+# from SimPy.SimulationTrace import *
 import random as ran
 
-## Model components ------------------------
+# Model components ------------------------
+
 
 class Task(Process):
     """ A computer  task  requires at least
@@ -35,60 +36,62 @@ class Task(Process):
     disk drive."""
     completed = 0
     rate = 0.0
-    def execute(self,maxCompletions):
+
+    def execute(self, maxCompletions):
         while Task.completed < MaxCompletions:
             self.debug(" starts thinking")
-            thinktime = ran.expovariate(1.0/MeanThinkTime)
-            yield hold,self,thinktime
+            thinktime = ran.expovariate(1.0 / MeanThinkTime)
+            yield hold, self, thinktime
             self.debug(" request cpu")
-            yield request,self,self.sim.cpu
+            yield request, self, self.sim.cpu
             self.debug(" got cpu")
-            CPUtime=ran.expovariate(1.0/MeanCPUTime)
-            yield hold,self,CPUtime
-            yield release,self,self.sim.cpu
+            CPUtime = ran.expovariate(1.0 / MeanCPUTime)
+            yield hold, self, CPUtime
+            yield release, self, self.sim.cpu
             self.debug(" finish cpu")
             while ran.random() < pDisk:
                 self.debug(" request disk")
-                yield request,self,self.sim.disk
+                yield request, self, self.sim.disk
                 self.debug(" got disk")
-                disktime=ran.expovariate(1.0/MeanDiskTime)
-                yield hold,self,disktime
+                disktime = ran.expovariate(1.0 / MeanDiskTime)
+                yield hold, self, disktime
                 self.debug(" finish disk")
-                yield release,self,self.sim.disk
+                yield release, self, self.sim.disk
                 self.debug(" request cpu")
-                yield request,self,self.sim.cpu
+                yield request, self, self.sim.cpu
                 self.debug(" got cpu")
-                CPUtime=ran.expovariate(1.0/MeanCPUTime)
-                yield hold,self,CPUtime
-                yield release,self,self.sim.cpu
+                CPUtime = ran.expovariate(1.0 / MeanCPUTime)
+                yield hold, self, CPUtime
+                yield release, self, self.sim.cpu
             Task.completed += 1
         self.debug(" completed {0:d} tasks".format(Task.completed))
-        Task.rate = Task.completed/float(self.sim.now())
+        Task.rate = Task.completed / float(self.sim.now())
 
-    def debug(self,message):
-        FMT="({0:9.3f} {1} {2}"
+    def debug(self, message):
+        FMT = "({0:9.3f} {1} {2}"
         if DEBUG:
-            print(FMT.format(self.sim.now(),self.name,message))
-            
-    
-## Model ------------------------------
+            print(FMT.format(self.sim.now(), self.name, message))
+
+
+# Model ------------------------------
 class CentralServerModel(Simulation):
     def run(self):
         self.initialize()
-        self.cpu  = Resource(name='cpu',sim=self)
-        self.disk = Resource(name='disk',sim=self)
+        self.cpu = Resource(name='cpu', sim=self)
+        self.disk = Resource(name='disk', sim=self)
         for i in range(Nterminals):
-            t = Task(name="task{0}".format(i),sim=self)
-            self.activate(t,t.execute(MaxCompletions))
-        self.simulate(until = MaxrunTime)
-        return (self.now(),Task.rate)
+            t = Task(name="task{0}".format(i), sim=self)
+            self.activate(t, t.execute(MaxCompletions))
+        self.simulate(until=MaxrunTime)
+        return (self.now(), Task.rate)
 
-## Experiment data -------------------------
-Nterminals = 3       ## Number of terminals = Tasks
-pDisk    = 0.8       ## prob. of going to disk
-MeanThinkTime = 10.0 ## seconds
-MeanCPUTime = 1.0    ## seconds
-MeanDiskTime = 1.39  ## seconds
+
+# Experiment data -------------------------
+Nterminals = 3  # Number of terminals = Tasks
+pDisk = 0.8  # prob. of going to disk
+MeanThinkTime = 10.0  # seconds
+MeanCPUTime = 1.0  # seconds
+MeanDiskTime = 1.39  # seconds
 
 ran.seed(111113333)
 MaxrunTime = 20000.0
@@ -96,11 +99,12 @@ MaxCompletions = 100
 DEBUG = False
 
 
-## Experiment
+# Experiment
 
 result = CentralServerModel().run()
 
-## Analysis/output -------------------------
+# Analysis/output -------------------------
 
 print('centralserver')
-print('{0:7.4f}: CPU rate = {1:7.4f} tasks per second'.format(result[0],result[1]))
+print('{0:7.4f}: CPU rate = {1:7.4f} tasks per second'.format(
+    result[0], result[1]))

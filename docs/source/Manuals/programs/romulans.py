@@ -39,10 +39,10 @@ class Federation(Process):
                     print('Ha! %s hit! Damage= %i' %
                           (target.name, target.damage))
                 else:
-                    if (target.lives-1) == 0:
+                    if (target.lives - 1) == 0:
                         print('No more %s left!' % (target.name))
                     else:
-                        print('Now only %i %s left!' % (target.lives-1,
+                        print('Now only %i %s left!' % (target.lives - 1,
                                                         target.name))
 
             yield hold, self, 1

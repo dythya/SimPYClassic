@@ -24,10 +24,11 @@ the objective is to measure the throughput of
 the CPU (tasks per second)
 """
 from SimPy.Simulation import *
-## from SimPy.SimulationTrace import *
+# from SimPy.SimulationTrace import *
 import random as ran
 
-## Model components ------------------------
+# Model components ------------------------
+
 
 class Task(Process):
     """ A computer  task  requires at least
@@ -35,60 +36,62 @@ class Task(Process):
     disk drive."""
     completed = 0
     rate = 0.0
-    def execute(self,maxCompletions):
+
+    def execute(self, maxCompletions):
         while Task.completed < maxCompletions:
             self.debug(" starts thinking")
-            thinktime = ran.expovariate(1.0/MeanThinkTime)
-            yield hold,self,thinktime
+            thinktime = ran.expovariate(1.0 / MeanThinkTime)
+            yield hold, self, thinktime
             self.debug(" request cpu")
-            yield request,self,cpu
+            yield request, self, cpu
             self.debug(" got cpu")
-            CPUtime=ran.expovariate(1.0/MeanCPUTime)
-            yield hold,self,CPUtime
-            yield release,self,cpu
+            CPUtime = ran.expovariate(1.0 / MeanCPUTime)
+            yield hold, self, CPUtime
+            yield release, self, cpu
             self.debug(" finish cpu")
             while ran.random() < pDisk:
                 self.debug(" request disk")
-                yield request,self,disk
+                yield request, self, disk
                 self.debug(" got disk")
-                disktime=ran.expovariate(1.0/MeanDiskTime)
-                yield hold,self,disktime
+                disktime = ran.expovariate(1.0 / MeanDiskTime)
+                yield hold, self, disktime
                 self.debug(" finish disk")
-                yield release,self,disk
+                yield release, self, disk
                 self.debug(" request cpu")
-                yield request,self,cpu
+                yield request, self, cpu
                 self.debug(" got cpu")
-                CPUtime=ran.expovariate(1.0/MeanCPUTime)
-                yield hold,self,CPUtime
-                yield release,self,cpu
+                CPUtime = ran.expovariate(1.0 / MeanCPUTime)
+                yield hold, self, CPUtime
+                yield release, self, cpu
             Task.completed += 1
         self.debug(" completed {0:d} tasks".format(Task.completed))
-        Task.rate = Task.completed/float(now())
+        Task.rate = Task.completed / float(now())
 
-    def debug(self,message):
-        FMT="{0:9.3f} {1} {2}"
+    def debug(self, message):
+        FMT = "{0:9.3f} {1} {2}"
         if DEBUG:
-            print(FMT.format(now(),self.name,message))
-            
-    
-## Model ------------------------------
+            print(FMT.format(now(), self.name, message))
+
+
+# Model ------------------------------
 def main():
-   initialize()
-   for i in range(Nterminals):     
-       t = Task(name="task{0}".format(i))
-       activate(t,t.execute(MaxCompletions))
-   simulate(until = MaxrunTime)
-   return (now(),Task.rate)
+    initialize()
+    for i in range(Nterminals):
+        t = Task(name="task{0}".format(i))
+        activate(t, t.execute(MaxCompletions))
+    simulate(until=MaxrunTime)
+    return (now(), Task.rate)
 
-## Experiment data -------------------------
+# Experiment data -------------------------
 
-cpu  = Resource(name='cpu')
+
+cpu = Resource(name='cpu')
 disk = Resource(name='disk')
-Nterminals = 3       ## Number of terminals = Tasks
-pDisk    = 0.8       ## prob. of going to disk
-MeanThinkTime = 10.0 ## seconds
-MeanCPUTime = 1.0    ## seconds
-MeanDiskTime = 1.39  ## seconds
+Nterminals = 3  # Number of terminals = Tasks
+pDisk = 0.8  # prob. of going to disk
+MeanThinkTime = 10.0  # seconds
+MeanCPUTime = 1.0  # seconds
+MeanDiskTime = 1.39  # seconds
 
 ran.seed(111113333)
 MaxrunTime = 20000.0
@@ -96,11 +99,12 @@ MaxCompletions = 100
 DEBUG = False
 
 
-## Experiment
+# Experiment
 
-result=main()
+result = main()
 
-## Analysis/output -------------------------
+# Analysis/output -------------------------
 
 print('centralserver')
-print('{0:7.4f}: CPU rate = {1:7.4f} tasks per second'.format(result[0],result[1]))
+print('{0:7.4f}: CPU rate = {1:7.4f} tasks per second'.format(
+    result[0], result[1]))

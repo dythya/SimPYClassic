@@ -10,6 +10,7 @@ import SimPy.SimulationTrace as Simulation
 
 class Source(Simulation.Process):
     """ Source generates customers randomly"""
+
     def __init__(self, seed=333):
         Simulation.Process.__init__(self)
         self.SEED = seed
@@ -19,7 +20,7 @@ class Source(Simulation.Process):
         for i in range(number):
             c = Customer(name="Customer%02d" % (i,))
             Simulation.activate(c, c.visit(timeInBank=12.0))
-            t = rv.expovariate(1.0/interval)
+            t = rv.expovariate(1.0 / interval)
             yield Simulation.hold, self, t
 
 
@@ -37,7 +38,7 @@ class Customer(Simulation.Process):
         wait = Simulation.now() - arrive
         print("%7.4f %s: Waited %6.3f" % (Simulation.now(),
                                           self.name, wait))
-        tib = counterRV.expovariate(1.0/timeInBank)
+        tib = counterRV.expovariate(1.0 / timeInBank)
         yield Simulation.hold, self, tib
         yield Simulation.release, self, counter
         print("%7.4f %s: Finished" % (Simulation.now(), self.name))

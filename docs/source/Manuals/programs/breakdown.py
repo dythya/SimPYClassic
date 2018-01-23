@@ -1,5 +1,5 @@
 from SimPy.Simulation import (Process, activate, hold, initialize, now,
-        reactivate, simulate)
+                              reactivate, simulate)
 
 
 class Bus(Process):

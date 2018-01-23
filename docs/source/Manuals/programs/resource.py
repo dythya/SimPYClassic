@@ -1,5 +1,5 @@
 from SimPy.Simulation import (Process, Resource, activate, initialize, hold,
-        now, release, request, simulate)
+                              now, release, request, simulate)
 
 
 class Client(Process):

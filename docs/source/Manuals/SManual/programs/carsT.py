@@ -1,5 +1,5 @@
 from SimPy.SimulationTrace import (Process, Resource, activate, initialize,
-        hold, now, release, request, simulate)
+                                   hold, now, release, request, simulate)
 
 
 class Car(Process):

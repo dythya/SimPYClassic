@@ -2,7 +2,9 @@
 from SimPy.Simulation import *
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
+
+
 class Source(Process):
     """ Source generates customers randomly """
 
@@ -13,6 +15,7 @@ class Source(Process):
             t = expovariate(1.0 / meanTBA)
             yield hold, self, t
 
+
 class Customer(Process):
     """ Customer arrives, is served and leaves """
 
@@ -22,7 +25,7 @@ class Customer(Process):
         arrive = now()
         print("%8.4f %s: Here I am " %
               (now(), self.name))
-        if len(b.waitQ) < maxInQueue:                    #1
+        if len(b.waitQ) < maxInQueue:  # 1
             yield request, self, b
             wait = now() - arrive
             print("%8.4f %s: Wait %6.3f" %
@@ -33,11 +36,12 @@ class Customer(Process):
             print("%8.4f %s: Finished  " %
                   (now(), self.name))
         else:
-            Customer.numBalking += 1                       #2
+            Customer.numBalking += 1  # 2
             print("%8.4f %s: BALKING   " %
                   (now(), self.name))
 
-## Experiment data -------------------------------
+# Experiment data -------------------------------
+
 
 timeInBank = 12.0  # mean, minutes
 ARRint = 10.0      # mean interarrival time, minutes
@@ -49,7 +53,7 @@ maxNumber = 8
 maxTime = 4000.0  # minutes
 theseed = 212121
 
-## Model/Experiment ------------------------------
+# Model/Experiment ------------------------------
 
 seed(theseed)
 k = Resource(capacity=numServers,
@@ -62,7 +66,7 @@ activate(s, s.generate(number=maxNumber,
                        resource=k), at=0.0)
 simulate(until=maxTime)
 
-## Results -----------------------------------------
+# Results -----------------------------------------
 
 nb = float(Customer.numBalking)
 print("balking rate is %8.4f per minute" % (nb / now()))

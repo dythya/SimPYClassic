@@ -2,7 +2,7 @@
 from SimPy.Simulation import *
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
 
 
 class Source(Process):
@@ -11,7 +11,7 @@ class Source(Process):
     def generate(self, number, interval, resource, mon):
         for i in range(number):
             c = Customer(name="Customer%02d" % (i))
-            activate(c, c.visit(b=resource, M=mon))     #1
+            activate(c, c.visit(b=resource, M=mon))  # 1
             t = expovariate(1.0 / interval)
             yield hold, self, t
 
@@ -28,7 +28,8 @@ class Customer(Process):
         yield hold, self, tib
         yield release, self, b
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxNumber = 50
 maxTime = 2000.0  # minutes
@@ -37,25 +38,26 @@ ARRint = 10.0     # mean, minutes
 Nc = 2            # number of counters
 theSeed = 393939
 
-## Model  ----------------------------------
+# Model  ----------------------------------
 
 
-def model(runSeed=theSeed):                             #2
+def model(runSeed=theSeed):  # 2
     seed(runSeed)
     k = Resource(capacity=Nc, name="Clerk")
-    wM = Monitor()                                      #3
+    wM = Monitor()  # 3
 
     initialize()
     s = Source('Source')
     activate(s, s.generate(number=maxNumber, interval=ARRint,
-                          resource=k, mon=wM), at=0.0)  #4
+                           resource=k, mon=wM), at=0.0)  # 4
     simulate(until=maxTime)
-    return (wM.count(), wM.mean())                      #5
+    return (wM.count(), wM.mean())  # 5
 
-## Experiment/Result  ----------------------------------
+# Experiment/Result  ----------------------------------
 
-theseeds = [393939, 31555999, 777999555, 319999771]     #6
+
+theseeds = [393939, 31555999, 777999555, 319999771]  # 6
 for Sd in theseeds:
     result = model(Sd)
     print("Avge wait for %3d completions was %6.2f min." %
-                                            result)     #7
+          result)  # 7

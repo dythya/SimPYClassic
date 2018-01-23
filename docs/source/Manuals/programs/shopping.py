@@ -2,7 +2,7 @@ from SimPy.Simulation import Process, activate, hold, initialize, simulate
 
 
 class Customer(Process):
-    def buy(self,   budget=0):
+    def buy(self, budget=0):
         print('Here I am at the shops %s' % self.name)
         t = 5.0
         for i in range(4):

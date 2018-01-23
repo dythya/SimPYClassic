@@ -2,7 +2,8 @@
 from SimPy.Simulation import Simulation, Process, hold
 from random import expovariate, seed
 
-## Model components ------------------------
+# Model components ------------------------
+
 
 class Customer(Process):
     """ Customer arrives at a random time,
@@ -13,7 +14,8 @@ class Customer(Process):
         yield hold, self, timeInBank
         print("%f %s I must leave" % (self.sim.now(), self.name))
 
-## Model -----------------------------------
+# Model -----------------------------------
+
 
 class BankModel(Simulation):
     def run(self, aseed):
@@ -24,14 +26,15 @@ class BankModel(Simulation):
         self.activate(c, c.visit(timeInBank), at=t)
         self.simulate(until=maxTime)
 
-## Experiment data -------------------------
+# Experiment data -------------------------
+
 
 maxTime = 100.0     # minutes
 timeInBank = 10.0   # minutes
 tMeanArrival = 5.0  # minutes
 seedVal = 99999
 
-## Experiment ------------------------------
+# Experiment ------------------------------
 
 mymodel = BankModel()
 mymodel.run(aseed=seedVal)

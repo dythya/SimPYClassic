@@ -2,16 +2,18 @@ from SimPy.Simulation import (Simulation, Process, Resource, request, hold,
                               release)
 """Object Oriented SimPy API"""
 
-## Model components -------------------------------
+# Model components -------------------------------
+
 
 class Car(Process):
-    def run(self,res):
+    def run(self, res):
         yield request, self, res
         yield hold, self, 10
         yield release, self, res
-        print("Time: %s"%self.sim.now())
+        print("Time: %s" % self.sim.now())
 
-## Model and Experiment ---------------------------
+# Model and Experiment ---------------------------
+
 
 s = Simulation()
 s.initialize()

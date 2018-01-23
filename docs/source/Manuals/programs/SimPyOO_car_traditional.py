@@ -1,17 +1,19 @@
-from SimPy.Simulation import (activate, hold, initialize, now, release, request,
+from SimPy.Simulation import (activate, hold, initialize, now, request,
                               release, simulate, Process, Resource)
 """Traditional SimPy API"""
 
-## Model components -------------------------------
+# Model components -------------------------------
+
 
 class Car(Process):
     def run(self, res):
         yield request, self, res
         yield hold, self, 10
         yield release, self, res
-        print("Time: %s"%now())
+        print("Time: %s" % now())
 
-## Model and Experiment ---------------------------
+# Model and Experiment ---------------------------
+
 
 initialize()
 r = Resource(capacity=5)

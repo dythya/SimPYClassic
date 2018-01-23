@@ -3,6 +3,7 @@ from SimPy.Simulation import Process, activate, initialize, hold, now, simulate
 
 class Message(Process):
     """A simple Process"""
+
     def __init__(self, i, len):
         Process.__init__(self, name='Message' + str(i))
         self.i = i
