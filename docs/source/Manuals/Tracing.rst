@@ -39,9 +39,9 @@ executed during the program's execution.
 An even nicer way is to replace this import by::
 
 	if __debug__:
-		from SimPy.SimulationTrace import *
+	    from SimPy.SimulationTrace import *
 	else:
-		from SimPy.Simulation import *
+	    from SimPy.Simulation import *
 
 
 This gives a trace during the development and debugging. If one then 
@@ -55,7 +55,7 @@ For the same reason, any user call to *trace* methods should be written
 as::
 
 	if __debug__:
-		trace.ttext("This will only show during debugging")
+	    trace.ttext("This will only show during debugging")
 
 Here is an example (bank02.py from the Bank Tutorial):
 
@@ -240,7 +240,7 @@ representation like so::
        >>> class Bus(SimulationProcess):
     ... 	def __init__(self, id):
     ... 		Simulation.Process.__init__(self, name=id)
-    ... 		self.typ="Bus"
+    ... 		self.typ = "Bus"
     ... 		
     >>> b = Bus("Line 15")
     >>> b
@@ -261,7 +261,3 @@ This can be handy in statements like **trace.ttext("Status of %s"%b)**.
    sentence-end-double-space: t
    fill-column: 70 
    End:
-
- 
- 
-

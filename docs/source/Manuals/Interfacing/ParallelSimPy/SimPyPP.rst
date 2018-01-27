@@ -17,7 +17,7 @@ should read the PP documentation for further information on how this works.
 .. _`Parallel Python`: https://www.parallelpython.com/
 
 Please, note that *Parallel Python* is not included in the SimPy  distribution
-and needs to be `downloaded <http://www.parallelpython.com/>` and installed
+and needs to be `downloaded <https://www.parallelpython.com/>` and installed
 separately.
 
 Examples

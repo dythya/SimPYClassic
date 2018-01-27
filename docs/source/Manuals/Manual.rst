@@ -442,7 +442,7 @@ object's operations.
 yield hold
 ++++++++++++
 
-    ``yield hold,self,``\ *t*
+    ``yield hold, self,``\ *t*
 
     Causes the process object to delay *t* time units [#]_.  After the
     delay, it continues with the next statement in its PEM.  During
@@ -924,7 +924,7 @@ You program a process to ``wait`` for SimEvents by including in its PEM:
 yield waitevent
 ++++++++++++++++
 
--  ``yield waitevent,self,``\ *<events part>*
+-  ``yield waitevent, self,``\ *<events part>*
 
    where *<events part>* can be either:
 
@@ -960,7 +960,7 @@ You program a process to "queue" for events by including in its PEM:
 yield queueevent
 +++++++++++++++++++
 
--  ``yield queueevent,self,``\ *<events part>*
+-  ``yield queueevent, self,``\ *<events part>*
 
    where the  *<events part>* is as described above.
 
@@ -1330,7 +1330,7 @@ process is inserted into the Resource's ``waitQ`` in order of priority
 used, we simply change the preceding example's specification of the
 ``server`` Resource object to::
 
-   server=Resource(capacity=2, qType=PriorityQ)
+   server = Resource(capacity=2, qType=PriorityQ)
 
 where, by not specifying it, we allow ``preemptable`` to take its
 default value, ``False``.
@@ -1395,7 +1395,7 @@ priority processes, i.e., they can take over and use a Resource unit
 currently being used by a lower priority process whenever no free
 Resource units are available. A Resource object that allows its units
 to be preempted is created by setting its properties to
-``qType==PriorityQ`` and ``preemptable==True``.
+``qType == PriorityQ`` and ``preemptable == True``.
 
 Whenever a ``preemptable`` Resource unit is free when a request is
 made, then the requesting process takes it and continues its
@@ -1590,7 +1590,7 @@ reneging.
 A SimPy program that models Resource requests with reneging must use
 the following pattern of statements::
 
- yield (request, self, r),(<reneging clause>)
+ yield (request, self, r), (<reneging clause>)
  if self.acquired(resource):
     ## process got resource and so did NOT renege
     . . . .
@@ -1952,14 +1952,14 @@ when there is enough to satisfy the request.
 Putting amounts into  a Level
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. |yput| replace:: ``yield put,self,``\ *lev,give[,P]*
+.. |yput| replace:: ``yield put, self,``\ *lev,give[,P]*
 
 
 A process, the *offerer*, which is usually but not necessarily
 different from the *requester*, can offer an amount *give* to a Level,
 *lev*, by a ``yield put`` statement:
 
-*  ``yield put,self,``\ *lev,give[,P]*
+*  ``yield put, self,``\ *lev,give[,P]*
 
 Here *give* must be a positive real or integer, and *P* is an optional
 priority value (real or integer). If the amount offered would lead to
@@ -2340,14 +2340,14 @@ it also cleanly removes a reneging process from the ``putQ``.
 The ``yield get`` can be subject to similar reneging_ using one of the compound
 statements:
 
-*  ``yield (get,self,sObj,n [,P]),(hold,self,waittime)``
-*  ``yield (get,self,sObj,ffn [,P]),(hold,self,waittime)``
+*  ``yield (get, self, sObj, n [,P]), (hold, self, waittime)``
+*  ``yield (get, self, sObj, ffn [,P]), (hold, self, waittime)``
 
 where if the process does not acquire the amount before *waittime* is
 elapsed, the offerer leaves the ``waitQ`` and its execution continues.
 
-*  ``yield (get,self,sObj,n [,P]),(waitevent,self,events)``
-*  ``yield (get,self,sObj,ffn [,P]),(waitevent,self,events)``
+*  ``yield (get, self, sObj, n [,P]), (waitevent, self, events)``
+*  ``yield (get, self, sObj, ffn [,P]), (waitevent, self, events)``
 
 where if one of the SimEvents in *events* occurs before enough becomes
 available, reneging occurs, the offerer leaves the ``waitQ`` and its execution
@@ -2393,16 +2393,16 @@ queue.
 **Example** ::
 
    class Parcel:
-        def __init__(self,weight):
+        def __init__(self, weight):
             self.weight = weight
 
    lightFirst=Store()
 
    def getLightFirst(self, par):
         """Lighter parcels to front of queue"""
-        tmplist = [(x.weight,x) for x in par]
+        tmplist = [(x.weight, x) for x in par]
         tmplist.sort()
-        return [x for (key,x) in tmplist]
+        return [x for (key, x) in tmplist]
 
    lightFirst.addSort(getLightFirst)
 
@@ -2811,12 +2811,12 @@ To establish a histogram for a Tally object, ``r``, we call the
 ``setHistogram`` method with appropriate arguments before we observe any
 data, e.g.,
 
-* ``r.setHistogram(name = '',low=0.0,high=100.0,nbins=10)``
+* ``r.setHistogram(name = '', low=0.0, high=100.0, nbins=10)``
 
 As usual, ``name`` is a descriptive title for the histogram (defaults to blank).
 Then, after ``observing`` the data:
 
-* ``h=r.getHistogram( )`` returns a completed histogram using the
+* ``h = r.getHistogram( )`` returns a completed histogram using the
   histogram parameters as set up.
 
 
@@ -2848,7 +2848,7 @@ a single call, e.g.,
 
 This  call is  equivalent to the following pair:
 
-* ``r.setHistogram(name = '',low=0.0,high=100.0,nbins=10)``
+* ``r.setHistogram(name = '', low=0.0, high=100.0, nbins=10)``
 * ``h = r.getHistogram( )``, which returns the completed histogram.
 
 

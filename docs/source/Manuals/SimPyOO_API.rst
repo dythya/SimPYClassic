@@ -335,7 +335,7 @@ class ``SimulationTrace``
 The simulation capabilities of a model with tracing are provided by instantiating class
 ``SimulationTrace`` like this::
 
-  from SimPy.SimulationTrace import *
+  from SimPy.SimulationTrace import SimulationTrace
 
   aSimulation = SimulationTrace()
   ## model code follows
@@ -343,7 +343,7 @@ The simulation capabilities of a model with tracing are provided by instantiatin
 Again, better OO programming style is actually to define a model class which inherits
 from Simulation::
 
-    from SimPy.SimulationTrace import *
+    from SimPy.SimulationTrace import SimulationTrace
 
     class MyModel(SimulationTrace):
         def run(self):
@@ -408,7 +408,7 @@ Example::
 
 Example calls (snippet)::
 
-   from SimPy.SimulationTrace import *
+   from SimPy.SimulationTrace import SimulationTrace
    s = SimulationTrace()
    s.initialize()
    s.trace.ttext("Here we go")
@@ -440,13 +440,13 @@ The semantics and parameters of the methods are identical to those of the non-OO
 
 Example calls (snippet)::
 
-   from SimPy.SimulationRT import *
+   from SimPy.SimulationRT import Process, hold
    class Car(Process):
       def __init__(self):
          Process.__init__(self, sim=self.sim)
       def run(self):
-         print self.sim.rtnow()
-         yield hold,self,10
+         print(self.sim.rtnow())
+         yield hold, self, 10
 
 
 class ``SimulationStep``
@@ -506,18 +506,18 @@ Example 1 (snippet)::
 
   class Car(Process):
       def drive(self):
-         yield hold,self,10
-         print "Arrived at", self.sim.now()
+         yield hold, self, 10
+         print("Arrived at", self.sim.now())
 
   aSim = Simulation()
   aSim.initialize()
   c=Car(name="Mine", sim=aSim)
 
-Example 2, with an ``__init__`` method (snippet):
+Example 2, with an ``__init__`` method (snippet)::
 
   class Car(Process):
-     def __init__(self,name):
-         Process.__init__(self,name=name, sim=self.sim)
+     def __init__(self, name):
+         Process.__init__(self, name=name, sim=self.sim)
 
   aSim = Simulation()
   aSim.initialize()
@@ -528,44 +528,46 @@ class ``Resource``
 
 ::
 
-    Resource.__init__(self, capacity = 1, name = 'a_resource', unitName = 'units',
-                 qType = FIFO, preemptable = 0, monitored = False,
-                 monitorType = Monitor,sim=None)
+    Resource.__init__(self, capacity=1, name='a_resource',
+                      unitName='units',
+                      qType=FIFO, preemptable=0, monitored=False,
+                      monitorType=Monitor, sim=None)
 
 Example (snippet)::
 
   aSim = Simulation()
   aSim.initialize()
-  res=Resource(name="Server",sim=aSim)
+  res = Resource(name="Server", sim=aSim)
 
 classes ``Store`` and ``Level``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-::
+Store::
 
-    Store.__init__(self, name = None, capacity = 'unbounded', unitName = 'units',
-                putQType = FIFO, getQType = FIFO,
-                monitored = False, monitorType = Monitor, initialBuffered = None,
-                sim = None)
+    Store.__init__(self, name=None, capacity='unbounded', unitName='units',
+                   putQType=FIFO, getQType=FIFO,
+                   monitored=False, monitorType=Monitor, initialBuffered=None,
+                   sim=None)
 
-::
-    Level.__init__(self, name = None, capacity = 'unbounded', unitName = 'units',
-                putQType = FIFO, getQType = FIFO,
-                monitored = False, monitorType = Monitor, initialBuffered = None,
-                sim = None)
+Level::
+
+    Level.__init__(self, name=None, capacity='unbounded', unitName='units',
+                   putQType=FIFO, getQType=FIFO,
+                   monitored=False, monitorType=Monitor, initialBuffered=None,
+                   sim=None)
 
 Example (snippet)::
 
   aSim = Simulation()
   aSim.initialize()
-  buffer = Store(name="Parts",sim=aSim)
+  buffer = Store(name="Parts", sim=aSim)
 
 class ``SimEvent``
 ~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
-  SimEvent.__init__(self, name = 'a_SimEvent', sim = None)
+  SimEvent.__init__(self, name='a_SimEvent', sim=None)
 
 Example (snippet)::
 
@@ -576,17 +578,16 @@ Example (snippet)::
 classes ``Monitor`` and ``Tally``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-::
+Monitor::
 
-    Monitor.__init__(self, name = 'a_Monitor', ylab = 'y', tlab = 't', sim = None)
+    Monitor.__init__(self, name='a_Monitor', ylab='y', tlab='t', sim=None)
 
-::
-    Tally.__init__(self, name = 'a_Tally', ylab = 'y', tlab = 't', sim = None)
+Tally::
+
+    Tally.__init__(self, name='a_Tally', ylab='y', tlab='t', sim=None)
 
 Example (snippet)::
 
   aSim = Simulation()
   aSim.initialize()
   myMoni = Monitor(name="Counting cars", sim=aSim)
-
-

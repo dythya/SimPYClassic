@@ -214,7 +214,7 @@ the simulation time reaches ``1000.0``. When the simulation stops the
 
   initialize()
   c = Car(name="Car23")
-  activate(c,  c.go(), at=0.0)
+  activate(c, c.go(), at=0.0)
   simulate(until=1000.0)
 
   Report()
