@@ -21,7 +21,7 @@ Globals - module providing global Simulation object and the global
 stepping - a simple interactive debugger
 
 """
-__version__ = '2.3.3'
+__version__ = '2.3.4'
 
 
 def test():
